@@ -171,10 +171,15 @@ footer{background:var(--navy-900);color:rgba(255,255,255,.5)}
 .fci small{display:block;font-size:.7rem;color:rgba(255,255,255,.3);letter-spacing:.04em}
 .foot-bot{max-width:var(--max);margin:auto;padding:1.1rem clamp(.9rem,3.5vw,1.5rem);border-top:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.6rem}
 .foot-bot p{font-size:.74rem;color:rgba(255,255,255,.28)}
+/* Staff login: deliberately faint, at the very bottom; brightens on hover or keyboard focus */
+.foot-bot .staff-login{color:inherit;text-decoration:none;transition:color var(--t)}
+.foot-bot .staff-login:hover,.foot-bot .staff-login:focus-visible{color:rgba(255,255,255,.75);text-decoration:underline}
 .foot-bot .disclaimer{font-style:italic;max-width:520px}
 
 /* Floating CTA — same style & position as Elder Home */
-.float-bar{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:999;display:flex;gap:.65rem;align-items:center;filter:drop-shadow(0 8px 20px rgba(0,0,0,.16))}
+.float-bar{position:fixed;bottom:1.6rem;left:50%;transform:translateX(-50%);z-index:999;display:flex;gap:.65rem;align-items:center;filter:drop-shadow(0 8px 20px rgba(0,0,0,.16));transition:opacity .3s ease,visibility .3s}
+/* at the very bottom the floating buttons step aside, so they don't cover the footer's last line (copyright and Staff login) */
+.float-bar.away{opacity:0;visibility:hidden;pointer-events:none}
 .float-wa,.float-donate,.float-vol{display:inline-flex;align-items:center;gap:.5rem;padding:.78rem 1.55rem;border-radius:999px;font-weight:700;font-size:.92rem;white-space:nowrap;transition:all var(--t);color:#fff}
 .float-wa{background:#25d366;box-shadow:0 6px 24px rgba(37,211,102,.42)}
 .float-wa:hover{background:#1ebe5a;transform:translateY(-3px)}
@@ -671,7 +676,7 @@ body{padding-top:var(--header-h)}
     </div>
   </div>
   <div class="foot-bot">
-    <p data-i18n="foot.copy">© 2026 Amitabha Foundation (1179489T) · Children Home Programme · All rights reserved.</p>
+    <p><span data-i18n="foot.copy">© 2026 Amitabha Foundation (1179489T) · Children Home Programme · All rights reserved.</span><span aria-hidden="true"> · </span><a class="staff-login" href="admin.html" rel="nofollow" data-i18n="foot.staff">Staff login</a></p>
     <p class="disclaimer" data-i18n="foot.disclaimer">Some images on this site are AI-generated or stock photos, used for illustration only.</p>
   </div>
 </footer>
@@ -869,7 +874,8 @@ document.querySelectorAll('.aos,.aos-l,.aos-r').forEach(el => aosObs.observe(el)
     'gi.v.btn': '立即报名当义工', 'gi.v.wa': '提出问题', 'gi.p.eyebrow': '企业合作', 'gi.p.h2': '携手创造<em>长远改变</em>',
     'gi.p.p': '通过企业社会责任（CSR）与我们携手，年复一年为孩子们创造更光明的未来。', 'gi.p.cap': '持续传递的善意', 'gi.p.l1': '企业配对捐款计划', 'gi.p.l2': '公司主导的教育赞助项目', 'gi.p.l3': '员工志愿者活动',
     'gi.p.btn': '传递希望', 'gi.p.wa': '洽谈企业合作',
-    'foot.givehope': '传递希望'
+    'foot.givehope': '传递希望',
+    'foot.staff': '员工登录'
   };
   const origTitle = document.title;
   function store(k, v){ try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch(e) { return null; } }
@@ -925,6 +931,14 @@ document.querySelectorAll('.aos,.aos-l,.aos-r').forEach(el => aosObs.observe(el)
     dd.addEventListener('focusout', e => { if (dd.classList.contains('open') && !dd.contains(e.relatedTarget)) closeLang(dd); });
   });
   document.addEventListener('click', e => document.querySelectorAll('.lang-dd.open').forEach(dd => { if (!dd.contains(e.target)) closeLang(dd); }));
+})();
+</script>
+<script>
+/* Floating buttons step aside while the footer's last line is on screen */
+(function(){
+  const bar = document.querySelector('.float-bar'), end = document.querySelector('.foot-bot');
+  if (!bar || !end || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(es => bar.classList.toggle('away', es[0].isIntersecting)).observe(end);
 })();
 </script>
 </body>

@@ -159,6 +159,26 @@ drop policy if exists "ch admins delete media" on storage.objects;
 create policy "ch admins delete media" on storage.objects
   for delete to authenticated using (bucket_id = 'ch-media' and public.ch_is_admin());
 
+-- ── Form responses: the status and note on each response (admins only) ──────
+--    Used by admin.html → Form responses and Dashboard (New / In progress / Done).
+--    response_key is a scrambled fingerprint of the response, so no names or
+--    phone numbers are stored here; the answers themselves stay in your Google Sheet.
+create table if not exists public.ch_response_actions (
+  response_key text primary key,
+  tab          text not null,                        -- which form (the Google Sheet tab)
+  status       text not null default 'new' check (status in ('new', 'in_progress', 'done')),
+  note         text,
+  updated_by   text,                                 -- email of the admin who last changed it
+  updated_at   timestamptz not null default now()
+);
+create index if not exists ch_response_actions_tab on public.ch_response_actions (tab);
+
+alter table public.ch_response_actions enable row level security;
+grant select, insert, update, delete on public.ch_response_actions to authenticated;
+drop policy if exists "ch admins manage response actions" on public.ch_response_actions;
+create policy "ch admins manage response actions" on public.ch_response_actions
+  for all to authenticated using (public.ch_is_admin()) with check (public.ch_is_admin());
+
 -- ════════════════════════════════════════════════════════════════════════════
 --  LAST STEP: make yourself an admin.
 --  First create your login in Authentication → Users → Add user (tick "Auto Confirm User"),

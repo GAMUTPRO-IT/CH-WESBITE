@@ -16,6 +16,7 @@
 
 const SECRET = 'PASTE-YOUR-SECRET-HERE';   // the secret from admin.html → Form responses
 const MAX_ROWS = 2000;                     // newest responses sent per tab
+const VERSION = 2;                         // the admin page checks this to know which features the script has
 
 function doPost(e) {
   let req = {};
@@ -32,7 +33,7 @@ function doPost(e) {
 
   if (req.action === 'list') {
     return reply({
-      ok: true, title: ss.getName(), url: ss.getUrl(),
+      ok: true, version: VERSION, title: ss.getName(), url: ss.getUrl(),
       tabs: tabs.map(function (sh) { return { name: sh.getName(), count: Math.max(0, sh.getLastRow() - 1) }; })
     });
   }
@@ -45,8 +46,22 @@ function doPost(e) {
     if (lastRow < 1 || lastCol < 1) return reply({ ok: true, tab: sh.getName(), header: [], rows: [], total: 0, url: link });
     const header = sh.getRange(1, 1, 1, lastCol).getDisplayValues()[0];
     const total = Math.max(0, lastRow - 1), take = Math.min(total, MAX_ROWS);
-    const rows = take ? sh.getRange(lastRow - take + 1, 1, take, lastCol).getDisplayValues().reverse() : [];   // newest first
-    return reply({ ok: true, tab: sh.getName(), header: header, rows: rows, total: total, url: link });
+    const range = take ? sh.getRange(lastRow - take + 1, 1, take, lastCol) : null;
+    const rows = range ? range.getDisplayValues().reverse() : [];                               // newest first
+    const stamps = range ? range.getValues().map(function (r) { return isoDate(r[0]); }).reverse() : [];   // the Timestamp column as a real date
+    return reply({ ok: true, version: VERSION, tab: sh.getName(), header: header, rows: rows, stamps: stamps, total: total, url: link });
+  }
+
+  // for the admin dashboard: how many responses each form has, and when they came in (no personal details)
+  if (req.action === 'overview') {
+    return reply({
+      ok: true, version: VERSION, title: ss.getName(), url: ss.getUrl(),
+      tabs: tabs.map(function (sh) {
+        const total = Math.max(0, sh.getLastRow() - 1), take = Math.min(total, MAX_ROWS);
+        const stamps = take ? sh.getRange(sh.getLastRow() - take + 1, 1, take, 1).getValues().map(function (r) { return isoDate(r[0]); }).reverse() : [];
+        return { name: sh.getName(), count: total, stamps: stamps };
+      })
+    });
   }
 
   return reply({ ok: false, error: 'Unknown request.' });
@@ -55,6 +70,10 @@ function doPost(e) {
 // Opening the Web app URL in a browser just shows that the link is running (no data).
 function doGet() {
   return reply({ ok: true, message: 'The Children Home responses link is running. Use it from admin.html.' });
+}
+
+function isoDate(v) {
+  return (v instanceof Date && !isNaN(v)) ? v.toISOString() : '';
 }
 
 function reply(obj) {

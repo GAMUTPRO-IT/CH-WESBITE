@@ -86,18 +86,100 @@ dialog::backdrop{background:rgba(20,10,40,.55)}
 .rs-tabs{display:flex;flex-wrap:wrap;gap:.45rem;margin-bottom:1rem}
 .rs-chip{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .9rem;border-radius:999px;border:1px solid var(--line);background:#fff;font-weight:700;font-size:.86rem;cursor:pointer;color:var(--ink-2)}
 .rs-chip .n{font-weight:600;color:var(--ink-3)}
-.rs-chip .new{padding:.08rem .45rem;border-radius:99px;background:var(--red);color:#fff;font-size:.7rem;font-weight:800}
 .rs-chip.on{background:var(--purple);border-color:var(--purple);color:#fff}.rs-chip.on .n{color:#e6dcf6}
-.rs-tools{display:flex;flex-wrap:wrap;align-items:center;gap:.8rem;margin-bottom:.7rem}
-.rs-tools input{flex:1;min-width:220px;max-width:420px;padding:.6rem .85rem;border:1px solid #ddd5e8;border-radius:11px}
-.rs-tools input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(106,66,176,.15)}
-.rs-wrap{overflow:auto;max-height:70vh;background:#fff;border:1px solid var(--line);border-radius:14px}
-.rs-table{border-collapse:collapse;width:100%;font-size:.84rem}
-.rs-table th{position:sticky;top:0;z-index:1;background:var(--purple-50);text-align:left;font-weight:800;color:var(--ink);padding:.65rem .8rem;border-bottom:1px solid var(--line);white-space:nowrap}
-.rs-table td{padding:.6rem .8rem;border-bottom:1px solid #f0ecf5;vertical-align:top;max-width:340px;white-space:pre-wrap;word-break:break-word;color:var(--ink-2)}
-.rs-table tr.fresh td{background:#fff7e6}
-.rs-table td:first-child{white-space:nowrap;color:var(--ink-3)}
 .rs-empty{padding:2rem;text-align:center;color:var(--ink-3)}
+.rs-chip .new{padding:.08rem .45rem;border-radius:99px;background:var(--red);color:#fff;font-size:.7rem;font-weight:800}
+/* dashboard */
+.db-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1rem}
+@media(max-width:900px){.db-cards{grid-template-columns:repeat(2,1fr)}}
+.stat{display:flex;flex-direction:column;gap:.15rem;padding:1.05rem 1.2rem;background:#fff;border:1px solid var(--line);border-radius:16px;text-align:left;font:inherit;color:inherit;cursor:pointer;transition:border-color .2s,transform .2s}
+.stat:hover{border-color:var(--purple);transform:translateY(-2px)}
+.stat .k{display:flex;align-items:center;gap:.45rem;font-size:.8rem;font-weight:700;color:var(--ink-2)}
+.stat .v{font-family:var(--display);font-size:2.1rem;font-weight:600;line-height:1.1;color:var(--ink)}
+.stat .s{font-size:.75rem;color:var(--ink-3)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%}
+.db-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.db-grid .wide{grid-column:1 / -1}
+.db-grid>*{min-width:0}   /* lets the cards shrink on phones; the wide table scrolls inside its card */
+@media(max-width:900px){.db-grid{grid-template-columns:1fr}}
+.db-grid h3{font-size:1rem;font-weight:800;margin-bottom:.9rem}
+.donut{display:flex;flex-wrap:wrap;align-items:center;gap:1.2rem}
+.donut svg{width:170px;height:170px;flex-shrink:0}
+.donut .d-n{font-family:var(--display);font-size:30px;font-weight:600;fill:var(--ink)}
+.donut .d-l{font-size:11px;font-weight:700;fill:var(--ink-3)}
+.legend{list-style:none;display:flex;flex-direction:column;gap:.5rem;flex:1;min-width:180px}
+.legend li{display:grid;grid-template-columns:12px 1fr auto 2.8rem;gap:.55rem;align-items:center;font-size:.86rem}
+.legend .sw{width:12px;height:12px;border-radius:4px}
+.legend b{font-weight:800;font-variant-numeric:tabular-nums}
+.legend .pct{font-size:.78rem;color:var(--ink-3);text-align:right}
+.bars{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:.6rem;align-items:end;height:200px;padding-top:.6rem}
+@media(max-width:640px){.bars{gap:.3rem}.bar span{white-space:normal;text-align:center;font-size:.62rem;line-height:1.2}}
+.bar{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:.3rem;height:100%}
+.bar i{display:block;width:100%;max-width:48px;min-height:3px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,#9c7dd6,#6a42b0)}
+.bar.now i{background:linear-gradient(180deg,#f7c46c,#f2a93b)}
+.bar b{font-size:.8rem;font-variant-numeric:tabular-nums}
+.bar span{font-size:.7rem;color:var(--ink-3);white-space:nowrap}
+.db-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.db-table th{padding:.5rem .7rem;border-bottom:1px solid var(--line);text-align:left;font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.db-table td{padding:.75rem .7rem;border-bottom:1px solid #f0ecf5;white-space:nowrap}
+.db-table tbody tr{cursor:pointer}.db-table tbody tr:hover td{background:var(--purple-50)}
+.db-table .num{text-align:right;font-variant-numeric:tabular-nums}
+.db-content{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:640px){.db-content{grid-template-columns:1fr}}
+.db-content button{display:flex;align-items:center;gap:.9rem;padding:1rem;border:1px solid var(--line);border-radius:14px;background:#fff;font:inherit;color:inherit;text-align:left;cursor:pointer}
+.db-content button:hover{border-color:var(--purple)}
+.db-content i{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:var(--purple-50);color:var(--purple);font-size:1.1rem}
+.db-content b{display:block;font-size:.95rem}.db-content span{font-size:.8rem;color:var(--ink-3)}
+/* status labels */
+.pill{display:inline-flex;align-items:center;gap:.3rem;padding:.16rem .55rem;border-radius:99px;font-size:.72rem;font-weight:800;white-space:nowrap}
+.st-new{background:#fdeceb;color:#b3292f}.st-prog{background:#fff3df;color:#9a5b00}.st-done{background:#e3f4ea;color:#1d7a4f}
+/* form responses inbox */
+.rs-filters{display:flex;flex-wrap:wrap;align-items:center;gap:.7rem;margin-bottom:.9rem}
+.rs-filters input{flex:1;min-width:220px;max-width:420px;padding:.6rem .85rem;border:1px solid #ddd5e8;border-radius:11px}
+.rs-filters input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(106,66,176,.15)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:.25rem;padding:.25rem;background:#fff;border:1px solid var(--line);border-radius:999px}
+.seg button{padding:.42rem .8rem;border:0;border-radius:999px;background:none;font-weight:700;font-size:.82rem;color:var(--ink-2);cursor:pointer}
+.seg button .c{margin-left:.3rem;font-weight:600;opacity:.7}
+.seg button.on{background:var(--ink);color:#fff}
+.inbox{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:1rem;align-items:start}
+.ib-list{display:flex;flex-direction:column;gap:.5rem;max-height:72vh;overflow:auto;padding:.15rem .3rem .15rem .15rem}
+.ib-item{position:relative;display:flex;flex-direction:column;gap:.28rem;padding:.85rem 1rem .85rem 1.2rem;background:#fff;border:1px solid var(--line);border-radius:14px;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.ib-item:hover{border-color:#cdbfe6}
+.ib-item.on{border-color:var(--purple);box-shadow:0 0 0 3px rgba(106,66,176,.12)}
+.ib-item.unseen::before{content:"";position:absolute;left:.45rem;top:1.18rem;width:7px;height:7px;border-radius:50%;background:var(--red)}
+.ib-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.ib-name{overflow:hidden;font-size:.95rem;font-weight:800;text-overflow:ellipsis;white-space:nowrap}
+.ib-meta{font-size:.76rem;color:var(--ink-3)}
+.ib-prev{display:-webkit-box;overflow:hidden;font-size:.84rem;color:var(--ink-2);-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.ib-none{padding:2rem 1rem;text-align:center;color:var(--ink-3);background:#fff;border:2px dashed var(--line);border-radius:14px}
+.ib-detail{position:sticky;top:5.2rem;min-height:340px;max-height:calc(100vh - 6.5rem);overflow:auto;padding:1.4rem 1.5rem;background:#fff;border:1px solid var(--line);border-radius:18px}
+.ib-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;min-height:290px;color:var(--ink-3);text-align:center}
+.ib-empty i{font-size:2.2rem;color:#cdbfe6}
+.ib-back{display:none}
+.ib-head h3{font-family:var(--display);font-size:1.55rem;font-weight:600;line-height:1.2}
+.ib-head .sub{margin-top:.25rem}
+.ib-contact{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:.9rem}
+.ib-contact .wa{border-color:#bfe8cf;color:#128c4a}.ib-contact .wa:hover{background:#25d366;border-color:#25d366;color:#fff}
+.ib-status{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem .8rem;margin:1.1rem 0 .4rem;padding:.8rem 1rem;background:var(--purple-50);border-radius:14px}
+.ib-status .lbl{font-size:.8rem;font-weight:800}
+.ib-status .seg button[data-st="new"].on{background:#b3292f}
+.ib-status .seg button[data-st="in_progress"].on{background:#c27a00}
+.ib-status .seg button[data-st="done"].on{background:#1d7a4f}
+.ib-who{width:100%;font-size:.76rem;color:var(--ink-3)}
+.ib-answers{display:flex;flex-direction:column;margin-top:.6rem}
+.ib-answers div{padding:.8rem 0;border-top:1px solid #f0ecf5}
+.ib-answers dt{margin-bottom:.25rem;font-size:.78rem;font-weight:800;color:var(--ink-3)}
+.ib-answers dd{font-size:.97rem;line-height:1.6;color:var(--ink);white-space:pre-wrap;word-break:break-word}
+.ib-answers dd.none{color:#b9b2c4}
+.ib-note{margin-top:.6rem;padding-top:1rem;border-top:1px solid var(--line)}
+.ib-note textarea{width:100%;min-height:80px;margin:.4rem 0 .6rem;padding:.65rem .8rem;border:1px solid #ddd5e8;border-radius:11px;resize:vertical}
+.ib-note textarea:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(106,66,176,.15)}
+@media(max-width:900px){
+  .inbox{display:block}.ib-list{max-height:none}
+  .ib-detail{position:fixed;inset:0;z-index:40;max-height:none;min-height:0;border:0;border-radius:0;visibility:hidden;transform:translateX(100%);transition:transform .25s ease,visibility .25s}
+  .inbox.open .ib-detail{visibility:visible;transform:none}
+  .ib-back{display:inline-flex;margin-bottom:.9rem}
+}
 .toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(20px);opacity:0;z-index:100;padding:.75rem 1.2rem;border-radius:12px;background:var(--ink);color:#fff;font-size:.9rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);transition:opacity .25s,transform .25s;pointer-events:none;max-width:92vw}
 .toast.on{opacity:1;transform:translateX(-50%)}
 .toast.bad{background:var(--red)}
@@ -137,6 +219,7 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
       <button class="btn btn-p" type="submit" id="lBtn" style="width:100%"><i class="fa fa-lock"></i> Sign in</button>
     </form>
     <p class="help" style="margin-top:1rem">Forgot your password? Ask another admin, or reset it in Supabase under Authentication → Users.</p>
+    <p style="margin-top:1rem"><a href="index.html" style="font-size:.86rem;font-weight:600;text-decoration:none"><i class="fa fa-arrow-left"></i> Back to the website</a></p>
   </section>
 
   <!-- Signed in, but not on the admin list -->
@@ -148,13 +231,33 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
   <!-- The dashboard -->
   <section id="vApp" hidden>
     <nav class="tabs" role="tablist">
-      <button class="tab on" type="button" data-tab="programs" role="tab" aria-selected="true"><i class="fa fa-hands-holding-child"></i> Programs</button>
+      <button class="tab on" type="button" data-tab="dashboard" role="tab" aria-selected="true"><i class="fa fa-chart-pie"></i> Dashboard</button>
+      <button class="tab" type="button" data-tab="sheets" role="tab" aria-selected="false"><i class="fa fa-inbox"></i> Form responses</button>
+      <button class="tab" type="button" data-tab="programs" role="tab" aria-selected="false"><i class="fa fa-hands-holding-child"></i> Programs</button>
       <button class="tab" type="button" data-tab="moments" role="tab" aria-selected="false"><i class="fa fa-camera"></i> Moments</button>
-      <button class="tab" type="button" data-tab="sheets" role="tab" aria-selected="false"><i class="fa fa-table"></i> Form responses</button>
       <button class="tab" type="button" data-tab="account" role="tab" aria-selected="false"><i class="fa fa-user-gear"></i> Account</button>
     </nav>
 
-    <div data-panel="programs">
+    <!-- DASHBOARD -->
+    <div data-panel="dashboard">
+      <div class="sec-head">
+        <div><h2>Dashboard</h2><p class="sub">An overview of your form responses and website content.</p></div>
+        <button class="btn btn-g btn-s" type="button" id="dbRefresh"><i class="fa fa-rotate"></i> Refresh</button>
+      </div>
+      <div class="note" id="dbConnect" style="margin-bottom:1rem" hidden><i class="fa fa-link"></i><div><b>Connect your Google Sheet</b> to see your form responses here. <button class="btn btn-p btn-s" type="button" id="dbGoConnect" style="margin-left:.4rem">Connect now</button></div></div>
+      <div class="note warn" id="dbOld" style="margin-bottom:1rem" hidden><i class="fa fa-circle-up"></i><div><b>Update your Apps Script</b> to see dates and the weekly chart: Form responses → <b>Connection</b> → <b>Copy code</b>, paste it into Apps Script, then <b>Deploy → Manage deployments → ✏ Edit → Version: New version → Deploy</b>.</div></div>
+      <p class="err" id="dbErr" role="alert"></p>
+      <div class="db-cards" id="dbCards"></div>
+      <div class="db-grid" id="dbResp">
+        <div class="card"><h3>Responses by form</h3><div class="donut" id="dbByForm"></div></div>
+        <div class="card"><h3>By status</h3><div class="donut" id="dbByStatus"></div></div>
+        <div class="card wide"><h3>Responses per week</h3><p class="help" id="dbWeeksNote" style="margin:-.5rem 0 .4rem">Last 8 weeks, all forms</p><div class="bars" id="dbWeeks"></div></div>
+        <div class="card wide"><h3>By form</h3><div style="overflow-x:auto"><table class="db-table" id="dbTable"></table></div></div>
+      </div>
+      <div class="card" style="margin-top:1rem"><h3 style="font-size:1rem;font-weight:800;margin-bottom:.8rem">Website content</h3><div class="db-content" id="dbContent"></div></div>
+    </div>
+
+    <div data-panel="programs" hidden>
       <div class="sec-head">
         <div><h2>Programs</h2><p class="sub">Shown on the Home page, above Credentials. Each program opens in a pop-up with a Donate now button and a Corporate partnership button.</p></div>
         <button class="btn btn-p" type="button" id="addProgram"><i class="fa fa-plus"></i> Add program</button>
@@ -209,11 +312,20 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
 
       <!-- Connected: the responses -->
       <div id="rsView" hidden>
+        <div class="note warn" id="rsOld" style="margin-bottom:1rem" hidden><i class="fa fa-circle-up"></i><div><b>Update your Apps Script</b> to show proper dates: click <b>Connection</b> → <b>Copy code</b>, paste it into Apps Script, then <b>Deploy → Manage deployments → ✏ Edit → Version: New version → Deploy</b>.</div></div>
         <p class="sub" style="margin-bottom:.8rem"><i class="fa fa-table" style="color:#1e8e3e"></i> <b id="rsTitle"></b> <span class="help" id="rsUpdated"></span></p>
-        <div class="rs-tabs" id="rsTabs" role="tablist"></div>
-        <div class="rs-tools"><input type="search" id="rsSearch" placeholder="Search names, phone numbers, anything…" aria-label="Search responses"><span class="help" id="rsCount"></span></div>
-        <div class="rs-wrap"><table class="rs-table" id="rsTable"></table></div>
-        <button class="btn btn-g" type="button" id="rsMore" style="margin-top:.8rem" hidden>Show more</button>
+        <div class="rs-tabs" id="rsTabs" role="tablist" aria-label="Forms"></div>
+        <div class="rs-filters">
+          <div class="seg" id="rsStatus" role="group" aria-label="Filter by status"></div>
+          <input type="search" id="rsSearch" placeholder="Search names, phone numbers, anything…" aria-label="Search responses">
+        </div>
+        <div class="inbox" id="rsInbox">
+          <div>
+            <div class="ib-list" id="rsList"></div>
+            <button class="btn btn-g btn-s" type="button" id="rsMore" style="margin-top:.6rem" hidden>Show more</button>
+          </div>
+          <div class="ib-detail" id="rsDetail" aria-live="polite"></div>
+        </div>
         <p class="err" id="rsErr" role="alert"></p>
       </div>
     </div>
@@ -340,6 +452,7 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
 
 const SECRET = 'PASTE-YOUR-SECRET-HERE';   // the secret from admin.html → Form responses
 const MAX_ROWS = 2000;                     // newest responses sent per tab
+const VERSION = 2;                         // the admin page checks this to know which features the script has
 
 function doPost(e) {
   let req = {};
@@ -356,7 +469,7 @@ function doPost(e) {
 
   if (req.action === 'list') {
     return reply({
-      ok: true, title: ss.getName(), url: ss.getUrl(),
+      ok: true, version: VERSION, title: ss.getName(), url: ss.getUrl(),
       tabs: tabs.map(function (sh) { return { name: sh.getName(), count: Math.max(0, sh.getLastRow() - 1) }; })
     });
   }
@@ -369,8 +482,22 @@ function doPost(e) {
     if (lastRow < 1 || lastCol < 1) return reply({ ok: true, tab: sh.getName(), header: [], rows: [], total: 0, url: link });
     const header = sh.getRange(1, 1, 1, lastCol).getDisplayValues()[0];
     const total = Math.max(0, lastRow - 1), take = Math.min(total, MAX_ROWS);
-    const rows = take ? sh.getRange(lastRow - take + 1, 1, take, lastCol).getDisplayValues().reverse() : [];   // newest first
-    return reply({ ok: true, tab: sh.getName(), header: header, rows: rows, total: total, url: link });
+    const range = take ? sh.getRange(lastRow - take + 1, 1, take, lastCol) : null;
+    const rows = range ? range.getDisplayValues().reverse() : [];                               // newest first
+    const stamps = range ? range.getValues().map(function (r) { return isoDate(r[0]); }).reverse() : [];   // the Timestamp column as a real date
+    return reply({ ok: true, version: VERSION, tab: sh.getName(), header: header, rows: rows, stamps: stamps, total: total, url: link });
+  }
+
+  // for the admin dashboard: how many responses each form has, and when they came in (no personal details)
+  if (req.action === 'overview') {
+    return reply({
+      ok: true, version: VERSION, title: ss.getName(), url: ss.getUrl(),
+      tabs: tabs.map(function (sh) {
+        const total = Math.max(0, sh.getLastRow() - 1), take = Math.min(total, MAX_ROWS);
+        const stamps = take ? sh.getRange(sh.getLastRow() - take + 1, 1, take, 1).getValues().map(function (r) { return isoDate(r[0]); }).reverse() : [];
+        return { name: sh.getName(), count: total, stamps: stamps };
+      })
+    });
   }
 
   return reply({ ok: false, error: 'Unknown request.' });
@@ -379,6 +506,10 @@ function doPost(e) {
 // Opening the Web app URL in a browser just shows that the link is running (no data).
 function doGet() {
   return reply({ ok: true, message: 'The Children Home responses link is running. Use it from admin.html.' });
+}
+
+function isoDate(v) {
+  return (v instanceof Date && !isNaN(v)) ? v.toISOString() : '';
 }
 
 function reply(obj) {
@@ -453,7 +584,7 @@ function sameText(a, b) {
     const { data: ok, error } = await sb.rpc('ch_is_admin');
     if (error || !ok) { $('dEmail').textContent = session.user.email || ''; show('vDenied'); return; }
     show('vApp');
-    if (!started) { started = true; loadPrograms(); loadMoments(); }
+    if (!started) { started = true; ME = session.user.email || ''; loadPrograms(); loadMoments(); openTab('dashboard'); }
   }
   sb.auth.getSession().then(({ data }) => route(data.session));
   sb.auth.onAuthStateChange((ev, session) => { if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') route(session); });
@@ -470,11 +601,13 @@ function sameText(a, b) {
   $('signOut').addEventListener('click', async () => { await sb.auth.signOut(); location.reload(); });
 
   /* ── tabs ──────────────────────────────────────────────────────────────── */
-  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => { x.classList.toggle('on', x === t); x.setAttribute('aria-selected', x === t); });
-    document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== t.dataset.tab; });
-    if (t.dataset.tab === 'sheets') initResponses();
-  }));
+  function openTab(name) {
+    document.querySelectorAll('.tab').forEach(x => { const on = x.dataset.tab === name; x.classList.toggle('on', on); x.setAttribute('aria-selected', on); });
+    document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== name; });
+    if (name === 'sheets') initResponses();
+    if (name === 'dashboard') loadDashboard();
+  }
+  document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => openTab(t.dataset.tab)));
   document.querySelectorAll('dialog [data-close]').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
 
   /* ── Programs ──────────────────────────────────────────────────────────── */
@@ -482,7 +615,7 @@ function sameText(a, b) {
   async function loadPrograms() {
     const { data, error } = await sb.from('ch_programs').select('*').order('sort_order', { ascending: true }).order('created_at', { ascending: false });
     if (error) { $('programList').innerHTML = '<p class="err">' + esc(friendly(error)) + '</p>'; return; }
-    programs = data; renderPrograms();
+    programs = data; renderPrograms(); renderContent();
   }
   function renderPrograms() {
     $('programList').innerHTML = programs.length ? programs.map(p =>
@@ -548,7 +681,7 @@ function sameText(a, b) {
   async function loadMoments() {
     const { data, error } = await sb.from('ch_moments').select('*').order('moment_date', { ascending: false }).order('created_at', { ascending: false });
     if (error) { $('momentList').innerHTML = '<p class="err">' + esc(friendly(error)) + '</p>'; return; }
-    moments = data; renderMoments();
+    moments = data; renderMoments(); renderContent();
   }
   function renderMoments() {
     $('momentList').innerHTML = moments.length ? moments.map(m =>
@@ -619,10 +752,18 @@ function sameText(a, b) {
     await removeFiles([mEdit.image_url, ...(mEdit.photos || []).flatMap(p => [p.src, p.thumb])]); $('dlgMoment').close(); toast('Moment deleted.'); loadMoments();
   });
 
-  /* ── Form responses: read from the Google Sheet through its Apps Script ───── */
-  const RS = { url: '', secret: '', tabs: [], tab: null, rows: [], header: [], total: 0, shown: 0, started: false, timer: null };
+  /* ── Form responses + Dashboard ────────────────────────────────────────────
+     Answers are read from the Google Sheet through its Apps Script (read-only).
+     Status (New / In progress / Done) and notes are kept in ch_response_actions,
+     keyed by a scrambled fingerprint of each response (no names or phone numbers). */
+  let ME = '';
+  const RS = { url: '', secret: '', ready: null, viewer: false, tabs: [], tab: null, header: [], rows: [], stamps: [], keys: [], acts: {}, total: 0,
+               fresh: 0, filter: 'all', shown: 50, sel: -1, cols: {}, timer: null };
+  const ST = { new: { label: 'New', cls: 'st-new', color: '#e0565b' }, in_progress: { label: 'In progress', cls: 'st-prog', color: '#f2a93b' }, done: { label: 'Done', cls: 'st-done', color: '#2e9e6b' } };
+  const FORM_COLORS = ['#6a42b0', '#f2a93b', '#e0567a', '#2e9e8b', '#3b82c4', '#9c7dd6', '#c0563a', '#7a888b'];
   const seenKey = t => 'ch_seen:' + t;
   const okScriptUrl = u => /^https:\/\/script\.google\.com\/(macros|a\/macros\/[^/]+)\/s\/[\w-]+\/exec$/.test(u);
+  const oldScript = j => !j || !j.version || j.version < 2;
   function newSecret() { const a = new Uint8Array(32); crypto.getRandomValues(a); return btoa(String.fromCharCode.apply(null, a)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, ''); }
   async function saveSetting(k, v) { const { error } = await sb.from('ch_settings').upsert({ key: k, value: v }); if (error) throw error; }
   async function callScript(body, url) {
@@ -633,24 +774,65 @@ function sameText(a, b) {
     if (!j.ok) throw new Error(j.error || 'The script answered with an error.');
     return j;
   }
+  function loadRsSettings() {
+    if (!RS.ready) RS.ready = (async () => {
+      const { data, error } = await sb.from('ch_settings').select('key,value').in('key', ['responses_url', 'responses_secret']);
+      if (error) throw error;
+      (data || []).forEach(r => { if (r.key === 'responses_url') RS.url = r.value || ''; if (r.key === 'responses_secret') RS.secret = r.value || ''; });
+      if (!RS.secret) { RS.secret = newSecret(); await saveSetting('responses_secret', RS.secret); }
+    })().catch(e => { RS.ready = null; throw e; });
+    return RS.ready;
+  }
+
+  /* dates: "13 Nov 2026, 10:15 AM" and "3 days ago" */
+  const fmtDay = d => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+  const fmtWhen = d => fmtDay(d) + ', ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  function ago(d) {
+    const m = (Date.now() - d) / 60000;
+    if (m < 1) return 'just now'; if (m < 60) return Math.floor(m) + ' min ago'; if (m < 1440) return Math.floor(m / 60) + ' h ago';
+    const days = Math.floor(m / 1440); if (days === 1) return 'yesterday'; if (days < 7) return days + ' days ago'; if (days < 35) return Math.floor(days / 7) + ' wk ago';
+    return '';
+  }
+  const dateOf = i => { const d = RS.stamps[i] ? new Date(RS.stamps[i]) : null; return d && !isNaN(d) ? d : null; };
+
+  /* which columns hold the name, phone number and email */
+  function findCols(h) {
+    const at = re => h.findIndex((x, i) => i > 0 && re.test(x));
+    let name = h.findIndex((x, i) => i > 0 && /name|nama|姓名|名字/i.test(x) && !/company|organi[sz]ation|school|syarikat|syarikat|公司|机构|学校/i.test(x));
+    if (name < 0) name = h.length > 1 ? 1 : -1;
+    return { name, phone: at(/phone|\btel|telefon|mobile|\bh\/?p\b|whatsapp|contact\s*(no|num)|电话|手机|联络|联系/i), email: at(/e-?mail|电邮|邮箱|电子邮件/i) };
+  }
+  function previewText(r) {
+    const c = RS.cols, skip = new Set([0, c.name, c.phone, c.email]);
+    const vals = r.map((v, i) => skip.has(i) ? '' : String(v || '').trim()).filter(Boolean);
+    const longest = vals.reduce((a, v) => v.length > a.length ? v : a, '');   // the longest answer is usually the request itself
+    return longest.length >= 25 ? longest : vals.slice(0, 3).join(' · ');
+  }
+  async function fingerprint(tab, i) {
+    const base = tab + '\n' + (RS.stamps[i] || RS.rows[i][0] || '') + '\n' + (RS.rows[i][1] || '');
+    const h = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(base));
+    return Array.from(new Uint8Array(h), b => b.toString(16).padStart(2, '0')).join('');
+  }
+  const statusOf = i => (RS.acts[RS.keys[i]] || {}).status || 'new';
+  const pill = st => '<span class="pill ' + ST[st].cls + '">' + ST[st].label + '</span>';
+  const waLink = p => { let d = String(p).replace(/[^\d+]/g, ''); d = d.startsWith('+') ? d.slice(1) : d.startsWith('0') ? '6' + d : d; return d.length >= 9 ? 'https://wa.me/' + d : ''; };
+
+  /* ── connecting the Google Sheet ── */
   async function initResponses() {
-    if (RS.started) return; RS.started = true;
-    const { data, error } = await sb.from('ch_settings').select('key,value').in('key', ['responses_url', 'responses_secret']);
+    $('rsLoading').hidden = false;
+    try { await loadRsSettings(); } catch (e) { $('rsLoading').hidden = true; $('rsView').hidden = false; $('rsErr').textContent = friendly(e); return; }
     $('rsLoading').hidden = true;
-    if (error) { $('rsErr').textContent = friendly(error); $('rsView').hidden = false; return; }
-    (data || []).forEach(r => { if (r.key === 'responses_url') RS.url = r.value || ''; if (r.key === 'responses_secret') RS.secret = r.value || ''; });
-    if (!RS.secret) { RS.secret = newSecret(); try { await saveSetting('responses_secret', RS.secret); } catch (e) { toast(friendly(e), true); } }
-    if (RS.url) showViewer(); else showSetup();
+    if (!RS.url) { showSetup(); return; }
+    if (!RS.viewer) showViewer(); else if ($('rsView').hidden && $('rsSetup').hidden) showViewer();
   }
   function showSetup() {
     $('rsSetup').hidden = false; $('rsView').hidden = true; $('rsActs').hidden = true; $('rsSetupErr').textContent = '';
     $('rsUrl').value = RS.url; $('rsCancel').hidden = !RS.url;
     $('rsCode').textContent = $('gasCode').textContent.trim().replace("const SECRET = 'PASTE-YOUR-SECRET-HERE';", "const SECRET = '" + RS.secret + "';");
   }
-  function showViewer() { $('rsSetup').hidden = true; $('rsView').hidden = false; $('rsActs').hidden = false; loadTabs(true); startAuto(); }
+  function showViewer() { RS.viewer = true; $('rsSetup').hidden = true; $('rsView').hidden = false; $('rsActs').hidden = false; loadTabs(true); startAuto(); }
   $('rsCopy').addEventListener('click', async () => {
-    const txt = $('rsCode').textContent;
-    try { await navigator.clipboard.writeText(txt); toast('Code copied. Paste it into Apps Script.'); }
+    try { await navigator.clipboard.writeText($('rsCode').textContent); toast('Code copied. Paste it into Apps Script.'); }
     catch (e) { const r = document.createRange(); r.selectNodeContents($('rsCode')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast('Press Ctrl+C (or ⌘+C) to copy the selected code.'); }
   });
   $('rsNewKey').addEventListener('click', async () => {
@@ -667,54 +849,241 @@ function sameText(a, b) {
     busy(btn, false);
   });
   $('rsCancel').addEventListener('click', showViewer);
-  $('rsChange').addEventListener('click', () => { stopAuto(); showSetup(); });
+  $('rsChange').addEventListener('click', showSetup);
   $('rsRefresh').addEventListener('click', () => loadTabs(true));
 
+  /* ── the forms (spreadsheet tabs) ── */
   async function loadTabs(reloadRows) {
     $('rsErr').textContent = '';
     let j; try { j = await callScript({ action: 'list' }); } catch (e) { $('rsErr').textContent = friendly(e); return; }
+    $('rsOld').hidden = !oldScript(j);
     $('rsTitle').textContent = j.title; $('rsOpen').href = j.url;
     $('rsUpdated').textContent = '· updated ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const old = RS.tabs; RS.tabs = j.tabs || [];
     RS.tabs.forEach(t => { if (localStorage.getItem(seenKey(t.name)) === null) localStorage.setItem(seenKey(t.name), t.count); });
-    if (!RS.tabs.length) { $('rsTabs').innerHTML = ''; $('rsTable').innerHTML = '<tr><td class="rs-empty">This spreadsheet has no tabs yet.</td></tr>'; return; }
+    if (!RS.tabs.length) { $('rsTabs').innerHTML = ''; $('rsStatus').innerHTML = ''; $('rsList').innerHTML = '<div class="ib-none">This spreadsheet has no tabs yet.</div>'; renderDetail(); return; }
     if (!RS.tab || !RS.tabs.some(t => t.name === RS.tab)) RS.tab = RS.tabs[0].name;
     renderChips();
     const before = old.find(t => t.name === RS.tab), now = RS.tabs.find(t => t.name === RS.tab);
-    if (reloadRows || !before || before.count !== now.count) loadRows();
+    if (reloadRows || !before || before.count !== now.count) loadRows(true);
   }
   function renderChips() {
     $('rsTabs').innerHTML = RS.tabs.map(t => {
-      const fresh = Math.max(0, t.count - (+localStorage.getItem(seenKey(t.name)) || 0));
+      const plus = Math.max(0, t.count - (+localStorage.getItem(seenKey(t.name)) || 0));
       return '<button class="rs-chip' + (t.name === RS.tab ? ' on' : '') + '" type="button" role="tab" aria-selected="' + (t.name === RS.tab) + '" data-tab="' + esc(t.name) + '">' + esc(t.name)
-        + ' <span class="n">' + t.count.toLocaleString() + '</span>' + (fresh && t.name !== RS.tab ? '<span class="new">' + fresh + ' new</span>' : '') + '</button>';
+        + ' <span class="n">' + t.count.toLocaleString() + '</span>' + (plus && t.name !== RS.tab ? '<span class="new" title="' + plus + ' arrived since you last looked">+' + plus + '</span>' : '') + '</button>';
     }).join('');
   }
-  $('rsTabs').addEventListener('click', e => { const c = e.target.closest('.rs-chip'); if (!c || c.dataset.tab === RS.tab) return; RS.tab = c.dataset.tab; $('rsSearch').value = ''; renderChips(); loadRows(); });
-  async function loadRows() {
-    $('rsErr').textContent = ''; $('rsTable').innerHTML = '<tr><td class="rs-empty"><i class="fa fa-spinner fa-spin"></i> Loading responses…</td></tr>'; $('rsMore').hidden = true;
-    let j; try { j = await callScript({ action: 'rows', tab: RS.tab }); } catch (e) { $('rsTable').innerHTML = ''; $('rsErr').textContent = friendly(e); return; }
-    const seen = +localStorage.getItem(seenKey(RS.tab)) || 0;
-    RS.header = j.header || []; RS.rows = j.rows || []; RS.total = j.total || 0; RS.fresh = Math.max(0, RS.total - seen);
-    localStorage.setItem(seenKey(RS.tab), RS.total); renderChips();
+  $('rsTabs').addEventListener('click', e => {
+    const c = e.target.closest('.rs-chip'); if (!c || c.dataset.tab === RS.tab) return;
+    RS.tab = c.dataset.tab; RS.filter = 'all'; RS.sel = -1; $('rsSearch').value = ''; renderChips(); loadRows(false);
+  });
+
+  /* ── the responses of one form ── */
+  async function loadRows(keepSel) {
+    const selKey = keepSel && RS.sel >= 0 ? RS.keys[RS.sel] : null;
+    $('rsErr').textContent = ''; $('rsList').innerHTML = '<div class="ib-none"><i class="fa fa-spinner fa-spin"></i> Loading responses…</div>'; $('rsMore').hidden = true;
+    let j; try { j = await callScript({ action: 'rows', tab: RS.tab }); } catch (e) { $('rsList').innerHTML = ''; $('rsErr').textContent = friendly(e); return; }
+    RS.header = j.header || []; RS.rows = j.rows || []; RS.stamps = j.stamps || []; RS.total = j.total || 0; RS.cols = findCols(RS.header);
     if (j.url) $('rsOpen').href = j.url;
-    RS.shown = 50; renderRows();
+    RS.keys = await Promise.all(RS.rows.map((_, i) => fingerprint(RS.tab, i)));
+    const { data, error } = await sb.from('ch_response_actions').select('*').eq('tab', RS.tab);
+    if (error) $('rsErr').textContent = friendly(error);
+    RS.acts = {}; (data || []).forEach(a => { RS.acts[a.response_key] = a; });
+    const seen = +localStorage.getItem(seenKey(RS.tab)) || 0;
+    RS.fresh = Math.max(0, RS.total - seen); localStorage.setItem(seenKey(RS.tab), RS.total); renderChips();
+    RS.sel = selKey ? RS.keys.indexOf(selKey) : -1; RS.shown = 50;
+    renderStatusFilter(); renderList(); renderDetail();
   }
-  function renderRows() {
+  function renderStatusFilter() {
+    const n = { all: RS.rows.length, new: 0, in_progress: 0, done: 0 };
+    RS.rows.forEach((_, i) => { n[statusOf(i)]++; });
+    $('rsStatus').innerHTML = [['all', 'All'], ['new', 'New'], ['in_progress', 'In progress'], ['done', 'Done']].map(([k, l]) =>
+      '<button type="button" data-f="' + k + '" class="' + (RS.filter === k ? 'on' : '') + '" aria-pressed="' + (RS.filter === k) + '">' + l + '<span class="c">' + n[k] + '</span></button>').join('');
+  }
+  $('rsStatus').addEventListener('click', e => { const b = e.target.closest('[data-f]'); if (!b) return; RS.filter = b.dataset.f; RS.shown = 50; renderStatusFilter(); renderList(); });
+  function visible() {
     const q = $('rsSearch').value.trim().toLowerCase();
-    const list = q ? RS.rows.filter(r => r.some(c => String(c).toLowerCase().includes(q))) : RS.rows;
-    if (!RS.header.length) { $('rsTable').innerHTML = '<tr><td class="rs-empty">No responses in this tab yet.</td></tr>'; $('rsCount').textContent = ''; return; }
-    const head = '<thead><tr>' + RS.header.map(h => '<th scope="col">' + esc(h) + '</th>').join('') + '</tr></thead>';
-    const body = list.slice(0, RS.shown).map(r => '<tr' + (!q && RS.rows.indexOf(r) < RS.fresh ? ' class="fresh"' : '') + '>' + RS.header.map((_, i) => '<td>' + esc(r[i]) + '</td>').join('') + '</tr>').join('');
-    $('rsTable').innerHTML = head + '<tbody>' + (body || '<tr><td class="rs-empty" colspan="' + RS.header.length + '">' + (RS.rows.length ? 'No responses match “' + esc(q) + '”.' : 'No responses in this tab yet.') + '</td></tr>') + '</tbody>';
-    $('rsCount').textContent = q ? list.length + ' of ' + RS.total.toLocaleString() + ' responses match' : RS.total.toLocaleString() + ' responses' + (RS.total > RS.rows.length ? ' (showing the newest ' + RS.rows.length.toLocaleString() + ')' : '') + (RS.fresh ? ' · ' + RS.fresh + ' new, highlighted' : '');
+    const out = [];
+    RS.rows.forEach((r, i) => {
+      if (RS.filter !== 'all' && statusOf(i) !== RS.filter) return;
+      if (q && !r.some(c => String(c).toLowerCase().includes(q))) return;
+      out.push(i);
+    });
+    return out;
+  }
+  function renderList() {
+    if (!RS.header.length || !RS.rows.length) { $('rsList').innerHTML = '<div class="ib-none">No responses in this form yet.</div>'; $('rsMore').hidden = true; return; }
+    const list = visible(), c = RS.cols;
+    if (!list.length) { $('rsList').innerHTML = '<div class="ib-none">No responses match.</div>'; $('rsMore').hidden = true; return; }
+    $('rsList').innerHTML = list.slice(0, RS.shown).map(i => {
+      const r = RS.rows[i], d = dateOf(i), name = (c.name >= 0 && String(r[c.name] || '').trim()) || 'Response ' + (RS.total - i);
+      return '<button class="ib-item' + (i === RS.sel ? ' on' : '') + (i < RS.fresh ? ' unseen' : '') + '" type="button" data-i="' + i + '">'
+        + '<span class="ib-top"><span class="ib-name">' + esc(name) + '</span>' + pill(statusOf(i)) + '</span>'
+        + '<span class="ib-meta">' + (d ? esc(fmtWhen(d)) + (ago(d) ? ' · ' + ago(d) : '') : esc(r[0])) + (i < RS.fresh ? ' · <b style="color:var(--red)">new arrival</b>' : '') + '</span>'
+        + (previewText(r) ? '<span class="ib-prev">' + esc(previewText(r)) + '</span>' : '') + '</button>';
+    }).join('');
     $('rsMore').hidden = list.length <= RS.shown;
   }
-  $('rsSearch').addEventListener('input', () => { RS.shown = 50; renderRows(); });
-  $('rsMore').addEventListener('click', () => { RS.shown += 50; renderRows(); });
-  /* while the Form responses tab is open, check for new answers every 2 minutes */
-  function startAuto() { stopAuto(); RS.timer = setInterval(() => { if (!document.hidden && !$('rsView').hidden && !document.querySelector('[data-panel="sheets"]').hidden) loadTabs(false); }, 120000); }
+  $('rsList').addEventListener('click', e => {
+    const it = e.target.closest('.ib-item'); if (!it) return;
+    RS.sel = +it.dataset.i; renderList(); renderDetail(); $('rsInbox').classList.add('open');
+    if (matchMedia('(max-width: 900px)').matches) setTimeout(() => { const b = $('rsDetail').querySelector('.ib-back'); if (b) b.focus(); }, 260);
+  });
+  $('rsSearch').addEventListener('input', () => { RS.shown = 50; renderList(); });
+  $('rsMore').addEventListener('click', () => { RS.shown += 50; renderList(); });
+
+  function renderDetail() {
+    const i = RS.sel;
+    if (i < 0 || !RS.rows[i]) {
+      $('rsInbox').classList.remove('open');
+      $('rsDetail').innerHTML = '<div class="ib-empty"><i class="fa fa-envelope-open-text"></i><b>Select a response</b><span>Its answers, contact buttons and status will show here.</span></div>'; return;
+    }
+    const r = RS.rows[i], c = RS.cols, d = dateOf(i), st = statusOf(i), act = RS.acts[RS.keys[i]];
+    const name = (c.name >= 0 && String(r[c.name] || '').trim()) || 'Response ' + (RS.total - i);
+    const phone = c.phone >= 0 ? String(r[c.phone] || '').trim() : '', email = c.email >= 0 ? String(r[c.email] || '').trim() : '';
+    const wa = phone ? waLink(phone) : '';
+    const contact = (phone ? '<a class="btn btn-g btn-s" href="tel:' + esc(phone.replace(/[^\d+]/g, '')) + '"><i class="fa fa-phone"></i> Call ' + esc(phone) + '</a>' : '')
+      + (wa ? '<a class="btn btn-g btn-s wa" href="' + esc(wa) + '" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>' : '')
+      + (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '<a class="btn btn-g btn-s" href="mailto:' + esc(email) + '"><i class="fa fa-envelope"></i> Email</a>' : '');
+    const who = act && act.updated_by ? 'Last changed by ' + esc(act.updated_by) + (act.updated_at ? ' · ' + esc(fmtWhen(new Date(act.updated_at))) : '') : 'Not handled yet.';
+    $('rsDetail').innerHTML = '<button class="btn btn-g btn-s ib-back" type="button" data-back><i class="fa fa-arrow-left"></i> Back to list</button>'
+      + '<div class="ib-head"><h3>' + esc(name) + '</h3><p class="sub">' + esc(RS.tab) + ' · ' + (d ? esc(fmtWhen(d)) : esc(r[0])) + '</p>'
+      + (contact ? '<div class="ib-contact">' + contact + '</div>' : '') + '</div>'
+      + '<div class="ib-status"><span class="lbl">Status</span><div class="seg" role="group" aria-label="Status">'
+      + Object.keys(ST).map(k => '<button type="button" data-st="' + k + '" class="' + (k === st ? 'on' : '') + '" aria-pressed="' + (k === st) + '">' + ST[k].label + '</button>').join('')
+      + '</div><span class="ib-who">' + who + '</span></div>'
+      + '<dl class="ib-answers">' + RS.header.map((h, k) => k === 0 ? '' : '<div><dt>' + esc(h) + '</dt><dd' + (String(r[k] || '').trim() ? '>' + esc(r[k]) : ' class="none">No answer') + '</dd></div>').join('') + '</dl>'
+      + '<div class="ib-note"><label class="lbl" for="rsNote">Note for the team</label><textarea id="rsNote" placeholder="For example: called on 14 Nov, visiting on Saturday">' + esc((act && act.note) || '') + '</textarea>'
+      + '<button class="btn btn-p btn-s" type="button" data-savenote><i class="fa fa-floppy-disk"></i> Save note</button></div>';
+  }
+  $('rsDetail').addEventListener('click', e => {
+    if (e.target.closest('[data-back]')) { $('rsInbox').classList.remove('open'); const it = $('rsList').querySelector('.ib-item.on'); if (it) it.focus(); return; }
+    const b = e.target.closest('[data-st]'); if (b) { saveAction({ status: b.dataset.st }); return; }
+    if (e.target.closest('[data-savenote]')) saveAction({ note: $('rsNote').value.trim() || null });
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('rsInbox').classList.contains('open') && matchMedia('(max-width: 900px)').matches) $('rsInbox').classList.remove('open'); });
+
+  async function saveAction(change) {
+    const i = RS.sel; if (i < 0) return;
+    const key = RS.keys[i], prev = RS.acts[key];
+    const row = { response_key: key, tab: RS.tab, status: prev ? prev.status : 'new', note: prev ? prev.note : null, updated_by: ME, updated_at: new Date().toISOString() };
+    Object.assign(row, change);
+    RS.acts[key] = row; renderStatusFilter(); renderList(); renderDetail();   // show the change straight away
+    const { error } = await sb.from('ch_response_actions').upsert(row);
+    if (error) { if (prev) RS.acts[key] = prev; else delete RS.acts[key]; renderStatusFilter(); renderList(); renderDetail(); toast(friendly(error), true); return; }
+    toast('status' in change ? 'Marked as ' + ST[row.status].label + '.' : 'Note saved.');
+  }
+
+  /* ── Dashboard ── */
+  function donut(el, items, centre) {
+    const total = items.reduce((a, b) => a + b.value, 0), R = 58, C = 2 * Math.PI * R, parts = items.filter(x => x.value > 0);
+    let off = 0;
+    const segs = total ? parts.map(x => {
+      const len = x.value / total * C, gap = parts.length > 1 ? Math.min(2, len / 3) : 0;
+      const seg = '<circle r="' + R + '" cx="80" cy="80" fill="none" stroke="' + x.color + '" stroke-width="24" stroke-dasharray="' + (len - gap) + ' ' + (C - len + gap) + '" stroke-dashoffset="' + (-off) + '" transform="rotate(-90 80 80)"><title>' + esc(x.label) + ': ' + x.value + '</title></circle>';
+      off += len; return seg;
+    }).join('') : '<circle r="' + R + '" cx="80" cy="80" fill="none" stroke="#eee8f5" stroke-width="24"/>';
+    el.innerHTML = '<svg viewBox="0 0 160 160" role="img" aria-label="' + esc(items.map(x => x.label + ' ' + x.value).join(', ')) + '">' + segs
+      + '<text x="80" y="80" text-anchor="middle" class="d-n">' + total.toLocaleString() + '</text><text x="80" y="99" text-anchor="middle" class="d-l">' + esc(centre) + '</text></svg>'
+      + '<ul class="legend">' + items.map(x => '<li><span class="sw" style="background:' + x.color + '"></span><span>' + esc(x.label) + '</span><b>' + x.value.toLocaleString() + '</b><span class="pct">'
+      + (total ? Math.round(x.value / total * 100) : 0) + '%</span></li>').join('') + '</ul>';
+  }
+  function weeks(stamps) {
+    const mon = d => { const x = new Date(d); x.setHours(0, 0, 0, 0); x.setDate(x.getDate() - (x.getDay() + 6) % 7); return x.getTime(); };
+    const now = mon(new Date()), w = [];
+    for (let k = 7; k >= 0; k--) { const t = new Date(now); t.setDate(t.getDate() - 7 * k); w.push({ t: t.getTime(), n: 0 }); }
+    stamps.forEach(s => { const d = new Date(s); if (isNaN(d)) return; const t = mon(d), b = w.find(x => x.t === t); if (b) b.n++; });
+    const max = Math.max(1, ...w.map(x => x.n));
+    $('dbWeeks').innerHTML = w.map((x, k) => '<div class="bar' + (k === 7 ? ' now' : '') + '" title="Week of ' + esc(fmtDay(new Date(x.t))) + ': ' + x.n + '"><b>' + x.n + '</b><i style="height:' + Math.max(2, x.n / max * 150) + 'px"></i><span>'
+      + (k === 7 ? 'This week' : new Date(x.t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })) + '</span></div>').join('');
+    $('dbWeeksNote').textContent = 'Last 8 weeks, all forms · ' + w.reduce((a, b) => a + b.n, 0) + ' responses';
+  }
+  function statCard(key, label, value, sub, color, go) {
+    return '<button class="stat" type="button" data-go="' + go + '"><span class="k">' + (color ? '<span class="dot" style="background:' + color + '"></span>' : '<i class="fa fa-inbox"></i>') + esc(label)
+      + '</span><span class="v">' + (value === null ? '–' : value.toLocaleString()) + '</span><span class="s">' + esc(sub) + '</span></button>';
+  }
+  function renderCards(t) {
+    $('dbCards').innerHTML = statCard('all', 'All responses', t ? t.total : null, t ? 'across ' + t.forms + ' forms' : 'connect your sheet', '', 'all')
+      + statCard('new', 'Need action', t ? t.new : null, 'marked New', ST.new.color, 'new')
+      + statCard('in_progress', 'In progress', t ? t.in_progress : null, 'being handled', ST.in_progress.color, 'in_progress')
+      + statCard('done', 'Done', t ? t.done : null, 'finished', ST.done.color, 'done');
+  }
+  $('dbCards').addEventListener('click', e => {
+    const b = e.target.closest('[data-go]'); if (!b) return;
+    if (!RS.url) { openTab('sheets'); return; }
+    const go = b.dataset.go; RS.filter = go;
+    // open a form that has responses with this status (the one with the most), not just the last one viewed
+    const pick = go === 'all' ? null : DB.rows.filter(r => r[go] > 0).sort((x, y) => y[go] - x[go])[0];
+    openResponses(pick ? pick.name : null);
+  });
+  $('dbTable').addEventListener('click', e => { const tr = e.target.closest('tr[data-tab]'); if (tr) { RS.filter = 'all'; openResponses(tr.dataset.tab); } });
+  $('dbGoConnect').addEventListener('click', () => openTab('sheets'));
+  $('dbRefresh').addEventListener('click', () => loadDashboard());
+  function openResponses(tab) {
+    if (tab && tab !== RS.tab) { RS.tab = tab; RS.sel = -1; $('rsSearch').value = ''; if (RS.viewer) { renderChips(); loadRows(false); } }
+    else if (RS.viewer && RS.rows.length) { renderStatusFilter(); renderList(); }
+    openTab('sheets');
+  }
+  function renderContent() {
+    const c = (list) => ({ pub: list.filter(x => x.published).length, draft: list.filter(x => !x.published).length });
+    const p = c(programs), m = c(moments);
+    $('dbContent').innerHTML = '<button type="button" data-tabgo="programs"><i class="fa fa-hands-holding-child"></i><div><b>' + p.pub + ' program' + (p.pub === 1 ? '' : 's') + ' on the website</b><span>' + p.draft + ' draft' + (p.draft === 1 ? '' : 's') + '</span></div></button>'
+      + '<button type="button" data-tabgo="moments"><i class="fa fa-camera"></i><div><b>' + m.pub + ' moment' + (m.pub === 1 ? '' : 's') + ' on the website</b><span>' + m.draft + ' draft' + (m.draft === 1 ? '' : 's') + ' · plus the 3 older moments</span></div></button>';
+  }
+  $('dbContent').addEventListener('click', e => { const b = e.target.closest('[data-tabgo]'); if (b) openTab(b.dataset.tabgo); });
+
+  let dbLoading = false; const DB = { rows: [] };
+  async function loadDashboard() {
+    if (dbLoading) return; dbLoading = true; $('dbErr').textContent = ''; renderContent();
+    try {
+      try { await loadRsSettings(); } catch (e) { $('dbErr').textContent = friendly(e); return; }
+      if (!RS.url) { $('dbConnect').hidden = false; $('dbResp').hidden = true; $('dbOld').hidden = true; renderCards(null); return; }
+      $('dbConnect').hidden = true; $('dbResp').hidden = false;
+      let ov, old = false;
+      try { ov = await callScript({ action: 'overview' }); }
+      catch (e) {
+        if (!/unknown request/i.test(e.message)) { $('dbErr').textContent = friendly(e); renderCards(null); return; }
+        old = true; ov = await callScript({ action: 'list' }).catch(() => null); if (!ov) { renderCards(null); return; }
+      }
+      $('dbOld').hidden = !(old || oldScript(ov));
+      const tabs = ov.tabs || [];
+      const { data: acts, error } = await sb.from('ch_response_actions').select('tab,status');
+      if (error) $('dbErr').textContent = friendly(error);
+      const by = {}; tabs.forEach(t => { by[t.name] = { in_progress: 0, done: 0 }; });
+      (acts || []).forEach(a => { if (by[a.tab] && by[a.tab][a.status] !== undefined) by[a.tab][a.status]++; });
+      const rows = tabs.map((t, k) => {
+        const ip = Math.min(by[t.name].in_progress, t.count), dn = Math.min(by[t.name].done, t.count - ip);
+        return { name: t.name, color: FORM_COLORS[k % FORM_COLORS.length], total: t.count, in_progress: ip, done: dn, new: t.count - ip - dn, last: (t.stamps || [])[0] };
+      });
+      DB.rows = rows;
+      const sum = f => rows.reduce((a, r) => a + r[f], 0);
+      const tot = { total: sum('total'), new: sum('new'), in_progress: sum('in_progress'), done: sum('done'), forms: rows.length };
+      renderCards(tot);
+      donut($('dbByForm'), rows.map(r => ({ label: r.name, value: r.total, color: r.color })), 'responses');
+      donut($('dbByStatus'), Object.keys(ST).map(k => ({ label: ST[k].label, value: tot[k], color: ST[k].color })), 'responses');
+      weeks([].concat(...tabs.map(t => t.stamps || [])));
+      $('dbTable').innerHTML = '<thead><tr><th>Form</th><th class="num">Total</th><th class="num">New</th><th class="num">In progress</th><th class="num">Done</th><th>Latest response</th></tr></thead><tbody>'
+        + (rows.length ? rows.map(r => {
+          const d = r.last ? new Date(r.last) : null;
+          return '<tr data-tab="' + esc(r.name) + '"><td><span class="dot" style="background:' + r.color + ';margin-right:.5rem"></span><b>' + esc(r.name) + '</b></td><td class="num">' + r.total + '</td>'
+            + '<td class="num">' + (r.new ? '<span class="pill st-new">' + r.new + '</span>' : '0') + '</td><td class="num">' + r.in_progress + '</td><td class="num">' + r.done + '</td>'
+            + '<td>' + (d && !isNaN(d) ? esc(fmtDay(d)) + (ago(d) ? ' <span class="help">(' + ago(d) + ')</span>' : '') : '<span class="help">–</span>') + '</td></tr>';
+        }).join('') : '<tr><td colspan="6" class="help">No forms yet.</td></tr>') + '</tbody>';
+    } finally { dbLoading = false; }
+  }
+
+  /* while the admin page is open, check for new answers every 2 minutes */
+  function startAuto() {
+    stopAuto();
+    RS.timer = setInterval(() => {
+      if (document.hidden || $('vApp').hidden) return;   // only while signed in
+      if (!document.querySelector('[data-panel="dashboard"]').hidden) loadDashboard();
+      if (!document.querySelector('[data-panel="sheets"]').hidden && !$('rsView').hidden) loadTabs(false);
+    }, 120000);
+  }
   function stopAuto() { if (RS.timer) clearInterval(RS.timer); RS.timer = null; }
+  startAuto();
 
   /* an error message disappears as soon as you start fixing it */
   $('programForm').addEventListener('input', () => { $('p_err').textContent = ''; });
