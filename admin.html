@@ -25,7 +25,7 @@ a{color:var(--purple)}
 .top img{height:42px;width:auto}
 .top .t{font-family:var(--display);font-weight:600;font-size:1.15rem;color:var(--purple);padding-left:1rem;border-left:2px solid #f2a93b}
 .top .who{margin-left:auto;display:flex;align-items:center;gap:.8rem;font-size:.86rem;color:var(--ink-2)}
-@media(max-width:640px){.top{gap:.6rem;padding:.6rem .9rem}.top img{height:32px}.top .t{font-size:.95rem;padding-left:.6rem}#whoEmail{display:none}}
+@media(max-width:640px){.top{gap:.6rem;padding:.6rem .9rem}.top img{height:32px}.top .t{font-size:.95rem;padding-left:.6rem}#whoEmail,#whoRole{display:none!important}}
 main{max-width:1100px;margin:0 auto;padding:clamp(1.2rem,3vw,2.4rem) clamp(1rem,3vw,2rem) 4rem}
 .card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(1.3rem,3vw,2rem);box-shadow:0 6px 24px rgba(40,20,80,.05)}
 .narrow{max-width:460px;margin:clamp(1rem,6vh,4rem) auto 0}
@@ -180,6 +180,52 @@ dialog::backdrop{background:rgba(20,10,40,.55)}
   .inbox.open .ib-detail{visibility:visible;transform:none}
   .ib-back{display:inline-flex;margin-bottom:.9rem}
 }
+/* roles, users, assignments, export, activity */
+.pill.role-admin{background:#ece4fa;color:var(--purple-d)}.pill.role-staff{background:#e6f1fb;color:#235d91}
+.top .who .pill{margin-left:-.3rem}
+.note.mine{align-items:center}.note.mine>div{flex:1}
+.sel{padding:.55rem 2rem .55rem .8rem;border:1px solid #ddd5e8;border-radius:11px;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a888b' stroke-width='1.6' fill='none'/%3E%3C/svg%3E") no-repeat right .8rem center;-webkit-appearance:none;appearance:none;font-weight:600;font-size:.84rem;color:var(--ink);cursor:pointer;max-width:100%}
+.sel:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 3px rgba(106,66,176,.15)}
+.rs-filters .xl{margin-left:auto}.rs-filters .xl i{color:#1d6f42}
+.ib-asg{display:inline-flex;align-items:center;gap:.3rem;padding:.08rem .5rem;border-radius:99px;background:#eef3fb;color:#235d91;font-size:.72rem;font-weight:700;white-space:nowrap}
+.ib-asg.me{background:#ece4fa;color:var(--purple-d)}
+.ib-assign{display:flex;flex-wrap:wrap;align-items:center;gap:.6rem;width:100%;padding-top:.6rem;border-top:1px solid #e4dbf2}
+.ib-assign .sel{min-width:200px}
+.roles-help{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:1.1rem}
+.roles-help>div{display:flex;align-items:flex-start;gap:.6rem;padding:.75rem .9rem;background:#fff;border:1px solid var(--line);border-radius:12px;font-size:.84rem;color:var(--ink-2)}
+.roles-help .pill{margin-top:.05rem}
+@media(max-width:700px){.roles-help{grid-template-columns:1fr}}
+.u-row{display:grid;grid-template-columns:44px minmax(0,1.6fr) 120px minmax(0,1fr) 270px;gap:.9rem;align-items:center;padding:.8rem .9rem;background:#fff;border:1px solid var(--line);border-radius:14px}
+.avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#fff}
+.u-row b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.u-row .em{display:block;overflow:hidden;font-size:.8rem;color:var(--ink-3);text-overflow:ellipsis;white-space:nowrap}
+.u-row .you{margin-left:.35rem;padding:.05rem .45rem;border-radius:99px;background:var(--purple-50);color:var(--purple);font-size:.7rem;font-weight:800;vertical-align:middle}
+.u-row .seen{font-size:.8rem;color:var(--ink-3)}
+.u-row .acts{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+@media(max-width:760px){.u-row{grid-template-columns:44px minmax(0,1fr) auto}.u-row .seen{grid-column:2 / -1}.u-row .acts{grid-column:1 / -1;justify-content:flex-start}}
+.role-pick{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.role-pick label{display:flex;gap:.6rem;align-items:flex-start;padding:.75rem .85rem;border:1px solid #ddd5e8;border-radius:12px;cursor:pointer}
+.role-pick label:has(input:checked){border-color:var(--purple);background:var(--purple-50)}
+.role-pick input{margin-top:.25rem;accent-color:var(--purple)}
+.role-pick b{display:block;font-size:.92rem}.role-pick small{display:block;font-size:.78rem;color:var(--ink-3);line-height:1.4}
+@media(max-width:520px){.role-pick{grid-template-columns:1fr}}
+.pw-row{display:flex;gap:.5rem}.pw-row input{flex:1;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.04em}
+.done-box{display:flex;flex-direction:column;gap:.9rem}
+.done-box .ok{display:flex;align-items:center;gap:.6rem;font-size:1.05rem;font-weight:800;color:var(--ok)}
+.creds{padding:.9rem 1rem;border-radius:12px;background:var(--purple-50);border:1px solid var(--purple-100);font-size:.88rem;line-height:1.8;word-break:break-all}
+.creds code{background:#fff;font-size:.92rem}
+.ac-list{display:flex;flex-direction:column}
+.ac-day{margin:1.1rem 0 .5rem;font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ac-day:first-child{margin-top:0}
+.ac-row{display:grid;grid-template-columns:36px 1fr auto;gap:.8rem;align-items:center;padding:.7rem .9rem;background:#fff;border:1px solid var(--line);border-top-width:0}
+.ac-day+.ac-row{border-top-width:1px;border-radius:12px 12px 0 0}
+.ac-row:last-child,.ac-row:has(+.ac-day){border-radius:0 0 12px 12px}
+.ac-day+.ac-row:last-child,.ac-day+.ac-row:has(+.ac-day){border-radius:12px}
+.ac-ic{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:.9rem}
+.ac-ic.a-responses{background:#fdeceb;color:#b3292f}.ac-ic.a-programs{background:#ece4fa;color:var(--purple-d)}.ac-ic.a-moments{background:#fff3df;color:#9a5b00}
+.ac-ic.a-users{background:#e6f1fb;color:#235d91}.ac-ic.a-settings{background:#eef0f1;color:#4b5b5f}
+.ac-row p{font-size:.9rem;line-height:1.45;color:var(--ink-2)}.ac-row p b{color:var(--ink)}
+.ac-row time{font-size:.78rem;color:var(--ink-3);white-space:nowrap}
 .toast{position:fixed;left:50%;bottom:1.4rem;transform:translateX(-50%) translateY(20px);opacity:0;z-index:100;padding:.75rem 1.2rem;border-radius:12px;background:var(--ink);color:#fff;font-size:.9rem;font-weight:600;box-shadow:0 12px 30px rgba(0,0,0,.25);transition:opacity .25s,transform .25s;pointer-events:none;max-width:92vw}
 .toast.on{opacity:1;transform:translateX(-50%)}
 .toast.bad{background:var(--red)}
@@ -192,7 +238,7 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
 <header class="top">
   <img src="assets/af-logo.png" alt="Amitabha Foundation">
   <span class="t">Children Home · Admin</span>
-  <div class="who" id="who" hidden><span id="whoEmail"></span><button class="btn btn-g btn-s" id="signOut" type="button"><i class="fa fa-right-from-bracket"></i> Sign out</button></div>
+  <div class="who" id="who" hidden><span id="whoEmail"></span><span class="pill" id="whoRole" hidden></span><button class="btn btn-g btn-s" id="signOut" type="button"><i class="fa fa-right-from-bracket"></i> Sign out</button></div>
 </header>
 
 <main>
@@ -211,30 +257,33 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
   <!-- Sign in -->
   <section class="card narrow" id="vLogin" hidden>
     <h1>Staff sign in</h1>
-    <p class="sub" style="margin-bottom:1.2rem">For Children Home admins only.</p>
+    <p class="sub" style="margin-bottom:1.2rem">For the Children Home team only.</p>
     <form id="loginForm" novalidate>
       <div class="field"><label for="lEmail">Email</label><input id="lEmail" type="email" autocomplete="username" required></div>
       <div class="field"><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password" required></div>
       <p class="err" id="lErr" role="alert"></p>
       <button class="btn btn-p" type="submit" id="lBtn" style="width:100%"><i class="fa fa-lock"></i> Sign in</button>
     </form>
-    <p class="help" style="margin-top:1rem">Forgot your password? Ask another admin, or reset it in Supabase under Authentication → Users.</p>
+    <p class="help" style="margin-top:1rem">Forgot your password? Ask an Admin to set a new one for you (Users → New password).</p>
     <p style="margin-top:1rem"><a href="index.html" style="font-size:.86rem;font-weight:600;text-decoration:none"><i class="fa fa-arrow-left"></i> Back to the website</a></p>
   </section>
 
   <!-- Signed in, but not on the admin list -->
   <section class="card narrow" id="vDenied" hidden>
-    <h1>No admin access</h1>
-    <p class="sub">You’re signed in as <b id="dEmail"></b>, but this account isn’t on the admin list. Ask an existing admin to add you (see ADMIN-GUIDE.md, “Add another admin”).</p>
+    <h1>No access</h1>
+    <p class="sub">You’re signed in as <b id="dEmail"></b>, but this account isn’t on the Children Home team. Ask an Admin to add you under <b>Users</b>.</p>
   </section>
 
   <!-- The dashboard -->
   <section id="vApp" hidden>
+    <div class="note warn" id="sqlOld" style="margin-bottom:1.2rem" hidden><i class="fa fa-database"></i><div><b>One more step to turn on Users &amp; roles, assigning responses and the Activity log:</b> run the updated <code>supabase/children-home-setup.sql</code> in Supabase (SQL Editor → New query → paste → Run), then reload this page. Nothing is deleted.</div></div>
     <nav class="tabs" role="tablist">
       <button class="tab on" type="button" data-tab="dashboard" role="tab" aria-selected="true"><i class="fa fa-chart-pie"></i> Dashboard</button>
       <button class="tab" type="button" data-tab="sheets" role="tab" aria-selected="false"><i class="fa fa-inbox"></i> Form responses</button>
       <button class="tab" type="button" data-tab="programs" role="tab" aria-selected="false"><i class="fa fa-hands-holding-child"></i> Programs</button>
       <button class="tab" type="button" data-tab="moments" role="tab" aria-selected="false"><i class="fa fa-camera"></i> Moments</button>
+      <button class="tab" type="button" data-tab="users" role="tab" aria-selected="false" data-admin-only hidden><i class="fa fa-users"></i> Users</button>
+      <button class="tab" type="button" data-tab="activity" role="tab" aria-selected="false" data-admin-only hidden><i class="fa fa-clock-rotate-left"></i> Activity</button>
       <button class="tab" type="button" data-tab="account" role="tab" aria-selected="false"><i class="fa fa-user-gear"></i> Account</button>
     </nav>
 
@@ -247,6 +296,7 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
       <div class="note" id="dbConnect" style="margin-bottom:1rem" hidden><i class="fa fa-link"></i><div><b>Connect your Google Sheet</b> to see your form responses here. <button class="btn btn-p btn-s" type="button" id="dbGoConnect" style="margin-left:.4rem">Connect now</button></div></div>
       <div class="note warn" id="dbOld" style="margin-bottom:1rem" hidden><i class="fa fa-circle-up"></i><div><b>Update your Apps Script</b> to see dates and the weekly chart: Form responses → <b>Connection</b> → <b>Copy code</b>, paste it into Apps Script, then <b>Deploy → Manage deployments → ✏ Edit → Version: New version → Deploy</b>.</div></div>
       <p class="err" id="dbErr" role="alert"></p>
+      <div class="note mine" id="dbMine" style="margin-bottom:1rem" hidden><i class="fa fa-user-check"></i><div id="dbMineText"></div><button class="btn btn-p btn-s" type="button" id="dbMineGo">Show them</button></div>
       <div class="db-cards" id="dbCards"></div>
       <div class="db-grid" id="dbResp">
         <div class="card"><h3>Responses by form</h3><div class="donut" id="dbByForm"></div></div>
@@ -284,6 +334,8 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
       </div>
       <p class="sub" id="rsLoading"><i class="fa fa-spinner fa-spin"></i> Loading…</p>
 
+      <div class="card" id="rsWait" hidden><h2 style="font-size:1.2rem;margin-bottom:.3rem">The Google Sheet isn’t connected yet</h2><p class="sub">Ask an Admin to connect it under Form responses. Then the answers show here.</p></div>
+
       <!-- Not connected yet: setup steps -->
       <div class="card" id="rsSetup" hidden>
         <h2 style="font-size:1.25rem;margin-bottom:.3rem">Connect your Google Sheet</h2>
@@ -317,7 +369,9 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
         <div class="rs-tabs" id="rsTabs" role="tablist" aria-label="Forms"></div>
         <div class="rs-filters">
           <div class="seg" id="rsStatus" role="group" aria-label="Filter by status"></div>
+          <select class="sel" id="rsWho" aria-label="Filter by who it’s assigned to" hidden></select>
           <input type="search" id="rsSearch" placeholder="Search names, phone numbers, anything…" aria-label="Search responses">
+          <button class="btn btn-g btn-s xl" type="button" id="rsExport" title="Download the responses shown here as an Excel file"><i class="fa fa-file-excel"></i> Export to Excel</button>
         </div>
         <div class="inbox" id="rsInbox">
           <div>
@@ -330,9 +384,63 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
       </div>
     </div>
 
+    <!-- USERS (Admins only) -->
+    <div data-panel="users" hidden>
+      <div class="sec-head">
+        <div><h2>Users</h2><p class="sub">Who can sign in to this admin page, and what they can do.</p></div>
+        <button class="btn btn-p" type="button" id="usAdd"><i class="fa fa-user-plus"></i> Add user</button>
+      </div>
+      <div class="roles-help">
+        <div><span class="pill role-admin">Admin</span><span>Everything, including <b>Users</b>, the <b>Activity</b> log and the Google Sheet connection.</span></div>
+        <div><span class="pill role-staff">Staff</span><span>Form responses (status, notes, assigning, export), Programs and Moments.</span></div>
+      </div>
+      <div class="card" id="usSetup" style="margin-bottom:1rem" hidden>
+        <h2 style="font-size:1.25rem;margin-bottom:.3rem">Turn on user management</h2>
+        <p class="sub">Done once, about 5 minutes. Adding people needs a small function on Supabase’s servers, so your secret key never sits in the website.</p>
+        <div class="note warn" id="usJwt" style="margin-top:1rem" hidden><i class="fa fa-triangle-exclamation"></i><div>The function is there, but Supabase is blocking it. Do <b>step 4</b> below (turn off JWT verification), then click <b>Try again</b>.</div></div>
+        <ol class="steps">
+          <li>In Supabase, open <b>Edge Functions</b> → <b>Deploy a new function</b> → <b>Via Editor</b>.</li>
+          <li>Name it exactly <code>ch-admin-users</code>. Delete the sample code, then paste the code below (click <b>Copy code</b>).</li>
+          <li>Click <b>Deploy function</b> and wait until it says it’s deployed.</li>
+          <li>Open the function’s <b>Details</b> (or <b>Settings</b>) and turn <b>off</b> JWT verification (it may be called “Verify JWT” or “Enforce JWT verification”), then save. The function checks for itself that you’re a signed-in Admin.</li>
+          <li>Come back here and click <b>Try again</b>.</li>
+        </ol>
+        <div class="code-box">
+          <div class="code-top"><span class="help">Edge Function code (ch-admin-users)</span><button class="btn btn-p btn-s" type="button" id="usCopy"><i class="fa fa-copy"></i> Copy code</button></div>
+          <pre id="usCode"></pre>
+        </div>
+        <button class="btn btn-g" type="button" id="usRetry" style="margin-top:1rem"><i class="fa fa-rotate"></i> Try again</button>
+      </div>
+      <p class="err" id="usErr" role="alert"></p>
+      <div class="list" id="usList"></div>
+    </div>
+
+    <!-- ACTIVITY (Admins only) -->
+    <div data-panel="activity" hidden>
+      <div class="sec-head">
+        <div><h2>Activity</h2><p class="sub">Who did what, and when. It never shows what people wrote in a form.</p></div>
+        <button class="btn btn-g btn-s" type="button" id="acRefresh"><i class="fa fa-rotate"></i> Refresh</button>
+      </div>
+      <div class="rs-filters">
+        <select class="sel" id="acArea" aria-label="Filter by area">
+          <option value="">Everything</option><option value="responses">Form responses</option><option value="programs">Programs</option>
+          <option value="moments">Moments</option><option value="users">Users</option><option value="settings">Google Sheet connection</option>
+        </select>
+        <select class="sel" id="acWho" aria-label="Filter by person"><option value="">Everyone</option></select>
+      </div>
+      <p class="err" id="acErr" role="alert"></p>
+      <div class="ac-list" id="acList"></div>
+      <button class="btn btn-g btn-s" type="button" id="acMore" style="margin-top:.8rem" hidden>Show older</button>
+    </div>
+
     <div data-panel="account" hidden>
       <div class="card" style="max-width:520px">
-        <p class="sub" style="margin-bottom:1rem">Signed in as <b id="accEmail"></b></p>
+        <p class="sub" style="margin-bottom:1rem">Signed in as <b id="accEmail"></b> <span class="pill" id="accRole" hidden></span></p>
+        <form id="nameForm" novalidate hidden style="margin-bottom:1.6rem;padding-bottom:1.4rem;border-bottom:1px solid var(--line)">
+          <div class="field"><label for="myName">Your name</label><input id="myName" type="text" maxlength="80" autocomplete="name">
+            <span class="help">Shown to the team when responses are assigned to you, and in the activity log.</span></div>
+          <button class="btn btn-g btn-s" type="submit" id="nameBtn"><i class="fa fa-floppy-disk"></i> Save name</button>
+        </form>
         <h2 style="margin-bottom:.4rem">Change my password</h2>
         <p class="sub" style="margin-bottom:1.2rem">At least 10 characters. Use one you don’t use anywhere else.</p>
         <form id="pwForm" novalidate>
@@ -345,6 +453,49 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
     </div>
   </section>
 </main>
+
+<!-- Add user -->
+<dialog id="dlgUser" aria-labelledby="uTitleH" style="width:min(560px,96vw)">
+  <form id="userForm" novalidate>
+    <div class="dlg-h"><h2 id="uTitleH">Add user</h2><button class="xbtn" type="button" data-close aria-label="Close"><i class="fa fa-xmark"></i></button></div>
+    <div class="dlg-b" id="uFields">
+      <div class="field"><label for="u_name">Name</label><input id="u_name" type="text" maxlength="80" autocomplete="off" placeholder="For example: Siti Rahman"></div>
+      <div class="field"><label for="u_email">Email *</label><input id="u_email" type="email" autocomplete="off" required></div>
+      <div class="field"><span class="lbl">Role</span>
+        <div class="role-pick">
+          <label><input type="radio" name="u_role" value="staff" checked><span><b>Staff</b><small>Form responses, Programs and Moments.</small></span></label>
+          <label><input type="radio" name="u_role" value="admin"><span><b>Admin</b><small>Everything, including Users and the Activity log.</small></span></label>
+        </div></div>
+      <div class="field"><label for="u_pass">Temporary password *</label>
+        <div class="pw-row"><input id="u_pass" type="text" autocomplete="off" spellcheck="false" minlength="10"><button class="btn btn-g btn-s" type="button" data-newpw="u_pass" title="Make a new one"><i class="fa fa-dice"></i> New</button></div>
+        <span class="help">Made for you. They sign in with it, then change it under Account.</span></div>
+    </div>
+    <div class="dlg-b" id="uDone" hidden></div>
+    <div class="dlg-f">
+      <span class="sp"></span><span class="err" id="u_err" role="alert"></span>
+      <button class="btn btn-g" type="button" data-close id="uCancel">Cancel</button>
+      <button class="btn btn-p" type="submit" id="u_save"><i class="fa fa-user-plus"></i> Add user</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- New password for someone -->
+<dialog id="dlgPw" aria-labelledby="pwTitleH" style="width:min(520px,96vw)">
+  <form id="pwResetForm" novalidate>
+    <div class="dlg-h"><h2 id="pwTitleH">New password</h2><button class="xbtn" type="button" data-close aria-label="Close"><i class="fa fa-xmark"></i></button></div>
+    <div class="dlg-b" id="rpFields">
+      <p class="sub" style="margin-bottom:1rem">Set a new temporary password for <b id="rpName"></b>. Their old password stops working.</p>
+      <div class="field"><label for="rp_pass">New password</label>
+        <div class="pw-row"><input id="rp_pass" type="text" autocomplete="off" spellcheck="false" minlength="10"><button class="btn btn-g btn-s" type="button" data-newpw="rp_pass" title="Make a new one"><i class="fa fa-dice"></i> New</button></div></div>
+    </div>
+    <div class="dlg-b" id="rpDone" hidden></div>
+    <div class="dlg-f">
+      <span class="sp"></span><span class="err" id="rp_err" role="alert"></span>
+      <button class="btn btn-g" type="button" data-close id="rpCancel">Cancel</button>
+      <button class="btn btn-p" type="submit" id="rp_save"><i class="fa fa-key"></i> Set password</button>
+    </div>
+  </form>
+</dialog>
 
 <!-- Program editor -->
 <dialog id="dlgProgram" aria-labelledby="pTitleH">
@@ -432,6 +583,169 @@ code{background:var(--purple-50);padding:.1rem .35rem;border-radius:5px;font-siz
 </dialog>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- The Edge Function for user management (same as supabase/functions/ch-admin-users/index.ts) -->
+<script type="text/plain" id="fnCode">// ════════════════════════════════════════════════════════════════════════════
+//  Children Home admin page: user management (Supabase Edge Function "ch-admin-users")
+//
+//  Lets ADMINS add people (as Admin or Staff), change roles, set new passwords
+//  and remove people, from admin.html → Users. It runs on Supabase's servers,
+//  so the secret key it needs never reaches the website.
+//
+//  Deploy it once (full steps in ADMIN-GUIDE.md):
+//    Supabase → Edge Functions → Deploy a new function → Via Editor →
+//    name it exactly  ch-admin-users  → paste this file → Deploy.
+//    Then, in the function's settings, turn OFF "Verify JWT" (JWT verification):
+//    this function checks for itself that the caller is a signed-in Admin.
+// ════════════════════════════════════════════════════════════════════════════
+import { createClient } from 'npm:@supabase/supabase-js@2';
+
+const CORS = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+const reply = (body, status = 200) =>
+  new Response(JSON.stringify(body), { status, headers: { ...CORS, 'Content-Type': 'application/json' } });
+const ROLES = ['admin', 'staff'];
+const ROLE_NAME = { admin: 'Admin', staff: 'Staff' };
+const okEmail = (e) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e);
+
+// the project's secret key: the new kind first, then the older service_role key
+function serverKey() {
+  try {
+    const keys = JSON.parse(Deno.env.get('SUPABASE_SECRET_KEYS') || '{}');
+    if (keys && keys.default) return keys.default;
+  } catch (_) { /* not set */ }
+  return Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') || '';
+}
+
+// every login in the project (Supabase lists them page by page)
+async function allLogins(db) {
+  const out = [];
+  for (let page = 1; page <= 20; page++) {
+    const { data, error } = await db.auth.admin.listUsers({ page, perPage: 200 });
+    if (error) throw error;
+    const users = (data && data.users) || [];
+    out.push(...users);
+    if (users.length < 200) break;
+  }
+  return out;
+}
+
+Deno.serve(async (req) => {
+  if (req.method === 'OPTIONS') return new Response('ok', { headers: CORS });
+  if (req.method !== 'POST') return reply({ error: 'Not allowed.' }, 405);
+  try {
+    const url = Deno.env.get('SUPABASE_URL'), key = serverKey();
+    if (!url || !key) return reply({ error: 'The function is missing its Supabase settings.' }, 500);
+    const db = createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
+
+    // 1. who is asking? They must be signed in, and an Admin on the team
+    const token = (req.headers.get('Authorization') || '').replace(/^Bearer\s+/i, '').trim();
+    if (!token) return reply({ error: 'Please sign in again.' }, 401);
+    const { data: auth, error: authErr } = await db.auth.getUser(token);
+    const caller = auth && auth.user;
+    if (authErr || !caller) return reply({ error: 'Please sign in again.' }, 401);
+    const { data: me } = await db.from('ch_admins').select('role').eq('user_id', caller.id).maybeSingle();
+    if (!me || me.role !== 'admin') return reply({ error: 'Only Admins can manage users.' }, 403);
+
+    const body = await req.json().catch(() => ({}));
+    const action = String(body.action || '');
+    const log = (summary) => db.from('ch_activity').insert({ actor_id: caller.id, actor_email: caller.email, area: 'users', action, summary });
+    const team = async () => {
+      const { data, error } = await db.from('ch_admins').select('user_id, email, role, display_name, created_at').order('created_at');
+      if (error) throw error;
+      return data || [];
+    };
+    const nameOf = (m) => (m.display_name && m.display_name.trim()) || m.email;
+    const findMember = async (id) => (await team()).find((m) => m.user_id === id);
+
+    // 2. what do they want to do?
+    if (action === 'list') {
+      const list = await team();
+      const lastIn = {};
+      (await allLogins(db)).forEach((u) => { lastIn[u.id] = u.last_sign_in_at || null; });
+      return reply({ ok: true, me: caller.id, users: list.map((m) => ({ ...m, last_sign_in_at: lastIn[m.user_id] || null })) });
+    }
+
+    if (action === 'create') {
+      const email = String(body.email || '').trim().toLowerCase();
+      const name = String(body.name || '').trim().slice(0, 80);
+      const role = String(body.role || '');
+      const password = String(body.password || '');
+      if (!okEmail(email)) return reply({ error: 'Please enter a valid email address.' }, 400);
+      if (!ROLES.includes(role)) return reply({ error: 'Please choose Admin or Staff.' }, 400);
+      if (password.length < 10) return reply({ error: 'The temporary password needs at least 10 characters.' }, 400);
+
+      let userId = null, existed = false;
+      const { data: made, error: makeErr } = await db.auth.admin.createUser({ email, password, email_confirm: true, user_metadata: { name } });
+      if (makeErr) {
+        if (!/already|exists|registered/i.test(makeErr.message || '')) return reply({ error: makeErr.message || 'Could not create the login.' }, 400);
+        // a login with this email already exists: add it to the team (its password stays the same)
+        const found = (await allLogins(db)).find((u) => String(u.email || '').toLowerCase() === email);
+        if (!found) return reply({ error: 'A login with this email already exists, but it could not be found.' }, 400);
+        if (await findMember(found.id)) return reply({ error: 'This person is already on the team.' }, 400);
+        userId = found.id; existed = true;
+      } else {
+        userId = made.user.id;
+      }
+      const { error: addErr } = await db.from('ch_admins').insert({ user_id: userId, email, role, display_name: name || null });
+      if (addErr) return reply({ error: addErr.message }, 400);
+      await log('Added ' + (name || email) + ' as ' + ROLE_NAME[role]);
+      return reply({ ok: true, existed });
+    }
+
+    // the rest act on one person already on the team
+    const target = await findMember(String(body.user_id || ''));
+    if (!target) return reply({ error: 'That person is not on the team.' }, 404);
+    const admins = (await team()).filter((m) => m.role === 'admin').length;
+
+    if (action === 'set_role') {
+      const role = String(body.role || '');
+      if (!ROLES.includes(role)) return reply({ error: 'Please choose Admin or Staff.' }, 400);
+      if (target.user_id === caller.id) return reply({ error: 'You can’t change your own role. Ask another Admin.' }, 400);
+      if (target.role === role) return reply({ ok: true });
+      if (target.role === 'admin' && admins <= 1) return reply({ error: 'There must always be at least one Admin.' }, 400);
+      const { error } = await db.from('ch_admins').update({ role }).eq('user_id', target.user_id);
+      if (error) return reply({ error: error.message }, 400);
+      await log('Changed ' + nameOf(target) + ' from ' + ROLE_NAME[target.role] + ' to ' + ROLE_NAME[role]);
+      return reply({ ok: true });
+    }
+
+    if (action === 'rename') {
+      const name = String(body.name || '').trim().slice(0, 80);
+      const { error } = await db.from('ch_admins').update({ display_name: name || null }).eq('user_id', target.user_id);
+      if (error) return reply({ error: error.message }, 400);
+      await log('Renamed ' + nameOf(target) + ' to ' + (name || target.email));
+      return reply({ ok: true });
+    }
+
+    if (action === 'reset_password') {
+      const password = String(body.password || '');
+      if (password.length < 10) return reply({ error: 'The new password needs at least 10 characters.' }, 400);
+      const { error } = await db.auth.admin.updateUserById(target.user_id, { password });
+      if (error) return reply({ error: error.message }, 400);
+      await log('Set a new password for ' + nameOf(target));
+      return reply({ ok: true });
+    }
+
+    if (action === 'remove') {
+      if (target.user_id === caller.id) return reply({ error: 'You can’t remove yourself. Ask another Admin.' }, 400);
+      if (target.role === 'admin' && admins <= 1) return reply({ error: 'There must always be at least one Admin.' }, 400);
+      // deleting the login also takes them off the team; responses assigned to them become unassigned
+      const { error } = await db.auth.admin.deleteUser(target.user_id);
+      if (error) return reply({ error: error.message }, 400);
+      await log('Removed ' + nameOf(target) + ' (' + ROLE_NAME[target.role] + ')');
+      return reply({ ok: true });
+    }
+
+    return reply({ error: 'Unknown request.' }, 400);
+  } catch (e) {
+    return reply({ error: String((e && e.message) || e) }, 500);
+  }
+});
+</script>
 
 <!-- The Apps Script for the response spreadsheet (same as google-apps-script/children-home-responses.gs) -->
 <script type="text/plain" id="gasCode">/* ════════════════════════════════════════════════════════════════════════════
@@ -526,7 +840,7 @@ function sameText(a, b) {
 </script>
 
 <script src="supabase-config.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js" integrity="sha384-0w2KAL2YHP6wKOkUDzkCDGgVvfmHnj02DHeQ6XcHOgTfFsGyonKOpShMH1x6nk9o" crossorigin="anonymous"></script>
 <script>
 (function () {
   'use strict';
@@ -581,10 +895,14 @@ function sameText(a, b) {
   async function route(session) {
     if (!session) { $('who').hidden = true; show('vLogin'); started = false; return; }
     $('whoEmail').textContent = $('accEmail').textContent = session.user.email || ''; $('who').hidden = false;
-    const { data: ok, error } = await sb.rpc('ch_is_admin');
-    if (error || !ok) { $('dEmail').textContent = session.user.email || ''; show('vDenied'); return; }
+    let role = null;
+    const r = await sb.rpc('ch_my_role');
+    if (!r.error) { V3 = true; role = r.data || null; }
+    else { V3 = false; const old = await sb.rpc('ch_is_admin'); role = !old.error && old.data ? 'admin' : null; }   // database not updated yet
+    if (!role) { $('dEmail').textContent = session.user.email || ''; show('vDenied'); return; }
+    ROLE = role; MY_ID = session.user.id; applyRole();
     show('vApp');
-    if (!started) { started = true; ME = session.user.email || ''; loadPrograms(); loadMoments(); openTab('dashboard'); }
+    if (!started) { started = true; ME = session.user.email || ''; loadTeam(); loadPrograms(); loadMoments(); openTab('dashboard'); }
   }
   sb.auth.getSession().then(({ data }) => route(data.session));
   sb.auth.onAuthStateChange((ev, session) => { if (ev === 'SIGNED_IN' || ev === 'SIGNED_OUT') route(session); });
@@ -606,6 +924,8 @@ function sameText(a, b) {
     document.querySelectorAll('[data-panel]').forEach(p => { p.hidden = p.dataset.panel !== name; });
     if (name === 'sheets') initResponses();
     if (name === 'dashboard') loadDashboard();
+    if (name === 'users') loadUsers();
+    if (name === 'activity') { loadTeam(); loadActivity(false); }
   }
   document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => openTab(t.dataset.tab)));
   document.querySelectorAll('dialog [data-close]').forEach(b => b.addEventListener('click', () => b.closest('dialog').close()));
@@ -758,7 +1078,7 @@ function sameText(a, b) {
      keyed by a scrambled fingerprint of each response (no names or phone numbers). */
   let ME = '';
   const RS = { url: '', secret: '', ready: null, viewer: false, tabs: [], tab: null, header: [], rows: [], stamps: [], keys: [], acts: {}, total: 0,
-               fresh: 0, filter: 'all', shown: 50, sel: -1, cols: {}, timer: null };
+               fresh: 0, filter: 'all', assignee: 'any', shown: 50, sel: -1, cols: {}, timer: null };
   const ST = { new: { label: 'New', cls: 'st-new', color: '#e0565b' }, in_progress: { label: 'In progress', cls: 'st-prog', color: '#f2a93b' }, done: { label: 'Done', cls: 'st-done', color: '#2e9e6b' } };
   const FORM_COLORS = ['#6a42b0', '#f2a93b', '#e0567a', '#2e9e8b', '#3b82c4', '#9c7dd6', '#c0563a', '#7a888b'];
   const seenKey = t => 'ch_seen:' + t;
@@ -779,7 +1099,7 @@ function sameText(a, b) {
       const { data, error } = await sb.from('ch_settings').select('key,value').in('key', ['responses_url', 'responses_secret']);
       if (error) throw error;
       (data || []).forEach(r => { if (r.key === 'responses_url') RS.url = r.value || ''; if (r.key === 'responses_secret') RS.secret = r.value || ''; });
-      if (!RS.secret) { RS.secret = newSecret(); await saveSetting('responses_secret', RS.secret); }
+      if (!RS.secret && isAdmin()) { RS.secret = newSecret(); await saveSetting('responses_secret', RS.secret); }   // only Admins set up the connection
     })().catch(e => { RS.ready = null; throw e; });
     return RS.ready;
   }
@@ -814,6 +1134,7 @@ function sameText(a, b) {
     return Array.from(new Uint8Array(h), b => b.toString(16).padStart(2, '0')).join('');
   }
   const statusOf = i => (RS.acts[RS.keys[i]] || {}).status || 'new';
+  const assignedOf = i => (RS.acts[RS.keys[i]] || {}).assigned_to || null;
   const pill = st => '<span class="pill ' + ST[st].cls + '">' + ST[st].label + '</span>';
   const waLink = p => { let d = String(p).replace(/[^\d+]/g, ''); d = d.startsWith('+') ? d.slice(1) : d.startsWith('0') ? '6' + d : d; return d.length >= 9 ? 'https://wa.me/' + d : ''; };
 
@@ -822,7 +1143,8 @@ function sameText(a, b) {
     $('rsLoading').hidden = false;
     try { await loadRsSettings(); } catch (e) { $('rsLoading').hidden = true; $('rsView').hidden = false; $('rsErr').textContent = friendly(e); return; }
     $('rsLoading').hidden = true;
-    if (!RS.url) { showSetup(); return; }
+    $('rsWait').hidden = true;
+    if (!RS.url) { if (isAdmin()) showSetup(); else { $('rsWait').hidden = false; $('rsSetup').hidden = true; $('rsView').hidden = true; } return; }
     if (!RS.viewer) showViewer(); else if ($('rsView').hidden && $('rsSetup').hidden) showViewer();
   }
   function showSetup() {
@@ -907,6 +1229,8 @@ function sameText(a, b) {
     const out = [];
     RS.rows.forEach((r, i) => {
       if (RS.filter !== 'all' && statusOf(i) !== RS.filter) return;
+      const a = assignedOf(i);
+      if (RS.assignee === 'me' ? a !== MY_ID : RS.assignee === 'none' ? !!a : RS.assignee !== 'any' && a !== RS.assignee) return;
       if (q && !r.some(c => String(c).toLowerCase().includes(q))) return;
       out.push(i);
     });
@@ -918,9 +1242,11 @@ function sameText(a, b) {
     if (!list.length) { $('rsList').innerHTML = '<div class="ib-none">No responses match.</div>'; $('rsMore').hidden = true; return; }
     $('rsList').innerHTML = list.slice(0, RS.shown).map(i => {
       const r = RS.rows[i], d = dateOf(i), name = (c.name >= 0 && String(r[c.name] || '').trim()) || 'Response ' + (RS.total - i);
+      const a = assignedOf(i);
       return '<button class="ib-item' + (i === RS.sel ? ' on' : '') + (i < RS.fresh ? ' unseen' : '') + '" type="button" data-i="' + i + '">'
         + '<span class="ib-top"><span class="ib-name">' + esc(name) + '</span>' + pill(statusOf(i)) + '</span>'
-        + '<span class="ib-meta">' + (d ? esc(fmtWhen(d)) + (ago(d) ? ' · ' + ago(d) : '') : esc(r[0])) + (i < RS.fresh ? ' · <b style="color:var(--red)">new arrival</b>' : '') + '</span>'
+        + '<span class="ib-meta">' + (d ? esc(fmtWhen(d)) + (ago(d) ? ' · ' + ago(d) : '') : esc(r[0])) + (i < RS.fresh ? ' · <b style="color:var(--red)">new arrival</b>' : '')
+        + (a ? ' <span class="ib-asg' + (a === MY_ID ? ' me' : '') + '"><i class="fa fa-user"></i> ' + (a === MY_ID ? 'You' : esc(teamName(a))) + '</span>' : '') + '</span>'
         + (previewText(r) ? '<span class="ib-prev">' + esc(previewText(r)) + '</span>' : '') + '</button>';
     }).join('');
     $('rsMore').hidden = list.length <= RS.shown;
@@ -946,17 +1272,24 @@ function sameText(a, b) {
     const contact = (phone ? '<a class="btn btn-g btn-s" href="tel:' + esc(phone.replace(/[^\d+]/g, '')) + '"><i class="fa fa-phone"></i> Call ' + esc(phone) + '</a>' : '')
       + (wa ? '<a class="btn btn-g btn-s wa" href="' + esc(wa) + '" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> WhatsApp</a>' : '')
       + (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? '<a class="btn btn-g btn-s" href="mailto:' + esc(email) + '"><i class="fa fa-envelope"></i> Email</a>' : '');
-    const who = act && act.updated_by ? 'Last changed by ' + esc(act.updated_by) + (act.updated_at ? ' · ' + esc(fmtWhen(new Date(act.updated_at))) : '') : 'Not handled yet.';
+    const byM = act && act.updated_by ? TEAM.find(m => m.email === act.updated_by) : null;
+    const who = act && act.updated_by ? 'Last changed by ' + esc(byM ? teamName(byM.user_id) : act.updated_by) + (act.updated_at ? ' · ' + esc(fmtWhen(new Date(act.updated_at))) : '') : 'Not handled yet.';
     $('rsDetail').innerHTML = '<button class="btn btn-g btn-s ib-back" type="button" data-back><i class="fa fa-arrow-left"></i> Back to list</button>'
       + '<div class="ib-head"><h3>' + esc(name) + '</h3><p class="sub">' + esc(RS.tab) + ' · ' + (d ? esc(fmtWhen(d)) : esc(r[0])) + '</p>'
       + (contact ? '<div class="ib-contact">' + contact + '</div>' : '') + '</div>'
       + '<div class="ib-status"><span class="lbl">Status</span><div class="seg" role="group" aria-label="Status">'
       + Object.keys(ST).map(k => '<button type="button" data-st="' + k + '" class="' + (k === st ? 'on' : '') + '" aria-pressed="' + (k === st) + '">' + ST[k].label + '</button>').join('')
-      + '</div><span class="ib-who">' + who + '</span></div>'
+      + '</div><span class="ib-who">' + who + '</span>'
+      + (V3 ? '<div class="ib-assign"><label class="lbl" for="rsAssign">Assigned to</label><select class="sel" id="rsAssign"><option value="">Nobody</option>'
+        + TEAM.map(m => '<option value="' + esc(m.user_id) + '"' + (act && act.assigned_to === m.user_id ? ' selected' : '') + '>' + esc(m.user_id === MY_ID ? 'Me (' + teamName(m.user_id) + ')' : teamName(m.user_id)) + '</option>').join('')
+        + (act && act.assigned_to && !member(act.assigned_to) ? '<option value="' + esc(act.assigned_to) + '" selected>Someone no longer on the team</option>' : '')
+        + '</select></div>' : '')
+      + '</div>'
       + '<dl class="ib-answers">' + RS.header.map((h, k) => k === 0 ? '' : '<div><dt>' + esc(h) + '</dt><dd' + (String(r[k] || '').trim() ? '>' + esc(r[k]) : ' class="none">No answer') + '</dd></div>').join('') + '</dl>'
       + '<div class="ib-note"><label class="lbl" for="rsNote">Note for the team</label><textarea id="rsNote" placeholder="For example: called on 14 Nov, visiting on Saturday">' + esc((act && act.note) || '') + '</textarea>'
       + '<button class="btn btn-p btn-s" type="button" data-savenote><i class="fa fa-floppy-disk"></i> Save note</button></div>';
   }
+  $('rsDetail').addEventListener('change', e => { if (e.target.id === 'rsAssign') saveAction({ assigned_to: e.target.value || null }); });
   $('rsDetail').addEventListener('click', e => {
     if (e.target.closest('[data-back]')) { $('rsInbox').classList.remove('open'); const it = $('rsList').querySelector('.ib-item.on'); if (it) it.focus(); return; }
     const b = e.target.closest('[data-st]'); if (b) { saveAction({ status: b.dataset.st }); return; }
@@ -968,11 +1301,13 @@ function sameText(a, b) {
     const i = RS.sel; if (i < 0) return;
     const key = RS.keys[i], prev = RS.acts[key];
     const row = { response_key: key, tab: RS.tab, status: prev ? prev.status : 'new', note: prev ? prev.note : null, updated_by: ME, updated_at: new Date().toISOString() };
+    if (V3) row.assigned_to = prev ? prev.assigned_to || null : null;
     Object.assign(row, change);
     RS.acts[key] = row; renderStatusFilter(); renderList(); renderDetail();   // show the change straight away
     const { error } = await sb.from('ch_response_actions').upsert(row);
     if (error) { if (prev) RS.acts[key] = prev; else delete RS.acts[key]; renderStatusFilter(); renderList(); renderDetail(); toast(friendly(error), true); return; }
-    toast('status' in change ? 'Marked as ' + ST[row.status].label + '.' : 'Note saved.');
+    toast('status' in change ? 'Marked as ' + ST[row.status].label + '.' : 'assigned_to' in change
+      ? (row.assigned_to ? 'Assigned to ' + (row.assigned_to === MY_ID ? 'you' : teamName(row.assigned_to)) + '.' : 'Unassigned.') : 'Note saved.');
   }
 
   /* ── Dashboard ── */
@@ -1019,6 +1354,11 @@ function sameText(a, b) {
   });
   $('dbTable').addEventListener('click', e => { const tr = e.target.closest('tr[data-tab]'); if (tr) { RS.filter = 'all'; openResponses(tr.dataset.tab); } });
   $('dbGoConnect').addEventListener('click', () => openTab('sheets'));
+  $('dbMineGo').addEventListener('click', () => {
+    RS.filter = 'all'; RS.assignee = 'me'; if ($('rsWho').options.length) $('rsWho').value = 'me';
+    const top = Object.keys(DB.mine).sort((a, b) => DB.mine[b] - DB.mine[a])[0];
+    openResponses(top || null);
+  });
   $('dbRefresh').addEventListener('click', () => loadDashboard());
   function openResponses(tab) {
     if (tab && tab !== RS.tab) { RS.tab = tab; RS.sel = -1; $('rsSearch').value = ''; if (RS.viewer) { renderChips(); loadRows(false); } }
@@ -1033,12 +1373,16 @@ function sameText(a, b) {
   }
   $('dbContent').addEventListener('click', e => { const b = e.target.closest('[data-tabgo]'); if (b) openTab(b.dataset.tabgo); });
 
-  let dbLoading = false; const DB = { rows: [] };
+  let dbLoading = false; const DB = { rows: [], mine: {} };
   async function loadDashboard() {
     if (dbLoading) return; dbLoading = true; $('dbErr').textContent = ''; renderContent();
     try {
       try { await loadRsSettings(); } catch (e) { $('dbErr').textContent = friendly(e); return; }
-      if (!RS.url) { $('dbConnect').hidden = false; $('dbResp').hidden = true; $('dbOld').hidden = true; renderCards(null); return; }
+      if (!RS.url) {
+        $('dbConnect').hidden = false; $('dbGoConnect').hidden = !isAdmin(); $('dbResp').hidden = true; $('dbOld').hidden = true; $('dbMine').hidden = true;
+        if (!isAdmin()) $('dbConnect').querySelector('div').firstChild.textContent = 'Ask an Admin to connect the Google Sheet';
+        renderCards(null); return;
+      }
       $('dbConnect').hidden = true; $('dbResp').hidden = false;
       let ov, old = false;
       try { ov = await callScript({ action: 'overview' }); }
@@ -1048,7 +1392,7 @@ function sameText(a, b) {
       }
       $('dbOld').hidden = !(old || oldScript(ov));
       const tabs = ov.tabs || [];
-      const { data: acts, error } = await sb.from('ch_response_actions').select('tab,status');
+      const { data: acts, error } = await sb.from('ch_response_actions').select(V3 ? 'tab,status,assigned_to' : 'tab,status');
       if (error) $('dbErr').textContent = friendly(error);
       const by = {}; tabs.forEach(t => { by[t.name] = { in_progress: 0, done: 0 }; });
       (acts || []).forEach(a => { if (by[a.tab] && by[a.tab][a.status] !== undefined) by[a.tab][a.status]++; });
@@ -1057,6 +1401,10 @@ function sameText(a, b) {
         return { name: t.name, color: FORM_COLORS[k % FORM_COLORS.length], total: t.count, in_progress: ip, done: dn, new: t.count - ip - dn, last: (t.stamps || [])[0] };
       });
       DB.rows = rows;
+      const names = new Set(tabs.map(t => t.name)), mine = (acts || []).filter(a => V3 && a.assigned_to === MY_ID && a.status !== 'done' && names.has(a.tab));
+      DB.mine = {}; mine.forEach(a => { DB.mine[a.tab] = (DB.mine[a.tab] || 0) + 1; });
+      $('dbMine').hidden = !mine.length;
+      $('dbMineText').innerHTML = '<b>You have ' + mine.length + ' open response' + (mine.length === 1 ? '' : 's') + ' assigned to you</b> (not Done yet).';
       const sum = f => rows.reduce((a, r) => a + r[f], 0);
       const tot = { total: sum('total'), new: sum('new'), in_progress: sum('in_progress'), done: sum('done'), forms: rows.length };
       renderCards(tot);
@@ -1084,6 +1432,286 @@ function sameText(a, b) {
   }
   function stopAuto() { if (RS.timer) clearInterval(RS.timer); RS.timer = null; }
   startAuto();
+
+  /* ── The team: roles, names, assignments ──────────────────────────────────
+     ROLE is 'admin' or 'staff'. V3 is true once the database has the Users &
+     roles update (supabase/children-home-setup.sql run again). */
+  let ROLE = 'admin', V3 = false, MY_ID = '', TEAM = [];
+  const ROLE_NAME = { admin: 'Admin', staff: 'Staff' };
+  const AV_COLORS = ['#6a42b0', '#e0567a', '#2e9e8b', '#3b82c4', '#c27a00', '#9c7dd6', '#c0563a', '#4b5b5f'];
+  const isAdmin = () => ROLE === 'admin';
+  const member = id => TEAM.find(m => m.user_id === id);
+  const teamName = id => { const m = member(id); return m ? ((m.display_name && m.display_name.trim()) || m.email) : 'someone no longer on the team'; };
+  const initials = n => String(n || '?').replace(/@.*/, '').split(/[\s._-]+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('') || '?';
+  const avColor = id => AV_COLORS[Math.abs([...String(id)].reduce((a, c) => (a * 31 + c.charCodeAt(0)) | 0, 7)) % AV_COLORS.length];
+  const rolePill = r => '<span class="pill role-' + r + '">' + ROLE_NAME[r] + '</span>';
+
+  function applyRole() {
+    document.querySelectorAll('[data-admin-only]').forEach(el => { el.hidden = !(isAdmin() && V3); });
+    $('rsChange').hidden = !isAdmin();
+    $('sqlOld').hidden = V3;
+    $('rsWho').hidden = !V3;
+    $('nameForm').hidden = !V3;
+    [$('whoRole'), $('accRole')].forEach(el => { el.hidden = !V3; el.className = 'pill role-' + ROLE; el.textContent = ROLE_NAME[ROLE]; });
+  }
+  async function loadTeam() {
+    if (!V3) return;
+    const { data, error } = await sb.from('ch_admins').select('user_id,email,role,display_name');
+    if (error) { toast(friendly(error), true); return; }
+    TEAM = (data || []).sort((a, b) => teamName(a.user_id).localeCompare(teamName(b.user_id)));
+    const me = member(MY_ID); if (me && document.activeElement !== $('myName')) $('myName').value = me.display_name || '';
+    renderWhoFilter(); renderActivityPeople();
+    if (RS.sel >= 0) renderDetail();
+  }
+  function renderWhoFilter() {
+    const v = RS.assignee;
+    $('rsWho').innerHTML = '<option value="any">Assigned: anyone</option><option value="me">Assigned to me</option><option value="none">Not assigned</option>'
+      + (TEAM.length ? '<optgroup label="Team">' + TEAM.filter(m => m.user_id !== MY_ID).map(m => '<option value="' + esc(m.user_id) + '">' + esc(teamName(m.user_id)) + '</option>').join('') + '</optgroup>' : '');
+    $('rsWho').value = [...$('rsWho').options].some(o => o.value === v) ? v : 'any';
+  }
+  $('rsWho').addEventListener('change', () => { RS.assignee = $('rsWho').value; RS.shown = 50; renderList(); });
+
+  /* ── Your name (Account) ───────────────────────────────────────────────── */
+  $('nameForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const name = val('myName').slice(0, 80) || null;
+    busy($('nameBtn'), true);
+    const { error } = await sb.from('ch_admins').update({ display_name: name }).eq('user_id', MY_ID);
+    busy($('nameBtn'), false);
+    if (error) { toast(friendly(error), true); return; }
+    toast('Name saved.'); loadTeam();
+  });
+
+  /* ── Export to Excel (the responses shown, with status, assignee and note) ── */
+  const XLSX_URL = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+  const XLSX_SRI = 'sha384-vtjasyidUo0kW94K5MXDXntzOJpQgBKXmE7e2Ga4LG0skTTLeBi97eFAXsqewJjw';
+  let xlsxLoading = null;
+  function loadXlsx() {
+    if (window.XLSX) return Promise.resolve();
+    if (!xlsxLoading) xlsxLoading = new Promise((ok, no) => {
+      const sc = document.createElement('script'); sc.src = XLSX_URL; sc.integrity = XLSX_SRI; sc.crossOrigin = 'anonymous';
+      sc.onload = ok; sc.onerror = () => { xlsxLoading = null; sc.remove(); no(new Error('Couldn’t load the Excel tool. Check your internet connection and try again.')); };
+      document.head.appendChild(sc);
+    });
+    return xlsxLoading;
+  }
+  const pad2 = n => String(n).padStart(2, '0');
+  const stampText = d => d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+  $('rsExport').addEventListener('click', async () => {
+    const list = visible();
+    if (!RS.header.length || !list.length) { toast('There are no responses to export here.', true); return; }
+    const btn = $('rsExport'); busy(btn, true);
+    try {
+      await loadXlsx();
+      const qs = RS.header.slice(1);
+      const head = ['Received'].concat(qs, ['Status'], V3 ? ['Assigned to'] : [], ['Note', 'Last changed by', 'Last changed']);
+      const rows = list.map(i => {
+        const r = RS.rows[i], a = RS.acts[RS.keys[i]] || {}, d = dateOf(i);
+        return [d ? stampText(d) : String(r[0] || '')].concat(qs.map((_, k) => String(r[k + 1] == null ? '' : r[k + 1])), [ST[statusOf(i)].label],
+          V3 ? [a.assigned_to ? teamName(a.assigned_to) : ''] : [], [a.note || '', a.updated_by || '', a.updated_at ? stampText(new Date(a.updated_at)) : '']);
+      });
+      const ws = XLSX.utils.aoa_to_sheet([head].concat(rows));
+      ws['!cols'] = head.map((h, k) => ({ wch: Math.min(60, Math.max(10, String(h).length + 2, ...rows.map(r => Math.min(60, String(r[k]).split('\n')[0].length + 2)))) }));
+      ws['!autofilter'] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: rows.length, c: head.length - 1 } }) };
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, (RS.tab.replace(/[\\\/?*\[\]:]/g, ' ').trim() || 'Responses').slice(0, 31));
+      const today = new Date(), day = today.getFullYear() + '-' + pad2(today.getMonth() + 1) + '-' + pad2(today.getDate());
+      XLSX.writeFile(wb, (RS.tab.replace(/[\\\/:*?"<>|]/g, ' ').trim() || 'Form') + ' responses ' + day + '.xlsx');
+      sb.rpc('ch_note_export', { p_tab: RS.tab, p_count: rows.length }).then(() => {}, () => {});
+      toast('Exported ' + rows.length + ' response' + (rows.length === 1 ? '' : 's') + ' to Excel.');
+    } catch (e) { toast(friendly(e), true); }
+    busy(btn, false);
+  });
+
+  /* ── Users (Admins only): through the ch-admin-users Edge Function ─────── */
+  async function callFn(body) {
+    let res;
+    try { res = await sb.functions.invoke('ch-admin-users', { body }); }
+    catch (e) { const err = new Error('Can’t reach the user-management function.'); err.missing = true; throw err; }
+    const { data, error } = res;
+    if (error) {
+      let msg = '', status = 0; const ctx = error.context;
+      if (ctx && typeof ctx.status === 'number') { status = ctx.status; try { const j = await ctx.clone().json(); msg = j.error || j.message || j.msg || ''; } catch (_) { /* not JSON */ } }
+      if (status === 404 || error.name === 'FunctionsFetchError' || error.name === 'FunctionsRelayError') { const err = new Error('The user-management function isn’t set up yet.'); err.missing = true; throw err; }
+      if (status === 401 && /jwt/i.test(msg)) { const err = new Error('Supabase is checking the sign-in token itself.'); err.missing = true; err.jwt = true; throw err; }
+      throw new Error(msg || error.message || 'Something went wrong. Please try again.');
+    }
+    if (data && data.error) throw new Error(data.error);
+    return data;
+  }
+  let USERS = [];
+  function showFnSetup(jwt) {
+    $('usSetup').hidden = false; $('usJwt').hidden = !jwt; $('usAdd').disabled = true;
+    $('usCode').textContent = $('fnCode').textContent.trim();
+  }
+  async function loadUsers() {
+    $('usErr').textContent = ''; $('usList').innerHTML = '<p class="sub"><i class="fa fa-spinner fa-spin"></i> Loading…</p>';
+    try {
+      const j = await callFn({ action: 'list' });
+      $('usSetup').hidden = true; $('usAdd').disabled = false;
+      USERS = j.users || []; renderUsers(true);
+    } catch (e) {
+      if (e.missing) { showFnSetup(!!e.jwt); USERS = TEAM.map(m => Object.assign({}, m)); renderUsers(false); }
+      else { $('usList').innerHTML = ''; $('usErr').textContent = friendly(e); }
+    }
+  }
+  function renderUsers(canEdit) {
+    const admins = USERS.filter(u => u.role === 'admin').length;
+    $('usList').innerHTML = USERS.length ? USERS.map(u => {
+      const me = u.user_id === MY_ID, name = (u.display_name && u.display_name.trim()) || u.email;
+      const seen = u.last_sign_in_at ? 'Last signed in ' + (ago(new Date(u.last_sign_in_at)) || fmtDay(new Date(u.last_sign_in_at))) : (canEdit ? 'Hasn’t signed in yet' : '');
+      const role = canEdit && !me
+        ? '<select class="sel" data-role="' + esc(u.user_id) + '" aria-label="Role for ' + esc(name) + '"><option value="staff"' + (u.role === 'staff' ? ' selected' : '') + '>Staff</option><option value="admin"' + (u.role === 'admin' ? ' selected' : '') + '>Admin</option></select>'
+        : rolePill(u.role);
+      const acts = canEdit ? '<button class="btn btn-g btn-s" type="button" data-pw="' + esc(u.user_id) + '"><i class="fa fa-key"></i> New password</button>'
+        + (me ? '' : '<button class="btn btn-d btn-s" type="button" data-rm="' + esc(u.user_id) + '"' + (u.role === 'admin' && admins <= 1 ? ' disabled' : '') + '><i class="fa fa-user-minus"></i> Remove</button>') : '';
+      return '<div class="u-row"><span class="avatar" style="background:' + avColor(u.user_id) + '" aria-hidden="true">' + esc(initials(name)) + '</span>'
+        + '<div style="min-width:0"><b>' + esc(name) + (me ? '<span class="you">You</span>' : '') + '</b><span class="em">' + esc(u.email) + '</span></div>'
+        + '<div>' + role + '</div><span class="seen">' + esc(seen) + '</span><div class="acts">' + acts + '</div></div>';
+    }).join('') : '<div class="empty">No one on the team yet.</div>';
+  }
+  $('usRetry').addEventListener('click', loadUsers);
+  $('usCopy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText($('usCode').textContent); toast('Code copied. Paste it into the Supabase editor.'); }
+    catch (e) { const r = document.createRange(); r.selectNodeContents($('usCode')); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); toast('Press Ctrl+C (or ⌘+C) to copy the selected code.'); }
+  });
+  $('usList').addEventListener('change', async e => {
+    const s = e.target.closest('[data-role]'); if (!s) return;
+    const u = USERS.find(x => x.user_id === s.dataset.role), to = s.value, name = (u.display_name && u.display_name.trim()) || u.email;
+    const ask = to === 'admin' ? 'Make ' + name + ' an Admin? Admins can add and remove users, change the Google Sheet connection and read the activity log.'
+                               : 'Make ' + name + ' Staff? They will no longer be able to manage users or read the activity log.';
+    if (!confirm(ask)) { s.value = u.role; return; }
+    s.disabled = true;
+    try { await callFn({ action: 'set_role', user_id: u.user_id, role: to }); toast(name + ' is now ' + ROLE_NAME[to] + '.'); await loadTeam(); loadUsers(); }
+    catch (err) { s.value = u.role; s.disabled = false; toast(friendly(err), true); }
+  });
+  $('usList').addEventListener('click', async e => {
+    const pw = e.target.closest('[data-pw]'), rm = e.target.closest('[data-rm]');
+    if (pw) openPw(USERS.find(x => x.user_id === pw.dataset.pw));
+    if (rm) {
+      const u = USERS.find(x => x.user_id === rm.dataset.rm), name = (u.display_name && u.display_name.trim()) || u.email;
+      if (!confirm('Remove ' + name + '? They won’t be able to sign in any more, and responses assigned to them become unassigned. This can’t be undone.')) return;
+      busy(rm, true);
+      try { await callFn({ action: 'remove', user_id: u.user_id }); toast(name + ' was removed.'); await loadTeam(); loadUsers(); }
+      catch (err) { busy(rm, false); toast(friendly(err), true); }
+    }
+  });
+
+  /* temporary passwords: easy to read out, hard to guess (14 letters and numbers, no look-alikes) */
+  function makePassword() {
+    const ch = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789', a = new Uint32Array(12); crypto.getRandomValues(a);
+    const s = Array.from(a, x => ch[x % ch.length]).join('');
+    return s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8, 12);
+  }
+  document.querySelectorAll('[data-newpw]').forEach(b => b.addEventListener('click', () => { $(b.dataset.newpw).value = makePassword(); }));
+  const signInUrl = () => location.href.split(/[?#]/)[0];
+  function credsBox(name, email, password, note) {
+    const msg = 'Hi ' + (name || email) + ', here are your sign-in details for the Children Home admin page:\n' + signInUrl() + '\nEmail: ' + email + '\nTemporary password: ' + password + '\nPlease change your password under Account after you sign in.';
+    return { msg, html: '<div class="creds">Sign-in page: <code>' + esc(signInUrl()) + '</code><br>Email: <code>' + esc(email) + '</code><br>Temporary password: <code>' + esc(password) + '</code></div>'
+      + '<button class="btn btn-p" type="button" data-copycreds><i class="fa fa-copy"></i> Copy sign-in details</button>'
+      + '<div class="note warn"><i class="fa fa-lock"></i><div>Share these privately, for example face to face or in a direct message, not in a group chat. ' + note + '</div></div>' };
+  }
+  function wireCopy(box, msg) {
+    box.querySelector('[data-copycreds]').addEventListener('click', async () => {
+      try { await navigator.clipboard.writeText(msg); toast('Sign-in details copied.'); } catch (e) { toast('Couldn’t copy. Select the details and copy them instead.', true); }
+    });
+  }
+
+  /* Add user */
+  $('usAdd').addEventListener('click', () => {
+    $('userForm').reset(); $('u_pass').value = makePassword(); $('u_err').textContent = '';
+    $('uFields').hidden = false; $('uDone').hidden = true; $('u_save').hidden = false; $('uCancel').textContent = 'Cancel'; $('uTitleH').textContent = 'Add user';
+    $('dlgUser').showModal(); $('u_name').focus();
+  });
+  $('userForm').addEventListener('input', () => { $('u_err').textContent = ''; });
+  $('userForm').addEventListener('submit', async e => {
+    e.preventDefault(); $('u_err').textContent = '';
+    const name = val('u_name'), email = val('u_email').toLowerCase(), password = val('u_pass'), role = (document.querySelector('input[name="u_role"]:checked') || {}).value;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) { $('u_err').textContent = 'Please enter a valid email address.'; $('u_email').focus(); return; }
+    if (password.length < 10) { $('u_err').textContent = 'The temporary password needs at least 10 characters.'; $('u_pass').focus(); return; }
+    busy($('u_save'), true);
+    try {
+      const j = await callFn({ action: 'create', name, email, role, password });
+      const box = $('uDone'), head = '<div class="done-box"><div class="ok"><i class="fa fa-circle-check"></i> ' + esc(name || email) + ' was added as ' + ROLE_NAME[role] + '</div>';
+      if (j.existed) {
+        box.innerHTML = head + '<div class="creds">Sign-in page: <code>' + esc(signInUrl()) + '</code><br>Email: <code>' + esc(email) + '</code></div>'
+          + '<div class="note warn"><i class="fa fa-circle-info"></i><div><b>This email already had a login, so their existing password still works</b> and the temporary one wasn’t used. If they don’t know it, use <b>New password</b> next to their name.</div></div></div>';
+      } else {
+        const c = credsBox(name, email, password, 'They should change the password under <b>Account</b> after signing in.');
+        box.innerHTML = head + c.html + '</div>'; wireCopy(box, c.msg);
+      }
+      $('uFields').hidden = true; box.hidden = false; $('u_save').hidden = true; $('uCancel').textContent = 'Done'; $('uTitleH').textContent = 'User added';
+      loadTeam().then(loadUsers);
+    } catch (err) { $('u_err').textContent = err.missing ? 'User management isn’t set up yet: see the steps on the Users page.' : friendly(err); }
+    busy($('u_save'), false);
+  });
+
+  /* New password for someone */
+  let PW_USER = null;
+  function openPw(u) {
+    PW_USER = u; $('rpName').textContent = (u.display_name && u.display_name.trim()) || u.email; $('rp_pass').value = makePassword(); $('rp_err').textContent = '';
+    $('rpFields').hidden = false; $('rpDone').hidden = true; $('rp_save').hidden = false; $('rpCancel').textContent = 'Cancel'; $('pwTitleH').textContent = 'New password';
+    $('dlgPw').showModal();
+  }
+  $('pwResetForm').addEventListener('submit', async e => {
+    e.preventDefault(); $('rp_err').textContent = '';
+    const password = val('rp_pass');
+    if (password.length < 10) { $('rp_err').textContent = 'The password needs at least 10 characters.'; return; }
+    busy($('rp_save'), true);
+    try {
+      await callFn({ action: 'reset_password', user_id: PW_USER.user_id, password });
+      const name = (PW_USER.display_name && PW_USER.display_name.trim()) || PW_USER.email;
+      if (PW_USER.user_id === MY_ID) { $('rpDone').innerHTML = '<div class="done-box"><div class="ok"><i class="fa fa-circle-check"></i> Your password was changed</div></div>'; }
+      else { const c = credsBox(name, PW_USER.email, password, 'They should change it under <b>Account</b> after signing in.');
+        $('rpDone').innerHTML = '<div class="done-box"><div class="ok"><i class="fa fa-circle-check"></i> New password set for ' + esc(name) + '</div>' + c.html + '</div>'; wireCopy($('rpDone'), c.msg); }
+      $('rpFields').hidden = true; $('rpDone').hidden = false; $('rp_save').hidden = true; $('rpCancel').textContent = 'Done';
+    } catch (err) { $('rp_err').textContent = friendly(err); }
+    busy($('rp_save'), false);
+  });
+
+  /* ── Activity log (Admins only) ────────────────────────────────────────── */
+  const AC_ICON = { responses: 'fa-inbox', programs: 'fa-hands-holding-child', moments: 'fa-camera', users: 'fa-users', settings: 'fa-link' };
+  const AC = { off: 0, rows: [], seq: 0 };
+  function renderActivityPeople() {
+    const v = $('acWho').value;
+    $('acWho').innerHTML = '<option value="">Everyone</option>' + TEAM.map(m => '<option value="' + esc(m.user_id) + '">' + esc(teamName(m.user_id)) + '</option>').join('');
+    $('acWho').value = [...$('acWho').options].some(o => o.value === v) ? v : '';
+  }
+  async function loadActivity(more) {
+    const seq = ++AC.seq; $('acErr').textContent = '';   // the newest request wins; older answers are ignored
+    if (!more) { AC.off = 0; AC.rows = []; $('acList').innerHTML = '<p class="sub"><i class="fa fa-spinner fa-spin"></i> Loading…</p>'; }
+    $('acMore').disabled = true;
+    let q = sb.from('ch_activity').select('id,at,actor_id,actor_email,area,summary').order('at', { ascending: false }).order('id', { ascending: false });
+    if ($('acArea').value) q = q.eq('area', $('acArea').value);
+    if ($('acWho').value) q = q.eq('actor_id', $('acWho').value);
+    const { data, error } = await q.range(AC.off, AC.off + 49);
+    if (seq !== AC.seq) return;
+    $('acMore').disabled = false;
+    if (error) { $('acList').innerHTML = ''; $('acErr').textContent = friendly(error); return; }
+    AC.rows = AC.rows.concat(data || []); AC.off += (data || []).length;
+    renderActivity(); $('acMore').hidden = (data || []).length < 50;
+  }
+  function dayLabel(d) {
+    const t = new Date(); t.setHours(0, 0, 0, 0); const x = new Date(d); x.setHours(0, 0, 0, 0);
+    const diff = Math.round((t - x) / 86400000);
+    return diff === 0 ? 'Today' : diff === 1 ? 'Yesterday' : x.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' });
+  }
+  function renderActivity() {
+    if (!AC.rows.length) { $('acList').innerHTML = '<div class="empty">Nothing here yet. Changes to programs, moments, responses, users and the Google Sheet connection show up here.</div>'; return; }
+    let last = '', html = '';
+    AC.rows.forEach(a => {
+      const d = new Date(a.at), lbl = dayLabel(d);
+      if (lbl !== last) { html += '<div class="ac-day">' + esc(lbl) + '</div>'; last = lbl; }
+      const who = a.actor_id && member(a.actor_id) ? teamName(a.actor_id) : (a.actor_email === 'system' || !a.actor_email ? 'Automatic' : a.actor_email);
+      html += '<div class="ac-row"><span class="ac-ic a-' + esc(a.area) + '" aria-hidden="true"><i class="fa ' + (AC_ICON[a.area] || 'fa-circle') + '"></i></span>'
+        + '<p><b>' + esc(who) + '</b> · ' + esc(a.summary) + '</p><time datetime="' + esc(a.at) + '">' + esc(d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })) + '</time></div>';
+    });
+    $('acList').innerHTML = html;
+  }
+  $('acArea').addEventListener('change', () => loadActivity(false));
+  $('acWho').addEventListener('change', () => loadActivity(false));
+  $('acMore').addEventListener('click', () => loadActivity(true));
+  $('acRefresh').addEventListener('click', () => loadActivity(false));
 
   /* an error message disappears as soon as you start fixing it */
   $('programForm').addEventListener('input', () => { $('p_err').textContent = ''; });
