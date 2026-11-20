@@ -248,7 +248,8 @@ footer{background:var(--navy-900);color:rgba(255,255,255,.5)}
 .page-hero-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center var(--fy,50%);animation:heroZoom 9s ease-out both}
 /* --fy: which height of the picture stays in view on wide screens; --fx: which part stays in view on phones and tablets */
 @media(max-width:900px){.page-hero-bg{background-position:var(--fx,50%) var(--fy,50%)}}
-.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(12,26,28,.8) 0%,rgba(12,26,28,.45) 60%,rgba(12,26,28,.2) 100%)}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(40,20,78,.92) 0%,rgba(58,33,108,.8) 26%,rgba(72,44,128,.45) 50%,rgba(72,44,128,0) 74%),linear-gradient(0deg,rgba(24,12,48,.5) 0%,rgba(24,12,48,0) 28%)}
+@media(max-width:900px){.page-hero::before{background:linear-gradient(90deg,rgba(40,20,78,.9) 0%,rgba(58,33,108,.74) 55%,rgba(72,44,128,.5) 100%),linear-gradient(0deg,rgba(24,12,48,.5) 0%,rgba(24,12,48,0) 32%)}}
 .page-hero-in{width:100%;padding-top:clamp(2.5rem,6vw,4rem);padding-bottom:clamp(2rem,5vw,3.2rem)}
 .crumbs{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:rgba(255,255,255,.75);margin-bottom:1rem}
 .crumbs a:hover{color:#fff;text-decoration:underline}
@@ -424,6 +425,7 @@ body{padding-top:var(--header-h)}
   .js .aos,.js .aos-l,.js .aos-r{opacity:1;transform:none}
 }
 </style>
+<link rel="stylesheet" href="assets/css/sections.css">
 </head>
 <body>
 
@@ -480,6 +482,8 @@ body{padding-top:var(--header-h)}
   <div class="hdr-progress" aria-hidden="true"><span></span></div>
 </header>
 
+<!-- FIRST SCREEN: banner + first section (data-snap: one section at a time, see assets/css/sections.css) -->
+<div class="snap-group" data-snap="first">
 <!-- PAGE BANNER -->
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image:url('assets/img/banners/moments-lanterns.jpg');--fy:65%;--fx:45%"></div>
@@ -513,7 +517,7 @@ body{padding-top:var(--header-h)}
 </section>
 
 <!-- NEWS & MOMENTS -->
-<section class="sec news-band" id="news">
+<section class="sec news-band snap-fill" id="news">
   <!-- Moving drawings: crayon doodles -->
   <div class="deco" aria-hidden="true">
     <svg class="a-wobble" style="--x:4%;--y:50px;--s:40px;--d:5s;color:#f2a93b"><use href="#i-d-star" width="100%" height="100%"/></svg>
@@ -581,8 +585,12 @@ body{padding-top:var(--header-h)}
   </div>
 </section>
 
+</div>
+
+<!-- LAST SCREEN: donate band + footer -->
+<div class="snap-group" data-snap="last">
 <!-- DONATION / VOLUNTEER CTA -->
-<div class="cta-band" id="donate">
+<div class="cta-band snap-fill" id="donate">
   <!-- Moving drawings: golden stars and sparkles twinkle and float up, with crayon hearts -->
   <div class="deco" aria-hidden="true">
     <svg class="a-pxfall px-glow" style="--x:3.7%;--y:-30px;--s:17px;--d:16.1s;--delay:-14.4s;--h:440px;--p:1.3s"><use href="#i-pstar" width="100%" height="100%"/></svg>
@@ -667,6 +675,7 @@ body{padding-top:var(--header-h)}
     <p class="disclaimer" data-i18n="foot.disclaimer">Some images on this site are AI-generated or stock photos, used for illustration only.</p>
   </div>
 </footer>
+</div>
 
 <div class="float-bar">
   <a class="float-donate" href="#" data-donate target="_blank" rel="noopener" aria-label="Donate"><i class="fa fa-hand-holding-heart"></i> <span class="fl-label" data-i18n="nav.donateNow">Donate Now</span><span class="donate-tip" data-i18n="float.tip">A child is waiting for a kindness only you can give.</span></a>
@@ -929,5 +938,6 @@ document.querySelectorAll('.news-card').forEach(card => {
   new IntersectionObserver(es => bar.classList.toggle('away', es[0].isIntersecting)).observe(end);
 })();
 </script>
+<script src="assets/js/sections.js"></script>
 </body>
 </html>

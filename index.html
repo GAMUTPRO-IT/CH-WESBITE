@@ -127,7 +127,8 @@ header.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 18px rgba(10,4
 @media(max-width:900px){.hero-slide{background-position:var(--fx,50%) var(--fy,50%)}}
 .hero-slide.active{opacity:1;animation:heroZoom 9s ease-out both}
 @keyframes heroZoom{from{transform:scale(1.06)}to{transform:scale(1)}}
-.hero-overlay{position:absolute;inset:0;z-index:-4;background:linear-gradient(100deg,rgba(12,26,28,.7) 0%,rgba(12,26,28,.38) 55%,rgba(12,26,28,.15) 100%)}
+.hero-overlay{position:absolute;inset:0;z-index:-4;background:linear-gradient(90deg,rgba(40,20,78,.92) 0%,rgba(58,33,108,.8) 26%,rgba(72,44,128,.45) 50%,rgba(72,44,128,0) 74%),linear-gradient(0deg,rgba(24,12,48,.5) 0%,rgba(24,12,48,0) 28%)}
+@media(max-width:900px){.hero-overlay{background:linear-gradient(90deg,rgba(40,20,78,.9) 0%,rgba(58,33,108,.74) 55%,rgba(72,44,128,.5) 100%),linear-gradient(0deg,rgba(24,12,48,.5) 0%,rgba(24,12,48,0) 32%)}}
 .hero-arcs{position:absolute;right:-140px;bottom:-220px;width:620px;height:620px;z-index:-3;pointer-events:none;opacity:.5}
 .hero-in{max-width:var(--max);margin:auto;width:100%;padding:clamp(1.8rem,6vw,4.5rem) clamp(.7rem,3.5vw,1.5rem) clamp(2.5rem,8vw,6rem);display:flex;flex-direction:column}
 .hero-in>*{max-width:640px}
@@ -140,16 +141,11 @@ header.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 18px rgba(10,4
 .hero-name{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:.6rem;row-gap:.35rem;animation:rise .9s .25s backwards}
 .hero-name-main{font-size:clamp(2.9rem,9vw,6.2rem);line-height:.98;letter-spacing:-.025em;text-wrap:balance;text-shadow:0 2px 0 rgba(0,0,0,.3),0 8px 30px rgba(0,0,0,.3)}
 .hero-name-alt{font-family:var(--sans);font-size:clamp(1.3rem,3.4vw,2.3rem);font-weight:700;line-height:1.2;letter-spacing:.06em;color:var(--sun-l);text-shadow:0 1px 8px rgba(0,0,0,.45)}
-.hero-tagline{font-family:var(--display);font-style:italic;font-weight:400;font-size:clamp(1.2rem,2.8vw,1.7rem);line-height:1.3;color:#fff;margin-bottom:1rem;text-wrap:balance;text-shadow:0 1px 10px rgba(0,0,0,.4);animation:rise .8s .35s backwards}
-.hero-sub{font-size:clamp(.92rem,2.5vw,1.05rem);color:rgba(255,255,255,.88);max-width:560px;line-height:1.7;margin-bottom:2rem;text-shadow:0 1px 4px rgba(0,0,0,.35);animation:rise .8s .45s backwards}
+/* "Children Home" stands out: gold brush underline that draws in, plus a soft glow */
+.hero-name-main{position:relative;display:inline-block;padding-bottom:.2em;text-shadow:0 2px 0 rgba(0,0,0,.25),0 0 40px rgba(156,125,214,.55),0 10px 34px rgba(20,8,45,.55)}
+.hero-name-main::after{content:"";position:absolute;left:-.02em;right:-.04em;bottom:0;height:.2em;background:linear-gradient(90deg,var(--sun-l),var(--sun) 55%,var(--sun-d));-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M4 17C70 8 170 5 296 7c2 0 3 3 0 4C190 12 92 16 7 22c-5 0-7-4-3-5z'/%3E%3C/svg%3E") center/100% 100% no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 24' preserveAspectRatio='none'%3E%3Cpath d='M4 17C70 8 170 5 296 7c2 0 3 3 0 4C190 12 92 16 7 22c-5 0-7-4-3-5z'/%3E%3C/svg%3E") center/100% 100% no-repeat;transform-origin:left center;animation:heroLine .9s 1s cubic-bezier(.65,0,.25,1) backwards;filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+@keyframes heroLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 @keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-.hero-items{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.4rem;max-width:720px!important}
-.hi-card{background:rgba(255,255,255,.1);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.2);border-radius:14px;padding:.85rem 1.05rem;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:flex-start;gap:.3rem;text-align:left;transition:background .2s,border-color .2s,transform .18s;animation:rise .7s backwards}
-.hi-card:nth-child(1){animation-delay:.55s}.hi-card:nth-child(2){animation-delay:.63s}.hi-card:nth-child(3){animation-delay:.71s}.hi-card:nth-child(4){animation-delay:.79s}.hi-card:nth-child(5){animation-delay:.87s}
-.hi-card:hover{background:rgba(255,255,255,.18);border-color:rgba(255,255,255,.34);transform:translateY(-3px)}
-.hi-card>i{font-size:1.05rem;color:var(--sun-l)}
-.hi-card .hi-title{font-size:.86rem;font-weight:600;line-height:1.3}
-.hi-card p,.hi-card .hi-link{display:none}
 .hero-dots{position:absolute;bottom:3.8rem;left:50%;transform:translateX(-50%);display:flex;gap:.5rem;align-items:center;z-index:10}
 .hero-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.4);padding:0;transition:width .4s ease,background .4s ease}
 .hero-dot.active{width:24px;border-radius:99px;background:rgba(255,255,255,.92)}
@@ -158,17 +154,6 @@ header.scrolled{background:rgba(255,255,255,.97);box-shadow:0 2px 18px rgba(10,4
 .scroll-cue .bar::after{content:"";display:block;width:1px;height:14px;background:var(--sun);animation:slide 1.8s ease-in-out infinite}
 @keyframes slide{0%{transform:translateY(-14px);opacity:0}40%{opacity:1}100%{transform:translateY(38px);opacity:0}}
 
-/* Hero card modal */
-.hi-modal{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:1.5rem;background:rgba(0,0,0,0);pointer-events:none;transition:background .35s ease}
-.hi-modal.on{background:rgba(0,0,0,.5);pointer-events:auto}
-.hi-modal .hi-card{width:min(24rem,88vw);background:rgba(30,30,30,.74);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border-radius:22px;padding:2.2rem 2rem;gap:.65rem;box-shadow:0 32px 80px rgba(0,0,0,.55);opacity:0;transform:scale(.9) translateY(14px);transition:opacity .35s ease,transform .45s cubic-bezier(.2,.8,.3,1.2);animation:none}
-.hi-modal.on .hi-card{opacity:1;transform:none}
-.hi-modal .hi-card:hover{transform:none}
-.hi-modal .hi-card>i{font-size:2.2rem}
-.hi-modal .hi-card .hi-title{font-size:1.4rem;font-weight:700;line-height:1.2}
-.hi-modal .hi-card p{display:block;font-size:.96rem;color:rgba(255,255,255,.8);line-height:1.7;border-top:1px solid rgba(255,255,255,.18);padding-top:.9rem;margin-top:.1rem}
-.hi-modal .hi-card .hi-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.88rem;font-weight:600;color:var(--sun-l)}
-.hi-modal .hi-card .hi-link:hover{text-decoration:underline}
 
 /* Section helpers */
 .sec{padding:clamp(3rem,7vw,6rem) 0;position:relative}
@@ -673,6 +658,7 @@ body{padding-top:var(--header-h)}
   ]
 }
 </script>
+<link rel="stylesheet" href="assets/css/sections.css">
 </head>
 <body>
 
@@ -733,8 +719,10 @@ body{padding-top:var(--header-h)}
   <div class="hdr-progress" aria-hidden="true"><span></span></div>
 </header>
 
+<!-- FIRST SCREEN: banner + figures (data-snap: one section at a time, see assets/css/sections.css) -->
+<div class="snap-group" data-snap="first">
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero snap-grow" id="home">
   <div class="hero-slideshow">
     <!-- Banner pictures are 3:1 (1792 x 592). --fx = the part that stays in view on phones (0% = left edge, 100% = right edge) -->
     <div class="hero-slide active" style="background-image:url('assets/img/banners/home-friends.jpg');--fx:54%"></div>
@@ -782,38 +770,6 @@ body{padding-top:var(--header-h)}
         <span class="hero-name-alt" lang="zh" data-i18n="hero.altname">儿童小屋</span>
       </span>
     </h1>
-    <p class="hero-tagline" data-i18n="hero.tagline">A safe place to grow, a future to believe in.</p>
-    <p class="hero-sub" data-i18n="hero.sub">Since 2010, Amitabha Foundation Children Home has given orphaned and underprivileged children a safe, loving home, a full education and the care they need to build a brighter future.</p>
-    <div class="hero-items">
-      <button class="hi-card">
-        <i class="fa fa-house-chimney-user"></i>
-        <span class="hi-title" data-i18n="hero.c1.title">Explore our care</span>
-        <p data-i18n="hero.c1.body">Shelter and daily care, education and academic support, and emotional and social development: everything a child needs to thrive.</p>
-        <a class="hi-link" href="our-care.html"><i class="fa fa-arrow-right"></i> <span data-i18n="hero.c1.link">See our programmes</span></a>
-      </button>
-      <button class="hi-card">
-        <i class="fa fa-comments"></i>
-        <span class="hi-title" data-i18n="hero.c2.title">Speak to us</span>
-        <p data-i18n="hero.c2.body">Want to sponsor a child, volunteer or schedule a visit? Our team is happy to help: just send us an enquiry.</p>
-        <a class="hi-link" href="#" data-form="enquiry" target="_blank" rel="noopener"><i class="fa fa-arrow-right"></i> <span data-i18n="hero.c2.link">Send an enquiry</span></a>
-      </button>
-      <button class="hi-card">
-        <i class="fa fa-book-open-reader"></i>
-        <span class="hi-title" data-i18n="hero.c3.title">Education first</span>
-        <p data-i18n="hero.c3.body">Formal school enrolment, tuition, after-school homework guidance and vocational training for life skills.</p>
-      </button>
-      <button class="hi-card">
-        <i class="fa fa-leaf"></i>
-        <span class="hi-title" data-i18n="hero.c4.title">Vegetarian meals</span>
-        <p data-i18n="hero.c4.body">One of the first Buddhist children homes in Malaysia to provide nutritious vegetarian meals.</p>
-      </button>
-      <button class="hi-card">
-        <i class="fa fa-star"></i>
-        <span class="hi-title" data-i18n="hero.c5.title">5-Star rated</span>
-        <p data-i18n="hero.c5.body">Awarded a 5-Star rating by the Johor State Government in 2023, and certified to ISO 9001:2015.</p>
-        <a class="hi-link" href="index.html#credentials"><i class="fa fa-arrow-right"></i> <span data-i18n="hero.c5.link">View our credentials</span></a>
-      </button>
-    </div>
   </div>
 
   <div class="hero-dots" id="heroDots"></div>
@@ -830,9 +786,11 @@ body{padding-top:var(--header-h)}
   </div>
 </div>
 
+</div>
+
 <!-- PROGRAMS: filled in from the database (admin.html → Programs).
      It stays hidden until at least one program is published. -->
-<section class="sec programs-band" id="programs" hidden>
+<section class="sec programs-band" id="programs" data-snap hidden>
   <div class="wrap">
     <div class="sh c">
       <div class="eyebrow" data-i18n="pg.eyebrow">Our programs</div>
@@ -871,7 +829,7 @@ body{padding-top:var(--header-h)}
 </div>
 
 <!-- CREDENTIALS -->
-<section class="cred-band" id="credentials">
+<section class="cred-band" id="credentials" data-snap>
   <div class="wrap cred-grid">
     <div class="cred-certs aos-l">
       <figure class="cert c1" data-lightbox="assets/img/cert-5-star.jpg">
@@ -908,7 +866,7 @@ body{padding-top:var(--header-h)}
 </section>
 
 <!-- ABOUT -->
-<section class="sec sec-about" id="about">
+<section class="sec sec-about" id="about" data-snap>
   <!-- Moving drawings: lotus flowers bobbing on a pond, a paper boat, a butterfly -->
   <div class="deco" aria-hidden="true">
     <svg class="pond-svg" viewBox="0 0 420 130">
@@ -962,7 +920,7 @@ body{padding-top:var(--header-h)}
 </section>
 
 <!-- EXPLORE: cards linking to the other pages (with floating balloons, paper plane and doodles behind) -->
-<section class="sec explore-band" id="explore">
+<section class="sec explore-band" id="explore" data-snap>
   <div class="deco" aria-hidden="true">
     <svg class="a-balloon" style="--x:2.5%;--y:34px;--s:76px;--d:6s;color:#ee9fb0"><use href="#i-balloon" width="100%" height="100%"/></svg>
     <svg class="a-balloon hide-sm" style="--x:6.5%;--y:70px;--s:62px;--d:7s;--delay:-2s;color:#f2a93b"><use href="#i-balloon" width="100%" height="100%"/></svg>
@@ -1021,7 +979,7 @@ body{padding-top:var(--header-h)}
 </section>
 
 <!-- GET IN TOUCH -->
-<section class="sec contact-band" id="contact">
+<section class="sec contact-band" id="contact" data-snap>
   <div class="wrap contact-grid">
     <div class="aos-l">
       <div class="eyebrow" data-i18n="ct.eyebrow">Visit us</div>
@@ -1075,7 +1033,7 @@ body{padding-top:var(--header-h)}
 </section>
 
 <!-- FOLLOW US ON SOCIAL MEDIA (same layout as the Elder Home site). To change a link, edit its href below. -->
-<section class="sec social-band" id="social">
+<section class="sec social-band" id="social" data-snap>
   <div class="wrap social-grid">
     <div class="social-intro aos-l">
       <div class="eyebrow" data-i18n="soc.eyebrow">Stay connected</div>
@@ -1111,8 +1069,10 @@ body{padding-top:var(--header-h)}
   </div>
 </section>
 
+<!-- LAST SCREEN: donate band + footer -->
+<div class="snap-group" data-snap="last">
 <!-- DONATION / VOLUNTEER CTA -->
-<div class="cta-band" id="donate">
+<div class="cta-band snap-fill" id="donate">
   <!-- Moving drawings: golden stars and sparkles twinkle and float up, with crayon hearts -->
   <div class="deco" aria-hidden="true">
     <svg class="a-pxfall px-glow" style="--x:3.7%;--y:-30px;--s:17px;--d:16.1s;--delay:-14.4s;--h:440px;--p:1.3s"><use href="#i-pstar" width="100%" height="100%"/></svg>
@@ -1197,6 +1157,7 @@ body{padding-top:var(--header-h)}
     <p class="disclaimer" data-i18n="foot.disclaimer">Some images on this site are AI-generated or stock photos, used for illustration only.</p>
   </div>
 </footer>
+</div>
 
 <div class="float-bar">
   <a class="float-donate" href="#" data-donate target="_blank" rel="noopener" aria-label="Donate"><i class="fa fa-hand-holding-heart"></i> <span class="fl-label" data-i18n="nav.donateNow">Donate Now</span><span class="donate-tip" data-i18n="float.tip">A child is waiting for a kindness only you can give.</span></a>
@@ -1306,25 +1267,6 @@ window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.
   document.addEventListener('visibilitychange', () => { if (document.hidden) clearInterval(timer); else restart(); });
 })();
 
-/* Hero cards open as a glass modal (same behaviour as Elder Home) */
-(function(){
-  const modal = document.createElement('div');
-  modal.className = 'hi-modal';
-  document.body.appendChild(modal);
-  function close(){ modal.classList.remove('on'); setTimeout(() => { if (!modal.classList.contains('on')) modal.innerHTML = ''; }, 400); }
-  document.querySelectorAll('.hero-items .hi-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const clone = card.cloneNode(true);
-      clone.querySelectorAll('.hi-link').forEach(l => l.addEventListener('click', e => { e.stopPropagation(); close(); }));
-      modal.innerHTML = '';
-      modal.appendChild(clone);
-      requestAnimationFrame(() => modal.classList.add('on'));
-    });
-  });
-  modal.addEventListener('click', close);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-})();
-
 /* Scroll reveal */
 const aosObs = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -1424,12 +1366,7 @@ document.querySelectorAll('.aos,.aos-l,.aos-r').forEach(el => aosObs.observe(el)
     'nav.home': '首页', 'nav.care': '我们的照护', 'nav.stories': '故事', 'nav.moments': '温馨时刻', 'nav.faq': '常见问题', 'nav.seekHelp': '寻求帮助', 'nav.donate': '捐款', 'float.enquire': '立即咨询',
     'nav.donateNow': '立即捐款',
     'brand.tag': '儿童小屋',
-    'hero.eyebrow': '阿弥陀佛援助总会 · 新山', 'hero.name': '儿童小屋', 'hero.altname': 'Children Home', 'hero.tagline': '安心成长的家，值得相信的未来。',
-    'hero.sub': '自2010年以来，阿弥陀佛援助总会儿童小屋为孤儿和弱势儿童提供安全温暖的家、完整的教育，以及迈向光明未来所需的关怀与照顾。', 'hero.c1.title': '了解我们的照护',
-    'hero.c1.body': '住所与日常照顾、教育与课业支持、情感与社交发展——孩子茁壮成长所需的一切。', 'hero.c1.link': '查看我们的计划', 'hero.c2.title': '联系我们',
-    'hero.c2.body': '想资助孩子、当义工或预约探访？欢迎填写咨询表格，我们的团队乐意协助。', 'hero.c2.link': '填写咨询表格', 'hero.c3.title': '教育为先',
-    'hero.c3.body': '安排正规入学与补习、课后作业指导，以及生活技能与就业培训。', 'hero.c4.title': '营养素食', 'hero.c4.body': '马来西亚首批提供健康营养素食的佛教儿童院之一。', 'hero.c5.title': '五星评级',
-    'hero.c5.body': '2023年荣获柔佛州政府颁发五星评级，并获 ISO 9001:2015 认证。', 'hero.c5.link': '查看资质认证',
+    'hero.eyebrow': '阿弥陀佛援助总会 · 新山', 'hero.name': '儿童小屋', 'hero.altname': 'Children Home',
     'stat.since': '创办年份', 'stat.children': '曾受照顾成长的孩子', 'stat.rating': '柔佛州五星评级 · 2023', 'stat.iso': '9001:2015 认证',
     'cred.eyebrow': '资质认证', 'cred.h2': '卓越与<em>爱</em>的家园', 'cred.p': '五星评级与 ISO 9001:2015 认证，不仅体现了我们在管理与照护上达致的高标准，更彰显了我们为每一位孩子营造充满爱与关怀的家所倾注的心力。',
     'cred.cert1': '儿童照护中心五星评级 2023（Penarafan Bintang Pusat Jagaan Kanak-Kanak 2023）', 'cred.seal': '柔佛 2023', 'cred.ms1.d': '2023年', 'cred.ms1.t': '儿童照护中心五星评级 2023（Penarafan Bintang Pusat Jagaan Kanak-Kanak 2023）',
@@ -1528,5 +1465,6 @@ document.querySelectorAll('.aos,.aos-l,.aos-r').forEach(el => aosObs.observe(el)
   new IntersectionObserver(es => bar.classList.toggle('away', es[0].isIntersecting)).observe(end);
 })();
 </script>
+<script src="assets/js/sections.js"></script>
 </body>
 </html>

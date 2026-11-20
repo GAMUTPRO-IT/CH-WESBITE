@@ -1,0 +1,67 @@
+/* ════════════════════════════════════════════════════════════════════════════
+   Children Home website: section menus + one-section-at-a-time scrolling
+   Used by index, our-care, stories, moments and get-involved (linked in <head>).
+   The menu items themselves are listed in assets/js/sections.js.
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ── Top menu: point at a page name (or click its arrow) to open the list of its sections.
+      Same look as the Elder Home site: white panel, coloured line on top, capital letters. ── */
+.nav-dd{position:relative;display:flex;align-items:center}
+.nav-caret{display:grid;place-items:center;width:1.3rem;height:1.6rem;margin-left:-.6rem;padding:0;border:0;background:none;color:var(--ink-400);font-size:.62rem;cursor:pointer;transition:transform .25s ease,color .2s ease}
+.nav-dd:hover .nav-caret,.nav-dd.open .nav-caret{color:var(--brand-red-nav)}
+.nav-dd.open .nav-caret{transform:rotate(180deg)}
+.nav-sub{display:none;position:absolute;top:calc(100% + var(--dd-gap,18px));left:-.4rem;z-index:130;width:max-content;min-width:14rem;max-width:17.5rem;padding:1.15rem 0;background:#fff;border-top:3px solid var(--leaf-700);box-shadow:0 18px 40px rgba(30,15,60,.14)}
+.nav-sub::before{content:"";position:absolute;left:0;right:0;bottom:100%;height:calc(var(--dd-gap,18px) + 3px)}   /* invisible bridge: the list stays open while the mouse moves down to it */
+.nav-dd.open .nav-sub{display:block;animation:navSubIn .18s ease both}
+@keyframes navSubIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+.nav-dd.edge .nav-sub{left:auto;right:-.4rem}
+[data-sec][hidden]{display:none!important}
+#hdr .nav .nav-sub a{display:block;padding:.55rem 1.9rem;border-radius:0;background:none;font-size:.86rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;line-height:1.45;color:var(--ink-900);white-space:normal}
+#hdr .nav .nav-sub a::after{display:none}
+#hdr .nav .nav-sub a:hover,#hdr .nav .nav-sub a:focus-visible{color:var(--brand-red-nav);background:none;outline:none}
+#hdr .nav .nav-sub a.here{color:var(--leaf-700)}
+#hdr .nav .nav-sub a.sub{padding:.4rem 1.9rem .4rem 2.9rem;font-size:.78rem;font-weight:500;letter-spacing:.04em;color:var(--ink-500)}
+#hdr .nav .nav-sub a.sub:hover{color:var(--brand-red-nav)}
+.nav-sub a i{display:none}
+
+/* ── Phone menu (☰): tap a page name to open its sections ── */
+.mob-menu .mob-row{display:flex;align-items:stretch;border-bottom:1px solid var(--line)}
+.mob-menu .mob-row>a{flex:1;border-bottom:0}
+.mob-caret{width:44px;flex-shrink:0;display:grid;place-items:center;border:0;background:none;color:var(--ink-400);font-size:.75rem;cursor:pointer;transition:transform .25s ease}
+.mob-row.open .mob-caret{transform:rotate(180deg);color:var(--brand-red-nav)}
+.mob-menu .mob-sub{padding:.4rem 0 .55rem;border-bottom:1px solid var(--line);border-left:3px solid var(--leaf-700);background:#fff}
+.mob-menu .mob-sub[hidden]{display:none}
+.mob-menu .mob-sub a{display:block;padding:.6rem .3rem .6rem 1.1rem;border-bottom:0;font-size:.84rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-900)}
+.mob-menu .mob-sub a.sub{padding:.45rem .3rem .45rem 2.1rem;font-size:.78rem;font-weight:500;color:var(--ink-500)}
+.mob-menu .mob-sub a i{display:none}
+.mob-menu .mob-sub a.here{color:var(--leaf-700)}
+body.menu-open .float-bar{opacity:0;visibility:hidden;pointer-events:none}
+
+/* see-through cover over the Google Map so scrolling over it still moves the page (laptops/desktops only) */
+.map-shield{display:none;position:absolute;inset:0;z-index:2;align-items:flex-end;justify-content:center;padding:1rem;border:0;background:transparent;cursor:pointer;font:inherit}
+.map-shield.off{display:none!important}
+.map-shield span{display:inline-flex;align-items:center;gap:.45rem;padding:.5rem .95rem;border-radius:999px;background:rgba(30,15,60,.78);color:#fff;font-size:.82rem;font-weight:600;opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}
+.map-shield b{font-weight:600}
+.map-shield:hover span,.map-shield:focus-visible span{opacity:1;transform:none}
+
+/* ── One section at a time ──────────────────────────────────────────────────
+   On laptops and desktops (mouse or trackpad), every section fills the screen
+   and the scroll wheel moves to the next section. A section that is taller
+   than the screen scrolls normally until its end, so nothing is ever skipped.
+   On phones and tablets the page scrolls normally: iPhone/iPad Safari makes
+   forced snapping jerky inside long sections.
+   To make a new section part of this, give it  data-snap  in the HTML.        */
+:root{--snap-top:72px}                                   /* height of the slim header after scrolling */
+@media(max-width:640px){:root{--snap-top:60px}}
+@media (hover:hover) and (pointer:fine) and (min-height:540px){
+  html{scroll-snap-type:y mandatory;scroll-padding-top:var(--snap-top)}
+  section[id],#donate{scroll-margin-top:0}
+  [data-snap]{scroll-snap-align:start;min-height:calc(100vh - var(--snap-top));display:flex;flex-direction:column;justify-content:center}
+  [data-snap][hidden]{display:none}
+  [data-snap="first"]{min-height:calc(100vh - var(--header-h));justify-content:flex-start;scroll-margin-top:calc(var(--header-h) - var(--snap-top))}   /* the top of the page is a stop */
+  [data-snap="last"]{justify-content:flex-start}
+  .snap-fill{flex:1 0 auto;display:flex;flex-direction:column;justify-content:center}
+  .snap-grow{flex:1 0 auto}
+  [data-snap]>.wrap,.snap-fill>.wrap{width:100%}
+  .map-shield{display:flex}
+}

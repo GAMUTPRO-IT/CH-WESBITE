@@ -306,7 +306,8 @@ footer{background:var(--navy-900);color:rgba(255,255,255,.5)}
 .page-hero-bg{position:absolute;inset:0;z-index:-2;background-size:cover;background-position:center var(--fy,50%);animation:heroZoom 9s ease-out both}
 /* --fy: which height of the picture stays in view on wide screens; --fx: which part stays in view on phones and tablets */
 @media(max-width:900px){.page-hero-bg{background-position:var(--fx,50%) var(--fy,50%)}}
-.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(100deg,rgba(12,26,28,.8) 0%,rgba(12,26,28,.45) 60%,rgba(12,26,28,.2) 100%)}
+.page-hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(40,20,78,.92) 0%,rgba(58,33,108,.8) 26%,rgba(72,44,128,.45) 50%,rgba(72,44,128,0) 74%),linear-gradient(0deg,rgba(24,12,48,.5) 0%,rgba(24,12,48,0) 28%)}
+@media(max-width:900px){.page-hero::before{background:linear-gradient(90deg,rgba(40,20,78,.9) 0%,rgba(58,33,108,.74) 55%,rgba(72,44,128,.5) 100%),linear-gradient(0deg,rgba(24,12,48,.5) 0%,rgba(24,12,48,0) 32%)}}
 .page-hero-in{width:100%;padding-top:clamp(2.5rem,6vw,4rem);padding-bottom:clamp(2rem,5vw,3.2rem)}
 .crumbs{display:flex;align-items:center;gap:.5rem;font-size:.78rem;color:rgba(255,255,255,.75);margin-bottom:1rem}
 .crumbs a:hover{color:#fff;text-decoration:underline}
@@ -483,6 +484,7 @@ body{padding-top:var(--header-h)}
   .js .aos,.js .aos-l,.js .aos-r{opacity:1;transform:none}
 }
 </style>
+<link rel="stylesheet" href="assets/css/sections.css">
 </head>
 <body>
 
@@ -535,6 +537,8 @@ body{padding-top:var(--header-h)}
   <div class="hdr-progress" aria-hidden="true"><span></span></div>
 </header>
 
+<!-- FIRST SCREEN: banner + first section (data-snap: one section at a time, see assets/css/sections.css) -->
+<div class="snap-group" data-snap="first">
 <!-- PAGE BANNER -->
 <section class="page-hero">
   <div class="page-hero-bg" style="background-image:url('assets/img/banners/our-care-dinner.jpg');--fy:65%;--fx:50%"></div>
@@ -568,7 +572,7 @@ body{padding-top:var(--header-h)}
 </section>
 
 <!-- KEY SUPPORT: OUR PROGRAMMES -->
-<section class="sec" id="support">
+<section class="sec snap-fill" id="support">
   <div class="wrap">
     <div class="sh c">
       <div class="eyebrow aos" data-i18n="prog.eyebrow">Our programmes</div>
@@ -576,7 +580,7 @@ body{padding-top:var(--header-h)}
       <p class="section-p aos d2" data-i18n="prog.p">Rooted in compassion, we care for the whole child: a safe home today, a good education for tomorrow, and the love and guidance to thrive.</p>
     </div>
     <div class="prog-grid">
-      <article class="prog-card aos">
+      <article class="prog-card aos" id="shelter">
         <div class="prog-photo"><img src="assets/img/life-cny.jpg" alt="Children in red shirts celebrating Chinese New Year together at the home" loading="lazy" style="object-position:center 30%"></div>
         <div class="prog-body">
           <div class="prog-ic"><i class="fa fa-house-chimney-user"></i></div>
@@ -589,7 +593,7 @@ body{padding-top:var(--header-h)}
           <p class="prog-quote" data-i18n="prog.p1.q">“Every child deserves a place to call home.”</p>
         </div>
       </article>
-      <article class="prog-card aos d1">
+      <article class="prog-card aos d1" id="education">
         <div class="prog-photo"><img src="assets/img/moment-chess-2.jpg" alt="Children studying in the home's classroom with a volunteer teacher" loading="lazy"></div>
         <div class="prog-body">
           <div class="prog-ic"><i class="fa fa-graduation-cap"></i></div>
@@ -602,7 +606,7 @@ body{padding-top:var(--header-h)}
           <p class="prog-quote" data-i18n="prog.p2.q">“Education is the key to breaking the cycle of poverty.”</p>
         </div>
       </article>
-      <article class="prog-card aos d2">
+      <article class="prog-card aos d2" id="growth">
         <div class="prog-photo"><img src="assets/img/life-sharing-circle.jpg" alt="Children and caregivers sitting together in a circle for a group activity" loading="lazy" style="object-position:center 60%"></div>
         <div class="prog-body">
           <div class="prog-ic"><i class="fa fa-hand-holding-heart"></i></div>
@@ -834,8 +838,10 @@ body{padding-top:var(--header-h)}
   </div>
 </section>
 
+</div>
+
 <!-- LIFE AT THE HOME -->
-<section class="sec gallery-band" id="gallery">
+<section class="sec gallery-band" id="gallery" data-snap>
   <div class="wrap">
     <div class="sh c">
       <div class="eyebrow aos" data-i18n="gal.eyebrow">Life at the Home</div>
@@ -910,8 +916,10 @@ body{padding-top:var(--header-h)}
   </div>
 </section>
 
+<!-- LAST SCREEN: donate band + footer -->
+<div class="snap-group" data-snap="last">
 <!-- DONATION / VOLUNTEER CTA -->
-<div class="cta-band" id="donate">
+<div class="cta-band snap-fill" id="donate">
   <!-- Moving drawings: golden stars and sparkles twinkle and float up, with crayon hearts -->
   <div class="deco" aria-hidden="true">
     <svg class="a-pxfall px-glow" style="--x:3.7%;--y:-30px;--s:17px;--d:16.1s;--delay:-14.4s;--h:440px;--p:1.3s"><use href="#i-pstar" width="100%" height="100%"/></svg>
@@ -996,6 +1004,7 @@ body{padding-top:var(--header-h)}
     <p class="disclaimer" data-i18n="foot.disclaimer">Some images on this site are AI-generated or stock photos, used for illustration only.</p>
   </div>
 </footer>
+</div>
 
 <div class="float-bar">
   <a class="float-donate" href="#" data-donate target="_blank" rel="noopener" aria-label="Donate"><i class="fa fa-hand-holding-heart"></i> <span class="fl-label" data-i18n="nav.donateNow">Donate Now</span><span class="donate-tip" data-i18n="float.tip">A child is waiting for a kindness only you can give.</span></a>
@@ -1316,5 +1325,6 @@ document.querySelectorAll('.vs-frame').forEach(btn => btn.addEventListener('clic
   new IntersectionObserver(es => bar.classList.toggle('away', es[0].isIntersecting)).observe(end);
 })();
 </script>
+<script src="assets/js/sections.js"></script>
 </body>
 </html>
