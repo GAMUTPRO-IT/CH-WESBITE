@@ -1,5 +1,6 @@
 /* ════════════════════════════════════════════════════════════════════════════
-   Children Home website: section menus in the top menu (all five pages)
+   Children Home website: section menus in the top menu (all five pages),
+   one-section-at-a-time scrolling and the floating contact bubble
    Point at a page name (Home, Our Care, Stories, Moments, Get Involved) to open a
    list of the sections on that page, then pick one to go straight to it.
    Clicking the page name itself opens that page. On phones the same lists open
@@ -50,7 +51,10 @@
   };
   /* Stories page: these items press the matching filter button (All / Success / Children's) */
   const STORY_FILTER = { 'stories': 0, 'success-stories': 1, 'childrens-stories': 2 };
-  const WORDS = { en: { open: 'Show sections' }, zh: { open: '显示本页内容' } };
+  const WORDS = {
+    en: { open: 'Show sections', bubble: 'How can we help?', bubbleOpen: 'Show Donate, Volunteer and WhatsApp', bubbleClose: 'Close' },
+    zh: { open: '显示本页内容', bubble: '我们能帮您什么？', bubbleOpen: '显示捐款、义工和 WhatsApp', bubbleClose: '关闭' }
+  };
 
   const zh = () => document.documentElement.lang === 'zh';
   const w = k => WORDS[zh() ? 'zh' : 'en'][k];
@@ -310,6 +314,32 @@
   const relabelMaps = () => document.querySelectorAll('.map-shield b').forEach(b => { b.textContent = w('map'); b.closest('button').setAttribute('aria-label', w('map')); });
   new MutationObserver(relabelMaps).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   relabelMaps();
+
+  /* ── Floating contact bubble (bottom right) ──
+     The page's Donate / Volunteer / WhatsApp links stay as they are; this adds the round
+     bubble that opens and closes them. Styles: "Floating contact bubble" in sections.css. */
+  const fbar = document.querySelector('.float-bar');
+  if (fbar) {
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'fb-toggle'; btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<i class="fa fa-comment-dots fb-chat" aria-hidden="true"></i><i class="fa fa-xmark fb-x" aria-hidden="true"></i><span class="fb-tip"></span>';
+    fbar.appendChild(btn);
+    const links = [...fbar.querySelectorAll('a')];
+    const setOpen = open => {
+      fbar.classList.toggle('fb-open', open);
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', w(open ? 'bubbleClose' : 'bubbleOpen'));
+      links.forEach(a => { a.tabIndex = open ? 0 : -1; });
+    };
+    setOpen(false);
+    btn.addEventListener('click', () => setOpen(!fbar.classList.contains('fb-open')));
+    links.forEach(a => a.addEventListener('click', () => setTimeout(() => setOpen(false), 150)));
+    document.addEventListener('click', e => { if (!fbar.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && fbar.classList.contains('fb-open')) { setOpen(false); btn.focus(); } });
+    const relabelBubble = () => { btn.querySelector('.fb-tip').textContent = w('bubble'); btn.setAttribute('aria-label', w(fbar.classList.contains('fb-open') ? 'bubbleClose' : 'bubbleOpen')); };
+    relabelBubble();
+    new MutationObserver(relabelBubble).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  }
 
   relabel(); spy();
   new MutationObserver(relabel).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });

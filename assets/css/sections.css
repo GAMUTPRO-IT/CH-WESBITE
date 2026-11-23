@@ -1,5 +1,8 @@
 /* ════════════════════════════════════════════════════════════════════════════
-   Children Home website: section menus + one-section-at-a-time scrolling
+   Children Home website: shared extras for all five pages
+     1. section menus under each page name in the top menu
+     2. one-section-at-a-time scrolling (laptops and desktops)
+     3. the floating contact bubble (bottom right): Donate / Volunteer / WhatsApp
    Used by index, our-care, stories, moments and get-involved (linked in <head>).
    The menu items themselves are listed in assets/js/sections.js.
    ════════════════════════════════════════════════════════════════════════════ */
@@ -36,6 +39,44 @@
 .mob-menu .mob-sub a i{display:none}
 .mob-menu .mob-sub a.here{color:var(--leaf-700)}
 body.menu-open .float-bar{opacity:0;visibility:hidden;pointer-events:none}
+
+/* ── Floating contact bubble, bottom right ───────────────────────────────────
+   One round bubble; click it and the Donate, Volunteer and WhatsApp icons pop up.
+   Point at an icon to see its name (on phones the names show as soon as it opens).
+   The three links are the .float-bar links already in each page; sections.js adds
+   the bubble button. ── */
+.float-bar{left:auto;right:1.5rem;bottom:1.5rem;transform:none;flex-direction:column;align-items:flex-end;gap:.75rem;filter:none}
+.float-bar .float-donate,.float-bar .float-vol,.float-bar .float-wa{position:relative;width:52px;height:52px;margin-right:4px;padding:0;border-radius:50%;justify-content:center;font-size:1.3rem;animation:none;
+  opacity:0;visibility:hidden;pointer-events:none;transform:translateY(16px) scale(.5);transition:opacity .2s ease,transform .28s cubic-bezier(.34,1.5,.64,1),visibility .2s,background .2s ease}
+.float-bar.fb-open .float-donate,.float-bar.fb-open .float-vol,.float-bar.fb-open .float-wa{opacity:1;visibility:visible;pointer-events:auto;transform:none}
+.float-bar.fb-open .float-wa{transition-delay:0s}
+.float-bar.fb-open .float-vol{transition-delay:.05s}
+.float-bar.fb-open .float-donate{transition-delay:.1s}
+.float-bar.fb-open .float-donate:hover,.float-bar.fb-open .float-vol:hover,.float-bar.fb-open .float-wa:hover{transform:scale(1.1);transition-delay:0s}
+.float-bar .donate-tip{display:none!important}
+/* the name that appears beside each icon */
+.float-bar .fl-label,.fb-toggle .fb-tip{display:block;position:absolute;right:calc(100% + .8rem);top:50%;padding:.45rem .85rem;border-radius:9px;background:var(--navy-900);color:#fff;font-size:.82rem;font-weight:600;font-style:normal;letter-spacing:0;line-height:1.2;white-space:nowrap;box-shadow:0 6px 18px rgba(0,0,0,.2);
+  opacity:0;pointer-events:none;transform:translate(6px,-50%);transition:opacity .18s ease,transform .18s ease}
+.float-bar .fl-label::after,.fb-toggle .fb-tip::after{content:"";position:absolute;left:100%;top:50%;transform:translateY(-50%);border:6px solid transparent;border-left-color:var(--navy-900)}
+.float-bar a:hover .fl-label,.float-bar a:focus-visible .fl-label,.fb-toggle:hover .fb-tip,.fb-toggle:focus-visible .fb-tip{opacity:1;transform:translate(0,-50%)}
+.float-bar.fb-open .fb-toggle .fb-tip{display:none}
+/* the bubble itself */
+.fb-toggle{position:relative;width:60px;height:60px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#fff;font-size:1.45rem;background:linear-gradient(135deg,var(--leaf-600),var(--leaf-800));box-shadow:0 10px 28px rgba(76,45,140,.45);transition:transform .25s ease,box-shadow .25s ease}
+.fb-toggle:hover{transform:scale(1.06);box-shadow:0 14px 34px rgba(76,45,140,.55)}
+.fb-toggle:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
+.fb-toggle>i{grid-area:1/1;transition:opacity .2s ease,transform .28s ease}
+.fb-toggle .fb-x{opacity:0;transform:rotate(-90deg)}
+.float-bar.fb-open .fb-toggle .fb-chat{opacity:0;transform:rotate(90deg)}
+.float-bar.fb-open .fb-toggle .fb-x{opacity:1;transform:none}
+.fb-toggle::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--leaf-500);animation:fbPulse 2.6s ease-out infinite;pointer-events:none}
+.float-bar.fb-open .fb-toggle::before{animation:none;opacity:0}
+@keyframes fbPulse{0%{transform:scale(1);opacity:.75}100%{transform:scale(1.55);opacity:0}}
+@media(hover:none){.float-bar.fb-open .fl-label{opacity:1;transform:translate(0,-50%)}}   /* touch screens can't point, so show the names */
+@media(max-width:900px){
+  .float-bar{right:1rem;bottom:1rem;gap:.6rem}
+  .float-bar .float-donate,.float-bar .float-vol,.float-bar .float-wa{width:48px;height:48px;font-size:1.2rem}
+  .fb-toggle{width:56px;height:56px;font-size:1.35rem}
+}
 
 /* see-through cover over the Google Map so scrolling over it still moves the page (laptops/desktops only) */
 .map-shield{display:none;position:absolute;inset:0;z-index:2;align-items:flex-end;justify-content:center;padding:1rem;border:0;background:transparent;cursor:pointer;font:inherit}
