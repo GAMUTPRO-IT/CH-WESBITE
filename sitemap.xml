@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+       <loc>https://childrenhome.amitabhafoundation.my/index.html</loc>
+       <lastmod>2026-11-23T00:35:36+00:00</lastmod>
+       <priority>1.0000</priority>
+  </url>
+  <url>
+       <loc>https://childrenhome.amitabhafoundation.my/our-care.html</loc>
+       <lastmod>2026-11-23T00:35:36+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://childrenhome.amitabhafoundation.my/stories.html</loc>
+       <lastmod>2026-11-23T00:35:36+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://childrenhome.amitabhafoundation.my/moments.html</loc>
+       <lastmod>2026-11-23T00:35:36+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+  <url>
+       <loc>https://childrenhome.amitabhafoundation.my/get-involved.html</loc>
+       <lastmod>2026-11-23T00:35:36+00:00</lastmod>
+       <priority>0.8000</priority>
+  </url>
+</urlset>
