@@ -1,6 +1,7 @@
 /* ════════════════════════════════════════════════════════════════════════════
    Children Home website: section menus in the top menu (all five pages),
-   one-section-at-a-time scrolling and the floating contact bubble
+   one-section-at-a-time scrolling, the floating contact bubble, and the
+   privacy labels on pictures of children
    Point at a page name (Home, Our Care, Stories, Moments, Get Involved) to open a
    list of the sections on that page, then pick one to go straight to it.
    Clicking the page name itself opens that page. On phones the same lists open
@@ -340,6 +341,144 @@
     relabelBubble();
     new MutationObserver(relabelBubble).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   }
+
+  /* ── Privacy labels on every picture of children ────────────────────────────
+     Real photos get "Edited for privacy"; AI-made pictures get "AI illustration".
+     Pictures uploaded on the admin page (Programs, Moments) count as real photos.
+     ► Adding a new picture of children? Put its file name in the right list below,
+       or add  data-kids  (real photo) or  data-kids="ai"  to the picture in the HTML.
+     The same name also covers its small copy in assets/img/thumbs/.               */
+  const KID_PHOTOS = [
+    'care-hug-1.jpg', 'care-hug.jpg', 'video-cover.jpg',
+    'hero-festival.jpg', 'hero-friends.jpg', 'hero-play.jpg', 'hero-stage.jpg',
+    'life-activity.jpg', 'life-cny.jpg', 'life-colouring.jpg', 'life-lion-dance.jpg', 'life-painting.jpg',
+    'life-puzzle.jpg', 'life-school-1.jpg', 'life-school.jpg', 'life-selfie-1.jpg', 'life-selfie.jpg', 'life-sharing-circle.jpg',
+    'moment-beds-1.jpg', 'moment-beds-3.jpg', 'moment-beds-4.jpg', 'moment-chess-1.jpg', 'moment-chess-2.jpg', 'moment-chess-3.jpg'
+  ];
+  const KID_AI = [
+    'home-friends.jpg', 'home-new-year.jpg', 'home-playtime.jpg', 'moments-lanterns.jpg', 'our-care-dinner.jpg',
+    'first-day.jpg', 'grandma-did-her-best.jpg', 'no-one-to-take-her-in.jpg', 'somewhere-to-call-home.jpg',
+    'the-boy-who-rewrote-his-story.jpg', 'too-many-doors-no-home.jpg', 'two-siblings-one-promise.jpg', 'where-he-belongs.jpg',
+    // Stories page pictures (Nov 2026)
+    'first-day-2.jpg', 'no-one-to-take-her-in-2.jpg', 'where-he-belongs-2.jpg', 'grandma-did-her-best-2.jpg', 'two-siblings-one-promise-2.jpg',
+    'the-family-that-lost-its-provider-2.jpg', 'too-many-doors-no-home-2.jpg', 'a-safe-place-to-sleep-2.jpg', 'somewhere-to-call-home-2.jpg',
+    'the-boy-who-rewrote-his-story-2.jpg'
+  ];
+  const UPLOADS = '/storage/v1/object/public/ch-media/';      // photos added on the admin page
+  Object.assign(WORDS.en, {
+    kidShort: 'Edited for privacy', kidWide: 'Photo edited to protect the children’s identity', kidTip: 'This photo has been edited to protect the children’s identity.',
+    aiShort: 'AI illustration', aiWide: 'AI illustration · no real child is shown', aiTip: 'This picture was made with AI for illustration. No real child is shown.',
+    kidNote: 'All photos of children on this website have been edited to protect their identity.'
+  });
+  Object.assign(WORDS.zh, {
+    kidShort: '已处理 · 保护隐私', kidWide: '照片已处理，以保护孩子的身份', kidTip: '此照片已经过处理，以保护孩子的身份。',
+    aiShort: 'AI 示意图', aiWide: 'AI 示意图 · 并非真实孩子', aiTip: '此图片由 AI 制作，仅作示意，并非真实的孩子。',
+    kidNote: '本网站所有孩子的照片均已经过处理，以保护他们的身份。'
+  });
+  const fileName = url => decodeURIComponent(String(url || '').split(/[?#]/)[0].split('/').pop()).toLowerCase();
+  function kindOf(url, el) {
+    const mark = el && el.closest('[data-kids]');
+    if (mark) return mark.dataset.kids === 'ai' ? 'ai' : 'photo';
+    if (!url) return null;
+    if (url.includes(UPLOADS)) return 'photo';
+    const f = fileName(url);
+    return KID_AI.includes(f) ? 'ai' : KID_PHOTOS.includes(f) ? 'photo' : null;
+  }
+  const bgUrl = el => { const m = (el.style.backgroundImage || '').match(/url\(["']?(.*?)["']?\)/); return el.dataset.bg || (m && m[1]) || ''; };
+  const isOut = el => ['absolute', 'fixed'].includes(getComputedStyle(el).position);
+  function hostFor(el) {                                    // the box the label sits in
+    if (el.closest('header, footer, .kid-tag')) return null;
+    if (el.classList.contains('gal-bg')) return null;       // blurred copy behind a gallery photo: the photo itself is labelled
+    if (el.classList.contains('page-hero-bg')) return el.parentElement;
+    if (el.classList.contains('hero-slide')) return el.closest('.hero');
+    if (el.tagName.toLowerCase() === 'image') { const svg = el.closest('svg'); return svg && svg.parentElement; }
+    if (el.tagName !== 'IMG') return el;                    // a background picture
+    if (isOut(el)) return el.offsetParent || el.parentElement;
+    const p = el.parentElement;
+    const shares = [...p.children].some(c => c !== el && !c.classList.contains('kid-tag') && !isOut(c) && getComputedStyle(c).display !== 'none');
+    if (!shares) return p;
+    const box = document.createElement('span');             // the photo shares its box with text: give it a box of its own
+    box.className = 'kid-wrap'; p.insertBefore(box, el); box.appendChild(el);
+    return box;
+  }
+  const hosts = new Set(), tagOf = new WeakMap();          // picture → its label
+  const fit = new ResizeObserver(es => es.forEach(e => sizeTag(e.target)));
+  function sizeTag(host) {
+    const w = host.getBoundingClientRect().width;
+    host.querySelectorAll(':scope > .kid-tag').forEach(t => {
+      t.classList.toggle('kid-tag--tiny', w < 170);
+      t.classList.toggle('kid-tag--wide', w >= 560);
+      writeTag(t);
+    });
+  }
+  function writeTag(t) {
+    const ai = t.dataset.kind === 'ai', wide = t.classList.contains('kid-tag--wide'), tip = w(ai ? 'aiTip' : 'kidTip');
+    t.querySelector('b').textContent = w(ai ? (wide ? 'aiWide' : 'aiShort') : (wide ? 'kidWide' : 'kidShort'));
+    t.querySelector('em').textContent = tip;               // shown when you point at the label
+    t.setAttribute('aria-label', tip);
+    if (t.classList.contains('kid-tag--tiny')) t.title = tip; else t.removeAttribute('title');   // tiny thumbnails: the browser's own tip
+  }
+  function label(el, kind) {
+    const host = hostFor(el);
+    if (!host) return;
+    let tag = host.querySelector(':scope > .kid-tag');
+    if (!tag) {
+      if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+      tag = document.createElement('span');
+      tag.className = 'kid-tag'; tag.setAttribute('role', 'note');
+      tag.innerHTML = '<i class="fa" aria-hidden="true"></i><b></b><em></em>';
+      host.appendChild(tag);
+      hosts.add(host); fit.observe(host);
+    }
+    if (el.classList.contains('hero-slide')) { tag.kinds = tag.kinds || new Map(); tag.kinds.set(el, kind); heroSync(host); return; }
+    tagOf.set(el, tag);
+    tag.dataset.kind = kind;
+    tag.querySelector('i').className = 'fa ' + (kind === 'ai' ? 'fa-wand-magic-sparkles' : 'fa-shield-halved');
+    sizeTag(host);
+  }
+  function heroSync(hero) {                                 // Home banner: the label follows the picture on show
+    const tag = hero.querySelector(':scope > .kid-tag');
+    if (!tag || !tag.kinds) return;
+    const on = hero.querySelector('.hero-slide.active') || hero.querySelector('.hero-slide');
+    const kind = tag.kinds.get(on);
+    tag.hidden = !kind;
+    if (kind && tag.dataset.kind !== kind) { tag.dataset.kind = kind; tag.querySelector('i').className = 'fa ' + (kind === 'ai' ? 'fa-wand-magic-sparkles' : 'fa-shield-halved'); writeTag(tag); }
+  }
+  const seen = new WeakMap();                               // picture → the file it showed when last checked
+  function scan(root) {
+    (root.querySelectorAll ? root : document).querySelectorAll('img, image, [data-bg], [style*="background-image"]').forEach(el => {
+      const url = el.tagName === 'IMG' ? el.getAttribute('src') : el.tagName.toLowerCase() === 'image' ? (el.getAttribute('href') || el.getAttribute('xlink:href')) : bgUrl(el);
+      if (seen.get(el) === url) return;
+      seen.set(el, url);
+      const kind = kindOf(url, el);
+      if (kind) label(el, kind);
+      else if (tagOf.has(el)) { tagOf.get(el).remove(); tagOf.delete(el); }   // a reused frame (photo viewer) now shows another picture
+    });
+  }
+  scan(document);
+  document.querySelectorAll('.hero').forEach(hero => new MutationObserver(() => heroSync(hero))
+    .observe(hero, { subtree: true, attributes: true, attributeFilter: ['class'] }));
+  /* pictures added later (pop-ups, the photo viewer, photos from the admin page) */
+  let scanRaf = 0;
+  new MutationObserver(ms => {
+    const fresh = ms.some(m => m.type === 'childList'
+      ? [...m.addedNodes].some(n => n.nodeType === 1 && !n.classList.contains('kid-tag') && !n.classList.contains('kid-wrap'))
+      : m.attributeName !== 'style' || !!m.target.style.backgroundImage);   // ignore style changes that aren't pictures
+    if (fresh && !scanRaf) scanRaf = requestAnimationFrame(() => { scanRaf = 0; scan(document); });
+  }).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['src', 'href', 'style', 'data-bg'] });
+  /* one line in the footer for the whole site */
+  document.querySelectorAll('.foot-bot .disclaimer').forEach(d => {
+    const p = document.createElement('p');
+    p.className = 'disclaimer kid-note';
+    p.innerHTML = '<i class="fa fa-shield-halved" aria-hidden="true"></i> <span></span>';
+    d.after(p);
+  });
+  const relabelKids = () => {
+    document.querySelectorAll('.kid-tag[data-kind]').forEach(writeTag);
+    document.querySelectorAll('.kid-note span').forEach(s => { s.textContent = w('kidNote'); });
+  };
+  relabelKids();
+  new MutationObserver(relabelKids).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
   relabel(); spy();
   new MutationObserver(relabel).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
