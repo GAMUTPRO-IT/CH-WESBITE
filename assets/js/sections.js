@@ -480,6 +480,14 @@
   relabelKids();
   new MutationObserver(relabelKids).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
 
+  /* ── Header: pass the logo's height to the CSS so "Children Home" lines up with the logo's lettering ── */
+  const logoImg = document.querySelector('#hdr .brand img'), brandBox = document.querySelector('#hdr .brand');
+  if (logoImg && brandBox) {
+    const setLogoH = () => brandBox.style.setProperty('--logo-h', logoImg.getBoundingClientRect().height + 'px');
+    new ResizeObserver(setLogoH).observe(logoImg);
+    setLogoH();
+  }
+
   relabel(); spy();
   new MutationObserver(relabel).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
   if (window.fitBrandTag) window.fitBrandTag();             // the menu got a little wider: re-check it still fits

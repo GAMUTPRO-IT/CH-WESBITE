@@ -8,6 +8,12 @@
    The menu items themselves are listed in assets/js/sections.js.
    ════════════════════════════════════════════════════════════════════════════ */
 
+/* ── Header: "Children Home" and its gold line sit level with the logo's lettering ──
+   The lettering (阿弥陀佛援助总会 / AMITABHA FOUNDATION) fills 44%–88% of the logo's height, below the
+   logo's middle, so centring on the whole logo looked too high. sections.js puts the logo's current
+   height in --logo-h (it shrinks when you scroll). Without it, the header simply stays as before. */
+#hdr .brand-tag{box-sizing:border-box;display:flex;align-items:center;min-height:calc(var(--logo-h) * .432);transform:translateY(calc(var(--logo-h) * .16))}
+
 /* ── Top menu: point at a page name (or click its arrow) to open the list of its sections.
       Same look as the Elder Home site: white panel, coloured line on top, capital letters. ── */
 .nav-dd{position:relative;display:flex;align-items:center}
