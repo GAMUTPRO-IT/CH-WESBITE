@@ -366,14 +366,14 @@
   ];
   const UPLOADS = '/storage/v1/object/public/ch-media/';      // photos added on the admin page
   Object.assign(WORDS.en, {
-    kidShort: ‘Edited for privacy’, kidWide: ‘Photo edited to protect the children’s identity’, kidTip: ‘This photo has been edited to protect the children’s identity.’,
-    aiShort: ‘Edited for privacy’, aiWide: ‘Photo edited to protect the children’s identity’, aiTip: ‘This photo has been edited to protect the children’s identity.’,
-    kidNote: ‘All photos of children on this website have been edited to protect their identity.’
+    kidShort: 'Edited for privacy', kidWide: 'Photo edited to protect the children\u2019s identity', kidTip: 'This photo has been edited to protect the children\u2019s identity.',
+    aiShort: 'Edited for privacy', aiWide: 'Photo edited to protect the children\u2019s identity', aiTip: 'This photo has been edited to protect the children\u2019s identity.',
+    kidNote: 'All photos of children on this website have been edited to protect their identity.'
   });
   Object.assign(WORDS.zh, {
-    kidShort: ‘已处理 · 保护隐私’, kidWide: ‘照片已处理，以保护孩子的身份’, kidTip: ‘此照片已经过处理，以保护孩子的身份。’,
-    aiShort: ‘已处理 · 保护隐私’, aiWide: ‘照片已处理，以保护孩子的身份’, aiTip: ‘此照片已经过处理，以保护孩子的身份。’,
-    kidNote: ‘本网站所有孩子的照片均已经过处理，以保护他们的身份。’
+    kidShort: '\u5df2\u5904\u7406 \u00b7 \u4fdd\u62a4\u9690\u79c1', kidWide: '\u7167\u7247\u5df2\u5904\u7406\uff0c\u4ee5\u4fdd\u62a4\u5b69\u5b50\u7684\u8eab\u4efd', kidTip: '\u6b64\u7167\u7247\u5df2\u7ecf\u8fc7\u5904\u7406\uff0c\u4ee5\u4fdd\u62a4\u5b69\u5b50\u7684\u8eab\u4efd\u3002',
+    aiShort: '\u5df2\u5904\u7406 \u00b7 \u4fdd\u62a4\u9690\u79c1', aiWide: '\u7167\u7247\u5df2\u5904\u7406\uff0c\u4ee5\u4fdd\u62a4\u5b69\u5b50\u7684\u8eab\u4efd', aiTip: '\u6b64\u7167\u7247\u5df2\u7ecf\u8fc7\u5904\u7406\uff0c\u4ee5\u4fdd\u62a4\u5b69\u5b50\u7684\u8eab\u4efd\u3002',
+    kidNote: '\u672c\u7f51\u7ad9\u6240\u6709\u5b69\u5b50\u7684\u7167\u7247\u5747\u5df2\u7ecf\u8fc7\u5904\u7406\uff0c\u4ee5\u4fdd\u62a4\u4ed6\u4eec\u7684\u8eab\u4efd\u3002'
   });
   const fileName = url => decodeURIComponent(String(url || '').split(/[?#]/)[0].split('/').pop()).toLowerCase();
   function kindOf(url, el) {
