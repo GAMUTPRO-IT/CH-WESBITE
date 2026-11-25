@@ -9,11 +9,14 @@
    The menu items themselves are listed in assets/js/sections.js.
    ════════════════════════════════════════════════════════════════════════════ */
 
-/* ── Header: "Children Home" and its gold line sit level with the logo's lettering ──
-   The lettering (阿弥陀佛援助总会 / AMITABHA FOUNDATION) fills 44%–88% of the logo's height, below the
-   logo's middle, so centring on the whole logo looked too high. sections.js puts the logo's current
-   height in --logo-h (it shrinks when you scroll). Without it, the header simply stays as before. */
+/* ── Header: "Children Home" logo sits level with the AF logo's lettering ──
+   sections.js puts the logo's current height in --logo-h (it shrinks when you scroll).
+   Without it, the header simply stays as before. */
 #hdr .brand-tag{box-sizing:border-box;display:flex;align-items:center;min-height:calc(var(--logo-h) * .432);transform:translateY(calc(var(--logo-h) * .16))}
+/* ch-logo SVG image sizing */
+.brand-tag .ch-logo{display:block;height:50px;width:auto;transition:height .45s cubic-bezier(.4,0,.2,1)}
+#hdr.scrolled .brand-tag .ch-logo{height:38px}
+@media(min-width:1200px){.brand-tag .ch-logo{height:58px}}
 
 /* ── Section topics ("— CREDENTIALS", "— OUR PROGRAMMES" …) ──────────────────
    Bigger, in a soft lavender pill so they stand out, and they pop in with a little bounce

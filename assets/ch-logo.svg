@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 210 68" role="img" aria-label="Children Home">
+
+  <!-- ── Kite ── -->
+  <polygon points="20,7 28,17 20,27 12,17" fill="#f2a93b"/>
+  <line x1="20" y1="7"  x2="20" y2="27" stroke="#d98e1f" stroke-width="0.8" opacity="0.6"/>
+  <line x1="12" y1="17" x2="28" y2="17" stroke="#d98e1f" stroke-width="0.8" opacity="0.6"/>
+  <path d="M20 27 Q24 32 20 37 Q16 41 20 45" stroke="#f2a93b" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M12 17 Q10 32 8 46" stroke="#d98e1f" stroke-width="0.9" fill="none" stroke-dasharray="2,2" opacity="0.7"/>
+
+  <!-- ── Paper plane ── -->
+  <g transform="translate(63,6) rotate(-18)">
+    <polygon points="0,0 17,6 0,11" fill="#6a42b0"/>
+    <polygon points="0,0 0,11 8,6"  fill="#c4afe6"/>
+  </g>
+  <path d="M68,13 Q62,22 70,52" stroke="#c4afe6" stroke-width="1" fill="none" stroke-dasharray="2,3" opacity="0.45"/>
+
+  <!-- ── Tree trunk ── -->
+  <rect x="57" y="50" width="5" height="16" rx="1.5" fill="#8B5E3C"/>
+  <!-- ── Tree foliage ── -->
+  <circle cx="59.5" cy="47" r="13" fill="#2b7a3e"/>
+  <circle cx="59.5" cy="38" r="10" fill="#349e50"/>
+  <circle cx="59.5" cy="30" r="7.5" fill="#48c97a"/>
+
+  <!-- ── House body ── -->
+  <rect x="20" y="48" width="30" height="18" rx="2" fill="#f0eafa"/>
+  <!-- ── House roof ── -->
+  <polygon points="17,50 35,36 53,50" fill="#6a42b0"/>
+  <!-- ── Door ── -->
+  <rect x="29" y="57" width="12" height="9" rx="2" fill="#f2a93b"/>
+  <!-- ── Windows ── -->
+  <rect x="22" y="53" width="6" height="5" rx="1" fill="#c4afe6"/>
+  <rect x="39" y="53" width="6" height="5" rx="1" fill="#c4afe6"/>
+
+  <!-- ── Child 1 (purple, left – holding kite string) ── -->
+  <circle cx="8" cy="43" r="4.5" fill="#9c7dd6"/>
+  <line x1="8"  y1="47.5" x2="8"  y2="57"  stroke="#51318a" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="8"  y1="51"   x2="3"  y2="56"  stroke="#51318a" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="8"  y1="51"   x2="13" y2="55"  stroke="#51318a" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="8"  y1="57"   x2="5"  y2="64"  stroke="#51318a" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="8"  y1="57"   x2="11" y2="64"  stroke="#51318a" stroke-width="2"   stroke-linecap="round"/>
+
+  <!-- ── Child 2 (pink-red, right) ── -->
+  <circle cx="73" cy="45" r="4.5" fill="#ee9fb0"/>
+  <line x1="73" y1="49.5" x2="73" y2="59"  stroke="#ab1a1f" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="73" y1="53"   x2="68" y2="58"  stroke="#ab1a1f" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="73" y1="53"   x2="78" y2="58"  stroke="#ab1a1f" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="73" y1="59"   x2="70" y2="66"  stroke="#ab1a1f" stroke-width="2"   stroke-linecap="round"/>
+  <line x1="73" y1="59"   x2="76" y2="66"  stroke="#ab1a1f" stroke-width="2"   stroke-linecap="round"/>
+
+  <!-- ── Ground ── -->
+  <path d="M2 66 Q40 62 78 66" stroke="#c4afe6" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+  <!-- ── "Children Home" wordmark ── -->
+  <text x="88" y="35" font-family="Fraunces,Georgia,'Times New Roman',serif"
+        font-size="21" font-weight="600" fill="#51318a" letter-spacing="-0.4">Children</text>
+  <text x="88" y="59" font-family="Fraunces,Georgia,'Times New Roman',serif"
+        font-size="21" font-weight="600" fill="#51318a" letter-spacing="-0.4">Home</text>
+
+</svg>
