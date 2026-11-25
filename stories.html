@@ -462,6 +462,18 @@ html[lang="zh"] .story .zh{display:block}
   *{animation:none!important;transition:none!important}
   .js .aos,.js .aos-l,.js .aos-r{opacity:1;transform:none}
 }
+/* Privacy labels on story images: always show the full sentence, no hover needed */
+.st-cover .kid-tag:not(.kid-tag--tiny),
+#stRArt .kid-tag:not(.kid-tag--tiny){
+  white-space:normal;border-radius:12px;
+  max-width:min(17rem,calc(100% - 1.2rem));
+  background:rgba(24,12,48,.88);
+  align-items:flex-start;cursor:default
+}
+.st-cover .kid-tag:not(.kid-tag--tiny) b,
+#stRArt .kid-tag:not(.kid-tag--tiny) b{display:none}
+.st-cover .kid-tag:not(.kid-tag--tiny) em,
+#stRArt .kid-tag:not(.kid-tag--tiny) em{display:block}
 </style>
 <link rel="stylesheet" href="assets/css/sections.css">
 </head>
