@@ -1,7 +1,7 @@
 /* ════════════════════════════════════════════════════════════════════════════
    Children Home website: section menus in the top menu (all five pages),
-   one-section-at-a-time scrolling, the floating contact bubble, and the
-   privacy labels on pictures of children
+   one-section-at-a-time scrolling, the floating contact bubble, the privacy
+   labels on pictures of children, and the pop-in of the section topics
    Point at a page name (Home, Our Care, Stories, Moments, Get Involved) to open a
    list of the sections on that page, then pick one to go straight to it.
    Clicking the page name itself opens that page. On phones the same lists open
@@ -187,7 +187,7 @@
     /* Tapping a page name opens its list instead of leaving. This runs before the page's own
        "close the menu when a link is tapped" handler, and stops it for page names only. */
     mob.addEventListener('click', e => {
-      const hit = e.target.closest('.mob-row > a, .mob-caret');
+      const hit = e.target.closest('.mob-caret');
       if (!hit) return;
       e.preventDefault(); e.stopPropagation();
       const row = hit.closest('.mob-row'), list = row.nextElementSibling, open = list.hidden;
@@ -486,6 +486,16 @@
     const setLogoH = () => brandBox.style.setProperty('--logo-h', logoImg.getBoundingClientRect().height + 'px');
     new ResizeObserver(setLogoH).observe(logoImg);
     setLogoH();
+  }
+
+  /* ── Section topics ("— CREDENTIALS" …) pop in when you scroll to them. Styles: "Section topics" in sections.css ── */
+  const topics = document.querySelectorAll('.eyebrow');
+  if (topics.length && 'IntersectionObserver' in window) {
+    document.documentElement.classList.add('eb-ready');
+    const seeTopic = new IntersectionObserver(es => es.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('eb-in'); seeTopic.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -6% 0px' });
+    topics.forEach(t => seeTopic.observe(t));
   }
 
   relabel(); spy();
