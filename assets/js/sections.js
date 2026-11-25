@@ -366,14 +366,14 @@
   ];
   const UPLOADS = '/storage/v1/object/public/ch-media/';      // photos added on the admin page
   Object.assign(WORDS.en, {
-    kidShort: 'Edited for privacy', kidWide: 'Photo edited to protect the children’s identity', kidTip: 'This photo has been edited to protect the children’s identity.',
-    aiShort: 'AI illustration', aiWide: 'AI illustration · no real child is shown', aiTip: 'This picture was made with AI for illustration. No real child is shown.',
-    kidNote: 'All photos of children on this website have been edited to protect their identity.'
+    kidShort: ‘Edited for privacy’, kidWide: ‘Photo edited to protect the children’s identity’, kidTip: ‘This photo has been edited to protect the children’s identity.’,
+    aiShort: ‘Edited for privacy’, aiWide: ‘Photo edited to protect the children’s identity’, aiTip: ‘This photo has been edited to protect the children’s identity.’,
+    kidNote: ‘All photos of children on this website have been edited to protect their identity.’
   });
   Object.assign(WORDS.zh, {
-    kidShort: '已处理 · 保护隐私', kidWide: '照片已处理，以保护孩子的身份', kidTip: '此照片已经过处理，以保护孩子的身份。',
-    aiShort: 'AI 示意图', aiWide: 'AI 示意图 · 并非真实孩子', aiTip: '此图片由 AI 制作，仅作示意，并非真实的孩子。',
-    kidNote: '本网站所有孩子的照片均已经过处理，以保护他们的身份。'
+    kidShort: ‘已处理 · 保护隐私’, kidWide: ‘照片已处理，以保护孩子的身份’, kidTip: ‘此照片已经过处理，以保护孩子的身份。’,
+    aiShort: ‘已处理 · 保护隐私’, aiWide: ‘照片已处理，以保护孩子的身份’, aiTip: ‘此照片已经过处理，以保护孩子的身份。’,
+    kidNote: ‘本网站所有孩子的照片均已经过处理，以保护他们的身份。’
   });
   const fileName = url => decodeURIComponent(String(url || '').split(/[?#]/)[0].split('/').pop()).toLowerCase();
   function kindOf(url, el) {
@@ -433,7 +433,7 @@
     if (el.classList.contains('hero-slide')) { tag.kinds = tag.kinds || new Map(); tag.kinds.set(el, kind); heroSync(host); return; }
     tagOf.set(el, tag);
     tag.dataset.kind = kind;
-    tag.querySelector('i').className = 'fa ' + (kind === 'ai' ? 'fa-wand-magic-sparkles' : 'fa-shield-halved');
+    tag.querySelector('i').className = 'fa fa-shield-halved';
     sizeTag(host);
   }
   function heroSync(hero) {                                 // Home banner: the label follows the picture on show
@@ -442,7 +442,7 @@
     const on = hero.querySelector('.hero-slide.active') || hero.querySelector('.hero-slide');
     const kind = tag.kinds.get(on);
     tag.hidden = !kind;
-    if (kind && tag.dataset.kind !== kind) { tag.dataset.kind = kind; tag.querySelector('i').className = 'fa ' + (kind === 'ai' ? 'fa-wand-magic-sparkles' : 'fa-shield-halved'); writeTag(tag); }
+    if (kind && tag.dataset.kind !== kind) { tag.dataset.kind = kind; tag.querySelector('i').className = 'fa fa-shield-halved'; writeTag(tag); }
   }
   const seen = new WeakMap();                               // picture → the file it showed when last checked
   function scan(root) {

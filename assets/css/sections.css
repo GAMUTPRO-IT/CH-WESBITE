@@ -4,6 +4,7 @@
      2. one-section-at-a-time scrolling (laptops and desktops)
      3. the floating contact bubble (bottom right): Donate / Volunteer / WhatsApp
      4. privacy labels on pictures of children ("Edited for privacy" / "AI illustration")
+     5. bigger section topics ("— CREDENTIALS" …) that pop in as you scroll
    Used by index, our-care, stories, moments and get-involved (linked in <head>).
    The menu items themselves are listed in assets/js/sections.js.
    ════════════════════════════════════════════════════════════════════════════ */
@@ -13,6 +14,20 @@
    logo's middle, so centring on the whole logo looked too high. sections.js puts the logo's current
    height in --logo-h (it shrinks when you scroll). Without it, the header simply stays as before. */
 #hdr .brand-tag{box-sizing:border-box;display:flex;align-items:center;min-height:calc(var(--logo-h) * .432);transform:translateY(calc(var(--logo-h) * .16))}
+
+/* ── Section topics ("— CREDENTIALS", "— OUR PROGRAMMES" …) ──────────────────
+   Bigger, in a soft lavender pill so they stand out, and they pop in with a little bounce
+   when you scroll to them (sections.js adds .eb-in). Without the script they simply show. */
+.eyebrow{gap:.6rem;font-size:.9rem;letter-spacing:.17em;line-height:1.2;padding:.52rem 1.1rem .52rem .9rem;margin-bottom:1.15rem;border-radius:999px;color:var(--leaf-700);
+  background:linear-gradient(135deg,#f7f2fe,#ece3fb);border:1px solid rgba(106,66,176,.16);box-shadow:0 6px 18px rgba(106,66,176,.12),inset 0 1px 0 rgba(255,255,255,.85)}
+.eyebrow::before{width:26px;height:3px;flex-shrink:0}
+@media(min-width:1500px){.eyebrow{font-size:1rem}}
+@media(max-width:640px){.eyebrow{font-size:.8rem;letter-spacing:.14em;padding:.45rem .9rem .45rem .75rem;margin-bottom:1rem}}
+.eb-ready .eyebrow:not(.eb-in){opacity:0;transform:translateY(10px) scale(.85)}
+.eyebrow.eb-in{animation:ebPop .7s cubic-bezier(.34,1.56,.64,1) both}
+.eyebrow.eb-in::before{transform-origin:left center;animation:ebLine .55s .25s cubic-bezier(.2,.7,.3,1) both}
+@keyframes ebPop{0%{opacity:0;transform:translateY(10px) scale(.85)}60%{opacity:1;transform:translateY(-2px) scale(1.06)}100%{opacity:1;transform:none}}
+@keyframes ebLine{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 
 /* ── Top menu: point at a page name (or click its arrow) to open the list of its sections.
       Same look as the Elder Home site: white panel, coloured line on top, capital letters. ── */
@@ -86,21 +101,16 @@ body.menu-open .float-bar{opacity:0;visibility:hidden;pointer-events:none}
 }
 
 /* ── Privacy labels on pictures of children ─────────────────────────────────
-   Added by sections.js to every picture of children. Pointing at a label opens it up to
-   show the full sentence (it stays inside the photo, so nothing gets cut off). */
+   Added by sections.js to every picture of children. The full sentence is always
+   visible — no hover needed. */
 .kid-wrap{position:relative;display:block}
-.kid-tag{position:absolute;left:.6rem;bottom:.6rem;z-index:4;display:inline-flex;align-items:center;gap:.38rem;max-width:calc(100% - 1.2rem);padding:.27rem .62rem .27rem .5rem;border-radius:999px;
-  background:rgba(24,12,48,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.24);box-shadow:0 2px 10px rgba(0,0,0,.18);
-  color:#fff;font-family:var(--sans);font-size:.68rem;font-weight:600;font-style:normal;letter-spacing:.01em;line-height:1.2;text-transform:none;text-align:left;white-space:nowrap;cursor:help;user-select:none;rotate:0deg}
+.kid-tag{position:absolute;left:.6rem;bottom:.6rem;z-index:4;display:inline-flex;align-items:flex-start;gap:.38rem;max-width:min(17rem,calc(100% - 1.2rem));padding:.27rem .62rem .27rem .5rem;border-radius:12px;
+  background:rgba(24,12,48,.88);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.24);box-shadow:0 2px 10px rgba(0,0,0,.18);
+  color:#fff;font-family:var(--sans);font-size:.68rem;font-weight:600;font-style:normal;letter-spacing:.01em;line-height:1.2;text-transform:none;text-align:left;white-space:normal;cursor:default;user-select:none;rotate:0deg}
 .kid-tag[hidden]{display:none}
-.kid-tag i{font-size:.74rem;color:#d9c8ff;flex-shrink:0}
-.kid-tag[data-kind="ai"] i{color:#ffe08a}
-.kid-tag b{font-weight:600;overflow:hidden;text-overflow:ellipsis}
-.kid-tag em{display:none;font-style:normal;font-weight:500;line-height:1.4}
-.kid-tag:not(.kid-tag--tiny):hover{white-space:normal;border-radius:12px;max-width:min(17rem,calc(100% - 1.2rem));background:rgba(24,12,48,.88);align-items:flex-start}
-.kid-tag:not(.kid-tag--tiny):hover b{display:none}
-.kid-tag:not(.kid-tag--tiny):hover em{display:block}
-.kid-tag:not(.kid-tag--tiny):hover i{margin-top:.12rem}
+.kid-tag i{font-size:.74rem;color:#d9c8ff;flex-shrink:0;margin-top:.12rem}
+.kid-tag b{display:none}
+.kid-tag em{display:block;font-style:normal;font-weight:500;line-height:1.4}
 .kid-tag--tiny{left:.3rem;bottom:.3rem;padding:.25rem;gap:0}
 .kid-tag--tiny b{display:none}
 .kid-tag--wide{font-size:.74rem;padding:.34rem .8rem .34rem .62rem}
