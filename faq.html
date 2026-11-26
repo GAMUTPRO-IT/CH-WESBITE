@@ -216,8 +216,6 @@ footer{background:var(--navy-900);color:rgba(255,255,255,.5)}
 @keyframes dDrift{from{transform:translateX(-20vw)}to{transform:translateX(120vw)}}
 .a-rise{opacity:0;animation:dRise var(--d,18s) linear var(--delay,0s) infinite}
 @keyframes dRise{0%{transform:translate(0,0) rotate(-8deg);opacity:0}10%{opacity:var(--o,.65)}50%{transform:translate(26px,calc(var(--h,720px) * -.5)) rotate(12deg)}85%{opacity:var(--o,.65)}100%{transform:translate(-16px,calc(var(--h,720px) * -1)) rotate(-10deg);opacity:0}}
-.dolls{display:flex;justify-content:center;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.06)}
-.dolls-img{height:90px;width:auto}
 /* golden pixel stars, sparkles and dots: some drift slowly down from the top, others twinkle in place, all gently pulse */
 .a-pxfall{opacity:0;animation:pxFall var(--d,16s) linear var(--delay,0s) infinite}
 @keyframes pxFall{0%{transform:translate(0,0);opacity:0}10%{opacity:1}50%{transform:translate(-16px,calc(var(--h,700px) * .5))}88%{opacity:1}100%{transform:translate(10px,var(--h,700px));opacity:0}}
@@ -512,8 +510,6 @@ body{padding-top:var(--header-h)}
 
 <!-- FOOTER -->
 <footer>
-  <!-- Paper children holding hands (decoration) -->
-  <div class="dolls" aria-hidden="true"><img src="assets/ch-kids.png" alt="" class="dolls-img"></div>
   <div class="foot-top">
     <div class="foot-brand">
       <a href="https://amitabhafoundation.my/" target="_blank" rel="noopener"><img src="assets/af-ch-logo.png" alt="Amitabha Foundation Children Home"></a>
