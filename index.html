@@ -397,15 +397,6 @@ footer{background:var(--navy-900);color:rgba(255,255,255,.5)}
 .contact-btns{display:flex;flex-wrap:wrap;gap:.7rem}
 .contact-map{position:relative;border-radius:var(--r-xl);overflow:hidden;box-shadow:var(--shadow-lg),0 0 0 1px rgba(106,66,176,.12);aspect-ratio:16/10;background:var(--leaf-100)}
 .contact-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-/* two children holding hands: they sway together, blink, and little hearts float up from their hands */
-.kids{display:block;width:170px;height:118px;margin:clamp(2.5rem,5vw,3.5rem) auto 0;overflow:visible}
-.kids-pair{transform-box:fill-box;transform-origin:50% 100%;animation:kidsSway 3.2s ease-in-out infinite alternate}
-@keyframes kidsSway{from{transform:rotate(-2.5deg)}to{transform:rotate(2.5deg) translateY(-3px)}}
-.kids-eye{transform-box:fill-box;transform-origin:center;animation:kidsBlink 4.5s infinite}
-@keyframes kidsBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
-.kids-heart{transform-box:fill-box;transform-origin:center;opacity:0;animation:kidsHeart 3.2s ease-out infinite}
-.kids-heart.h2{animation-delay:-1.6s}
-@keyframes kidsHeart{0%{transform:translate(0,0) scale(.4);opacity:0}20%{opacity:1}100%{transform:translate(var(--hx,0px),-48px) scale(1.15);opacity:0}}
 @media(max-width:900px){.contact-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.cl-row{grid-template-columns:1fr;gap:.35rem}.cl-row dd{padding-top:0}}
 
@@ -990,36 +981,6 @@ body{padding-top:var(--header-h)}
     </div>
   </div>
 
-  <!-- Two children holding hands (original drawing): they sway, blink, and hearts float up from their hands -->
-  <svg class="kids" viewBox="0 0 170 118" aria-hidden="true" focusable="false">
-    <path class="kids-heart" style="--hx:-6px" d="M85 58c-3-2-5-4-5-6a2.6 2.6 0 0 1 5-1a2.6 2.6 0 0 1 5 1c0 2-2 4-5 6Z" fill="#ee9fb0"/>
-    <path class="kids-heart h2" style="--hx:8px" d="M85 58c-3-2-5-4-5-6a2.6 2.6 0 0 1 5-1a2.6 2.6 0 0 1 5 1c0 2-2 4-5 6Z" fill="#f2a93b"/>
-    <g class="kids-pair" fill="none" stroke="#7b55c2" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-      <!-- boy -->
-      <path d="M46 72L46 104M58 72L58 104"/>
-      <path d="M44 50h20l3 24H41Z" fill="#fff"/>
-      <path d="M44 54L30 68M64 54L82 68"/>
-      <circle cx="28.5" cy="70" r="3.4" fill="#fff"/>
-      <circle cx="52" cy="30" r="17" fill="#fff"/>
-      <path d="M36 25c4-9 14-13 24-9c3 1 6 4 8 8c-6-3-11-3-15 1c-3-3-9-3-17 0Z" fill="#7b55c2"/>
-      <circle class="kids-eye" cx="46" cy="32" r="1.8" fill="#7b55c2" stroke="none"/><circle class="kids-eye" cx="58" cy="32" r="1.8" fill="#7b55c2" stroke="none"/>
-      <path d="M46.5 38q5.5 5 11 0"/>
-      <!-- girl -->
-      <path d="M112 76L112 104M124 76L124 104"/>
-      <path d="M110 50h16l9 28H101Z" fill="#fff"/>
-      <path d="M110 54L88 68M126 54L140 68"/>
-      <circle cx="141.5" cy="70" r="3.4" fill="#fff"/>
-      <circle cx="99" cy="19" r="6.5" fill="#7b55c2"/><circle cx="137" cy="19" r="6.5" fill="#7b55c2"/>
-      <circle cx="118" cy="30" r="17" fill="#fff"/>
-      <path d="M101 30c0-12 9-19 18-18c9 0 16 7 16 17c-5-6-11-9-17-6c-5-4-12-2-17 7Z" fill="#7b55c2"/>
-      <circle class="kids-eye" cx="112" cy="32" r="1.8" fill="#7b55c2" stroke="none"/><circle class="kids-eye" cx="124" cy="32" r="1.8" fill="#7b55c2" stroke="none"/>
-      <path d="M112.5 38q5.5 5 11 0"/>
-      <circle cx="103.5" cy="22.5" r="2.4" fill="#f2a93b" stroke="none"/><circle cx="132.5" cy="22.5" r="2.4" fill="#f2a93b" stroke="none"/>
-      <!-- hands held together -->
-      <circle cx="85" cy="68.5" r="3.8" fill="#fff"/>
-    </g>
-    <g fill="#ee9fb0" opacity=".55"><circle cx="42" cy="37" r="2.6"/><circle cx="62" cy="37" r="2.6"/><circle cx="108" cy="37" r="2.6"/><circle cx="128" cy="37" r="2.6"/></g>
-  </svg>
 </section>
 
 <!-- FOLLOW US ON SOCIAL MEDIA (same layout as the Elder Home site). To change a link, edit its href below. -->
