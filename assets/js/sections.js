@@ -323,7 +323,7 @@
   if (fbar) {
     const btn = document.createElement('button');
     btn.type = 'button'; btn.className = 'fb-toggle'; btn.setAttribute('aria-expanded', 'false');
-    btn.innerHTML = '<i class="fa fa-comment-dots fb-chat" aria-hidden="true"></i><i class="fa fa-xmark fb-x" aria-hidden="true"></i><span class="fb-tip"></span>';
+    btn.innerHTML = '<img src="assets/ch-bubble.png" alt="" class="fb-chat" aria-hidden="true" style="width:38px;height:auto;object-fit:contain"><i class="fa fa-xmark fb-x" aria-hidden="true"></i><span class="fb-tip"></span>';
     fbar.appendChild(btn);
     const links = [...fbar.querySelectorAll('a')];
     const setOpen = open => {
