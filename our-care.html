@@ -1186,43 +1186,7 @@ document.querySelectorAll('.vs-frame').forEach(btn => btn.addEventListener('clic
   document.querySelectorAll('.deco, .dolls').forEach(el => io.observe(el));
 })();
 
-/* Footer paper children: on computers they hop up as the mouse passes over them,
-   and a little heart pops up from each child you reach (phones keep the gentle automatic wave) */
-(function(){
-  const row = document.querySelector('.dolls');
-  if (!row || !matchMedia('(hover: hover) and (pointer: fine)').matches) return;
-  const dolls = [...row.querySelectorAll('.doll')];
-  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let centers = [], mx = null, raf = 0, last = -1, lastT = 0;
-  const measure = () => { centers = dolls.map(d => { const r = d.getBoundingClientRect(); return r.left + r.width / 2; }); };
-  function update(){
-    raf = 0;
-    let near = -1, best = 1e9;
-    dolls.forEach((d, i) => {
-      if (mx === null){ d.style.removeProperty('--lift'); return; }
-      const dist = Math.abs(centers[i] - mx) / 40;            // distance in "children"
-      if (dist < best){ best = dist; near = i; }
-      const lift = Math.max(0, 1 - dist / 3.2);               // reaches about 3 children either side
-      d.style.setProperty('--lift', (lift * lift).toFixed(3));
-    });
-    if (near > -1 && near !== last && best < .6 && !calm && performance.now() - lastT > 140){ pop(near); lastT = performance.now(); }
-    last = near;
-  }
-  function pop(i){
-    const h = document.createElement('span');
-    h.className = 'doll-heart';
-    h.style.left = (centers[i] - row.getBoundingClientRect().left) + 'px';
-    h.style.color = dolls[i].style.color;
-    h.innerHTML = '<svg viewBox="0 0 20 18" width="14" height="14"><path d="M10 17C4 13 1 10 1 6a4.5 4.5 0 0 1 9-1.5A4.5 4.5 0 0 1 19 6c0 4-3 7-9 11Z" fill="currentColor"/></svg>';
-    row.appendChild(h);
-    h.animate([{ transform: 'translateY(0) scale(.5)', opacity: 1 }, { transform: 'translateY(-34px) scale(1.15)', opacity: 0 }],
-              { duration: 900, easing: 'ease-out' }).onfinish = () => h.remove();
-  }
-  row.addEventListener('mouseenter', measure);
-  window.addEventListener('resize', () => { centers = []; }, { passive: true });
-  row.addEventListener('mousemove', e => { if (!centers.length) measure(); mx = e.clientX; if (!raf) raf = requestAnimationFrame(update); });
-  row.addEventListener('mouseleave', () => { mx = null; last = -1; if (!raf) raf = requestAnimationFrame(update); });
-})();
+
 
 /* ── English / 中文 switch (same mechanism as Elder Home lang.js) ── */
 (function(){
