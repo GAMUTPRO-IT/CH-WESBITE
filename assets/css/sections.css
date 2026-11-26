@@ -86,10 +86,10 @@ body.menu-open .float-bar{opacity:0;visibility:hidden;pointer-events:none}
 .float-bar a:hover .fl-label,.float-bar a:focus-visible .fl-label,.fb-toggle:hover .fb-tip,.fb-toggle:focus-visible .fb-tip{opacity:1;transform:translate(0,-50%)}
 .float-bar.fb-open .fb-toggle .fb-tip{display:none}
 /* the bubble itself */
-.fb-toggle{position:relative;width:60px;height:60px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#fff;font-size:1.45rem;background:#fff;box-shadow:0 10px 28px rgba(76,45,140,.45);transition:transform .25s ease,box-shadow .25s ease}
+.fb-toggle{position:relative;width:60px;height:60px;padding:0;border:0;border-radius:50%;display:grid;place-items:center;cursor:pointer;color:#fff;font-size:1.45rem;background:linear-gradient(135deg,var(--leaf-600),var(--leaf-800));box-shadow:0 10px 28px rgba(76,45,140,.45);transition:transform .25s ease,box-shadow .25s ease}
 .fb-toggle:hover{transform:scale(1.06);box-shadow:0 14px 34px rgba(76,45,140,.55)}
 .fb-toggle:focus-visible{outline:3px solid var(--sun);outline-offset:3px}
-.fb-toggle>i,.fb-toggle>img{grid-area:1/1;transition:opacity .2s ease,transform .28s ease}
+.fb-toggle>i{grid-area:1/1;transition:opacity .2s ease,transform .28s ease}
 .fb-toggle .fb-x{opacity:0;transform:rotate(-90deg)}
 .float-bar.fb-open .fb-toggle .fb-chat{opacity:0;transform:rotate(90deg)}
 .float-bar.fb-open .fb-toggle .fb-x{opacity:1;transform:none}
